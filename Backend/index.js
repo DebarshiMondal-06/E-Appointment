@@ -1,1 +1,1 @@
-// Backend Lambda
+// Backend Lambda setup
