@@ -1,12 +1,16 @@
 import React from "react";
+import { Routes, Route } from "react-router-dom";
+import Home from "./LandingView/Home";
+import Auth from "./Auth/Auth";
+
+
 
 const App = () => {
   return (
-    <div>
-      <h1 style={{ textAlign: "center" }}>
-        <span style={{ color: "salmon" }}>E-appointment</span> Hello From React 17.10
-      </h1>
-    </div>
+    <Routes>
+      <Route element={<Home />} path="/" />
+      <Route index element={<Auth />} path="/auth" />
+    </Routes>
   );
 };
 
