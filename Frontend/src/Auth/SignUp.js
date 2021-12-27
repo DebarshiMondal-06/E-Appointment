@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const SignUp = () => {
   return (
-    <div className="section--login account mt-5">
+    <div className="section--login account" style={{ marginTop: 120 }}>
       <h1>Create Account</h1>
       <p>You are creating account as Patient.</p>
       <form className="login_card">
