@@ -24,7 +24,7 @@ body {
 .section--img {
   width: 50%;
   background-color: antiquewhite;
-  height: 100vh;
+  /* height: 100vh; */
   display: flex;
   justify-content: center;
 }
@@ -58,6 +58,16 @@ body {
   .login_card div{
     width: 80%;
   }
+  .signup--row{
+    display: flex;
+    flex-direction: column!important;
+    width: 100%;
+    align-items: center;
+    gap: 1em!important;
+  };
+  .account{
+    margin-top: 50px!important;
+  };
 }
 
 .login_card {
@@ -102,3 +112,9 @@ body {
 .signin--btn button:hover {
   color: white;
 }
+.signup--row{
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: row;
+  gap: 3em;
+};
