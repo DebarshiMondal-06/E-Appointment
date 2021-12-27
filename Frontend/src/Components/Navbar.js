@@ -1,7 +1,6 @@
 import React from "react";
 import NavList from "./NavList";
-import './component.css';
-
+import "./component.css";
 
 const Navbar = () => {
   return (
@@ -18,7 +17,10 @@ const Navbar = () => {
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-        <div className="nav--items collapse navbar-collapse" id="navbarSupportedContent">
+        <div
+          className="nav--items collapse navbar-collapse"
+          id="navbarSupportedContent"
+        >
           <NavList />
         </div>
       </div>

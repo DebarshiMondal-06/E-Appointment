@@ -5,7 +5,7 @@
 }
 .toggler {
   box-shadow: none !important;
-  color: aqua!important;
+  color: aqua !important;
 }
 .toggler:hover {
   background-color: gainsboro;
@@ -29,7 +29,7 @@
   letter-spacing: 1px;
   padding: 5px 25px;
 }
-.nav--items .signin--button:hover{
+.nav--items .signin--button:hover {
   background: #00bfa6;
   color: white;
 }

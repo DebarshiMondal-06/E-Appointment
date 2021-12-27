@@ -17,25 +17,25 @@ const NavList = () => {
   };
 
 
-    return <ul className="navbar-nav">
-      <li className="nav-item">
-        <NavLink onClick={Home} activeClassName='menu_active' className="nav--text nav-link" to="/"> Home </NavLink>
-      </li>
-      <li className="nav-item">
-        <NavLink onClick={AboutMe} className="nav--text nav-link" to="/about-section"> About </NavLink>
-      </li>
-      <li className="nav-item">
-        <NavLink onClick={Project} className="nav--text nav-link" to="/project"> Services </NavLink>
-      </li>
-      <li className="nav-item">
-        <NavLink onClick={ContactMe} className="nav--text nav-link" to="/contact"> Contact </NavLink>
-      </li>
-      <li className='mt-1'>
-        <Link to="/auth">
-          <button className='signin--button btn'>SignIn</button>
-        </Link>
-      </li>
-    </ul>
+  return <ul className="navbar-nav">
+    <li className="nav-item">
+      <NavLink onClick={Home} activeClassName='menu_active' className="nav--text nav-link" to="/"> Home </NavLink>
+    </li>
+    <li className="nav-item">
+      <NavLink onClick={AboutMe} className="nav--text nav-link" to="/about-section"> About </NavLink>
+    </li>
+    <li className="nav-item">
+      <NavLink onClick={Project} className="nav--text nav-link" to="/project"> Services </NavLink>
+    </li>
+    <li className="nav-item">
+      <NavLink onClick={ContactMe} className="nav--text nav-link" to="/contact"> Contact </NavLink>
+    </li>
+    <li className='mt-1'>
+      <Link to="/auth">
+        <button className='signin--button btn'>SignIn</button>
+      </Link>
+    </li>
+  </ul>
 };
 
 export default NavList;
