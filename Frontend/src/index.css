@@ -1,0 +1,104 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+
+body {
+  font-family: "Poppins", sans-serif;
+}
+.not--member {
+  position: absolute;
+  right: 2%;
+  top: 3%;
+}
+.not--member button {
+  background: gainsboro;
+  padding: 6px 20px;
+}
+.not--member button:hover{
+  box-shadow: none;
+}
+.not--member button:focus{
+  box-shadow: none;
+}
+.signin--section {
+  display: flex;
+}
+.section--img {
+  width: 50%;
+  background-color: antiquewhite;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+.section--img .back--btn {
+  position: absolute;
+  top: 15%;
+  left: 10%;
+  color: #333;
+}
+.section--img .svg--signin {
+  align-self: center;
+  height: 450px;
+  width: 400px;
+}
+.section--login {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  height: 100vh;
+}
+
+@media only screen and (max-width: 990px) {
+  .section--img {
+    display: none;
+  }
+  .section--login {
+    width: 100%;
+  }
+  .login_card div{
+    width: 80%;
+  }
+}
+
+.login_card {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+}
+.login_card input {
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: whitesmoke;
+}
+.login_card label {
+  font-weight: bold;
+  color: #333333;
+  display: flex;
+  margin: 0%;
+  position: relative;
+}
+.login_card label .forgot {
+  position: absolute;
+  right: 0.5%;
+  text-decoration: none;
+}
+.login_card input:focus {
+  background-color: whitesmoke;
+  box-shadow: none;
+  border-bottom: 2.5px solid #00bfa6;
+}
+.signin--btn {
+  background-color: #00bfa6;
+  border-radius: 8px;
+  margin-top: 25px;
+}
+.signin--btn button {
+  color: white;
+  padding: 10px 0px;
+}
+.signin--btn button:hover {
+  color: white;
+}
