@@ -1,6 +1,7 @@
 import React from "react";
 import { FaLongArrowAltLeft } from "react-icons/fa";
 
+
 const svg1 = () => {
   return (
     <>
