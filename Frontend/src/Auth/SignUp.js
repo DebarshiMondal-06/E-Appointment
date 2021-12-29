@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { FaEye } from "react-icons/fa";
+import { RiEyeFill, RiEyeOffFill } from "react-icons/ri";
+
 
 const SignUp = () => {
   const [hide, setHide] = useState({
@@ -36,28 +37,16 @@ const SignUp = () => {
         </div>
         <div className="col-8 mt-3 password">
           <label className="form-label">Password</label>
-          <input
-            type={`${hide.password ? "text" : "password"}`}
-            className="form-control"
-          />
-          <span
-            onClick={() => setHide({ ...hide, password: !hide.password })}
-            className="eye--password"
-          >
-            <FaEye />
+          <input type={`${hide.password ? "text" : "password"}`} className="form-control" />
+          <span onClick={() => setHide({ ...hide, password: !hide.password })} className="eye--password">
+            {hide.password ? <RiEyeFill /> : <RiEyeOffFill />}
           </span>
         </div>
         <div className="col-8 mt-3 password">
           <label className="form-label">Verify</label>
-          <input
-            type={`${hide.verify ? "text" : "password"}`}
-            className="form-control"
-          />
-          <span
-            onClick={() => setHide({ ...hide, verify: !hide.verify })}
-            className="eye--password"
-          >
-            <FaEye />
+          <input type={`${hide.verify ? "text" : "password"}`} className="form-control" />
+          <span onClick={() => setHide({ ...hide, verify: !hide.verify })}
+            className="eye--password">{hide.verify ? <RiEyeFill /> : <RiEyeOffFill />}
           </span>
         </div>
         <div className="col-8 signin--btn">

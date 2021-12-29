@@ -24,7 +24,6 @@ body {
 .section--img {
   width: 50%;
   background-color: antiquewhite;
-  /* height: 100vh; */
   display: flex;
   justify-content: center;
 }
@@ -79,9 +78,11 @@ body {
 }
 .login_card input {
   border: none;
-  padding: 10px;
+  padding: 12px;
   border-radius: 5px;
+  font-size: 15px;
   background-color: whitesmoke;
+  color: #383838;
 }
 .login_card label {
   font-weight: bold;
@@ -96,8 +97,9 @@ body {
 .eye--password{
   position: absolute;
   right: 15px;
-  top: 50%;
+  top: 45%;
   cursor: pointer;
+  font-size: 20px;
 }
 .login_card label .forgot {
   position: absolute;
