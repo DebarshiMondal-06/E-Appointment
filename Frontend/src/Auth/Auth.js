@@ -5,12 +5,13 @@ import { Link } from "react-router-dom";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
 import Svg2 from "./Svg2";
+import { AuthContext } from "./AuthContext";
 
 const Auth = () => {
   const [signup, setSignUp] = useState(false);
 
   return (
-    <>
+    <AuthContext>
       <article className="not--member">
         {!signup ? "Not a member?" : "Already have account?"} &nbsp;
         <button onClick={() => setSignUp(!signup)} className="btn">
@@ -26,7 +27,7 @@ const Auth = () => {
         </div>
         {signup ? <SignUp /> : <SignIn />}
       </main>
-    </>
+    </AuthContext>
   );
 };
 

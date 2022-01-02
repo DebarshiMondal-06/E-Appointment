@@ -115,17 +115,25 @@ body {
   background-color: #00bfa6;
   border-radius: 8px;
   margin-top: 25px;
+  cursor: pointer;
 }
 .signin--btn button {
   color: white;
   padding: 10px 0px;
+  box-shadow: none;
 }
 .signin--btn button:hover {
   color: white;
 }
+.signin--btn button:focus{
+  box-shadow: none;
+}
 .signup--row{
   display: flex;
-  justify-content: space-evenly;
   flex-direction: row;
-  gap: 3em;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  background-color: #00bfa6;
+  width: 50%;
+  gap: 0em;
 };

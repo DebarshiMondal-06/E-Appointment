@@ -1,47 +1,37 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import {
   AuthenticationDetails,
   CognitoUser,
   CognitoUserPool,
 } from "amazon-cognito-identity-js";
 import { RiEyeFill, RiEyeOffFill } from "react-icons/ri";
+import { toast } from 'react-toastify';
+import ProcessSpinner from "../Components/Spinners/ProcessSpinner";
+import { createAuthContext } from "./AuthContext";
+
 
 const SignIn = () => {
+  const { sign_in } = useContext(createAuthContext);
   const [value, setValue] = useState({ email: "", password: "" });
-  const { email, password } = value;
   const [hide, setHide] = useState(false);
+  const [loader, setLoader] = useState(false);
+  const navigate = useNavigate();
+  const { email, password } = value;
 
 
-  const authenicate = async () => {
-    console.log(email);
-    return await new Promise((resolve, reject) => {
-      var poolData = {
-        UserPoolId: "ap-south-1_P6zGpVmws",
-        ClientId: "707b8r1jjimaj4voe30s0u64oo",
-      };
-      var userPool = new CognitoUserPool(poolData);
-      const user = new CognitoUser({
-        Username: email,
-        Pool: userPool,
-      });
-      const authDetails = new AuthenticationDetails({
-        Password: password,
-        Username: email,
-      });
-      user.authenticateUser(authDetails, {
-        onSuccess: (res) => {
-          console.log(res);
-          // setCookie("auth_Token", res.getIdToken());
-          resolve(res);
-        },
-        onFailure: (err) => {
-          console.log(err);
-          reject(err);
-        },
-      });
+  const authenicate = () => {
+    setLoader(true);
+    sign_in(email, password).then((el) => {
+      setLoader(false);
+      console.log(el);
+      navigate('/dashboard');
+    }).catch((err) => {
+      toast.error(err && err.message);
+      setLoader(false);
     });
   };
+
 
   return (
     <div className="section--login">
@@ -62,7 +52,7 @@ const SignIn = () => {
         </div>
         <div className="col-8 signin--btn" onClick={() => authenicate()}>
           <button type="button" className="btn">
-            Sign In
+            {loader ? <ProcessSpinner /> : 'Sign In'}
           </button>
         </div>
       </form>
