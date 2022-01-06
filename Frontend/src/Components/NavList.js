@@ -19,7 +19,7 @@ const NavList = () => {
 
   return <ul className="navbar-nav">
     <li className="nav-item">
-      <NavLink onClick={Home} activeClassName='menu_active' className="nav--text nav-link" to="/"> Home </NavLink>
+      <NavLink onClick={Home} activeclassName='menu_active' className="nav--text nav-link" to="/"> Home </NavLink>
     </li>
     <li className="nav-item">
       <NavLink onClick={AboutMe} className="nav--text nav-link" to="/about-section"> About </NavLink>

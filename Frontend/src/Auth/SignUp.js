@@ -1,94 +1,111 @@
-import { CognitoUser, CognitoUserAttribute, CognitoUserPool } from "amazon-cognito-identity-js";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { RiEyeFill, RiEyeOffFill } from "react-icons/ri";
-import '../index.css';
-import Swal from 'sweetalert2';
-import ProcessSpinner from "../Components/Spinners/ProcessSpinner";
 import { createAuthContext } from "./AuthContext";
+import { exception_handler } from "../Exception";
+import { toast } from "react-toastify";
+import ProcessSpinner from "../Components/Spinners/ProcessSpinner";
+import { useForm } from 'react-hook-form';
+import '../index.css';
+
 
 
 const SignUp = () => {
   const { sign_up } = useContext(createAuthContext);
-  const [hide, setHide] = useState({
-    verify: false,
-    password: false,
-  });
+  const [btnTxt, setBtnTxt] = useState('Sign Up');
+  const [hide, setHide] = useState({ verify: false, password: false });
   const [loader, setLoader] = useState(false);
-  const [value, setValue] = useState({
-    username: '', password: '', phone: '', dob: '', verify: '', firstname: '', lastname: ''
-  });
-  const { username, password, verify, firstname, lastname, phone, dob } = value;
+  const [confirmPass, setConfirmPass] = useState(false);
+  const { register, formState: { errors }, handleSubmit, setError, watch } = useForm();
 
 
 
 
 
-
-  const execute = () => {
+  const execute = (data) => {
     setLoader(true);
-    sign_up(username, password, phone, firstname, lastname, dob).then(() => {
+    sign_up(data).then((el) => {
       setLoader(false);
-      setValue({ username: '', password: '', phone: '', dob: '', verify: '', firstname: '', lastname: '' });
+      toast.success('Account Registered!');
+      setBtnTxt('Redirecting...');
+      setTimeout(() => {
+        window.location.reload();
+      }, 1500);
     }).catch((err) => {
-      console.log(err);
-    })
+      toast.error(exception_handler(err.code));
+      setLoader(false);
+    });
   };
 
+  const password_org = watch('password');
+  const confirm_pass = watch('verify');
+  useEffect(() => {
+    if (password_org && confirm_pass && password_org !== confirm_pass) {
+      setConfirmPass(true);
+    } else {
+      setConfirmPass(false);
+    }
+  }, [confirm_pass, password_org]);
 
 
 
   return (
-    <div className="section--login account" style={{ margin: '100px 0px' }}>
+    <div className="section--login account" style={{ margin: '180px 0px' }}>
       <h1>Create Account</h1>
       <p>You are creating account as Patient.</p>
       <form className="login_card">
         <div className="col-8">
           <label className="form-label">First Name</label>
-          <input value={firstname} onChange={(e) => setValue({ ...value, firstname: e.target.value })}
-            type="text" className="form-control" />
+          <input {...register("firstname", { required: true })} type="text"
+            className={`form-control ${errors.firstname ? 'border border-danger' : null}`} />
         </div>
         <div className="col-8 mt-3">
           <label className="form-label">Last Name</label>
-          <input value={lastname} onChange={(e) => setValue({ ...value, lastname: e.target.value })}
-            type="text" className="form-control" />
+          <input {...register("lastname", { required: true })} type="text"
+            className={`form-control ${errors.lastname ? 'border border-danger' : null}`} />
         </div>
         <div className="col-8 mt-3">
           <label className="form-label">Email Address</label>
-          <input value={username} onChange={(e) => setValue({ ...value, username: e.target.value })}
-            type="email" className="form-control" />
+          <input {...register("username", { required: true, pattern: /\S+@\S+\.\S+/ })} type="email"
+            className={`form-control ${errors.username ? 'border border-danger' : null}`} />
         </div>
         <div className="col-8 mt-3">
           <label className="form-label">Phone Number</label>
-          <input value={phone} onChange={(e) => setValue({ ...value, phone: e.target.value })}
-            type="text" className="form-control" />
+          <input {...register("phone", { required: true, pattern: /^\+[1-9]{1}[0-9]{3,14}$/ })} type="text"
+            className={`form-control ${errors.phone ? 'border border-danger' : null}`} />
         </div>
         <div className="col-8 mt-3">
           <label className="form-label">Date of Birth</label>
-          <input value={dob} onChange={(e) => setValue({ ...value, dob: e.target.value })}
-            type="date" className="form-control" />
+          <input {...register("dob", { required: true })} type="date"
+            className={`form-control ${errors.dob ? 'border border-danger' : null}`} />
         </div>
         <div className="col-8 mt-3 password">
           <label className="form-label">Password</label>
-          <input value={password} onChange={(e) => setValue({ ...value, password: e.target.value })}
-            type={`${hide.password ? "text" : "password"}`} className="form-control" />
+          <input {...register("password", { required: true, pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/ })}
+            type={`${hide.password ? "text" : "password"}`} className={`form-control ${errors.password ? 'border border-danger' : null}`} />
           <span onClick={() => setHide({ ...hide, password: !hide.password })} className="eye--password">
             {hide.password ? <RiEyeFill /> : <RiEyeOffFill />}
           </span>
         </div>
         <div className="col-8 mt-3 password">
           <label className="form-label">Verify</label>
-          <input value={verify} onChange={(e) => setValue({ ...value, verify: e.target.value })}
-            type={`${hide.verify ? "text" : "password"}`} className="form-control" />
+          <input type={`${hide.verify ? "text" : "password"}`} {...register("verify", { required: true })}
+            className={`form-control ${errors.verify && !confirmPass ? 'border border-danger' : null}`} />
           <span onClick={() => setHide({ ...hide, verify: !hide.verify })}
             className="eye--password">{hide.verify ? <RiEyeFill /> : <RiEyeOffFill />}
           </span>
         </div>
-        <div className="col-8 signin--btn" onClick={() => execute()}>
+        <div className="col-8 signin--btn" onClick={!confirmPass ? handleSubmit(execute) : null}>
           <button type="button" className="btn">
-            {loader ? <ProcessSpinner /> : 'Sign Up'}
+            {loader ? <ProcessSpinner /> : btnTxt}
           </button>
         </div>
       </form>
+      <br></br>
+      <p>{Object.values(errors).some(val => val) ? <span className="text-danger">All feilds are required!</span> : null}</p>
+      <p>{errors.password?.type === 'pattern' ? <span className="text-danger"> <b>Password:</b> Ateast contain 1 upper, 1 lower, 1 digit, 1 special & 8 char</span> : null}</p>
+      <p>{errors.username?.type === 'pattern' ? <span className="text-danger"> <b>Email:</b> Must be a Valid Email</span> : null}</p>
+      <p>{errors.phone?.type === 'pattern' ? <span className="text-danger"> <b>Phone:</b> Must be a Valid Phone Number.</span> : null}</p>
+      <p>{confirmPass ? <span className="text-danger"> <b>Verify:</b> Password didn't matches</span> : null}</p>
     </div>
   );
 };

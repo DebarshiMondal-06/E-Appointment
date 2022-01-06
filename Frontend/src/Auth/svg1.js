@@ -1,12 +1,11 @@
 import React from "react";
-import { FaLongArrowAltLeft } from "react-icons/fa";
 
 
 const svg1 = () => {
   return (
     <>
       <svg
-        className="svg--signin"
+        className="svg--signin--1"
         xmlns="http://www.w3.org/2000/svg"
         data-name="Layer 1"
         width="744.84799"

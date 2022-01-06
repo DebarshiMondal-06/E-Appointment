@@ -1,6 +1,7 @@
+import React, { createContext } from 'react';
 import { AuthenticationDetails, CognitoUser, CognitoUserAttribute, CognitoUserPool } from 'amazon-cognito-identity-js';
-import React, { createContext } from 'react'
 import Swal from 'sweetalert2';
+
 
 const createAuthContext = createContext();
 
@@ -8,6 +9,7 @@ var userPool = new CognitoUserPool({
     UserPoolId: "ap-south-1_qLkXcua4B",
     ClientId: "2pq4j37blp4ki285mr7acfb1nr",
 });
+
 
 const AuthContext = ({ children }) => {
 
@@ -30,7 +32,7 @@ const AuthContext = ({ children }) => {
                 else resolve('Success');
             });
         });
-    }
+    };
     const verify_modal = async (username) => {
         return Swal.fire({
             title: 'Verify Email',
@@ -41,8 +43,6 @@ const AuthContext = ({ children }) => {
             confirmButtonText: 'Verify',
             inputValidator: (value) => check_code(value),
             allowOutsideClick: false,
-            cancelButtonText: 'Cancel',
-            showCancelButton: true,
             preConfirm: (code) => {
                 return getCode(username, code).catch(() => Swal.showValidationMessage('Invalid Code, Try Again!'));;
             }
@@ -67,6 +67,7 @@ const AuthContext = ({ children }) => {
                     resolve(res);
                 },
                 onFailure: (err) => {
+                    console.log(err);
                     reject(err);
                 },
             });
@@ -74,7 +75,7 @@ const AuthContext = ({ children }) => {
     };
 
     // ************************** Registartion ***************************************
-    const sign_up = async (username, password, phone, firstname, lastname, dob) => {
+    const sign_up = async ({ username, password, phone, firstname, lastname, dob }) => {
         return new Promise((res, rej) => {
             let attributeList = [];
             var dataPhoneNumber = {
@@ -110,11 +111,50 @@ const AuthContext = ({ children }) => {
                 }
             });
         })
-    }
+    };
+    // ************************** Forgot Password ********************************
+    const forgot_password = async (email) => {
+        return await new Promise((res, rej) => {
+            const user = new CognitoUser({
+                Username: email,
+                Pool: userPool,
+            });
+            user.forgotPassword({
+                onSuccess: function (data) {
+                    console.log(data);
+                    res();
+                },
+                onFailure: function (err) {
+                    console.log(err);
+                    rej(err);
+                },
+            });
+        })
+    };
+    // ************************** Reset Code Password ********************************
+    const reset_code_operation = async (email, code, newPassword) => {
+        return await new Promise((res, rej) => {
+            const user = new CognitoUser({
+                Username: email,
+                Pool: userPool,
+            });
+            user.confirmPassword(code, newPassword, {
+                onSuccess() {
+                    res();
+                },
+                onFailure(err) {
+                    rej(err);
+                    console.log(err);
+                },
+            });
+        });
+    };
 
     return <createAuthContext.Provider value={{
         sign_in,
         sign_up,
+        forgot_password,
+        reset_code_operation
     }}>
         {children}
     </createAuthContext.Provider>

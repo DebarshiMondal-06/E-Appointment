@@ -8,7 +8,7 @@ const Svg2 = () => {
       width="1166.17"
       height="805.09"
       viewBox="0 0 1166.17 805.09"
-      className="svg--signin"
+      className="svg--signin--2"
     >
       <defs>
         <linearGradient
