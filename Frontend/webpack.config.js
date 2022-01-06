@@ -4,4 +4,4 @@ module.exports = {
       "path": require.resolve("crypto-browserify")
     }
   },
-}
+};
