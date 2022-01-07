@@ -13,7 +13,7 @@
 }
 .nav--items {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
 }
 .nav--items ul {
   padding: 15px;

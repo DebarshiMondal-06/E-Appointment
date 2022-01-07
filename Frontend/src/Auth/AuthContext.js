@@ -1,5 +1,4 @@
 import React, { createContext } from 'react';
-import 'cross-fetch/polyfill';
 import { AuthenticationDetails, CognitoUser, CognitoUserAttribute, CognitoUserPool } from 'amazon-cognito-identity-js';
 import Swal from 'sweetalert2';
 

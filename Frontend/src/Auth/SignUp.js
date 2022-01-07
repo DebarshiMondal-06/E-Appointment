@@ -15,7 +15,7 @@ const SignUp = () => {
   const [hide, setHide] = useState({ verify: false, password: false });
   const [loader, setLoader] = useState(false);
   const [confirmPass, setConfirmPass] = useState(false);
-  const { register, formState: { errors }, handleSubmit, setError, watch } = useForm();
+  const { register, formState: { errors }, handleSubmit, watch } = useForm();
 
 
 
