@@ -1,6 +1,7 @@
 import React, { createContext } from 'react';
 import { AuthenticationDetails, CognitoUser, CognitoUserAttribute, CognitoUserPool } from 'amazon-cognito-identity-js';
 import Swal from 'sweetalert2';
+import { useCookies } from 'react-cookie';
 
 
 const createAuthContext = createContext();
@@ -12,6 +13,7 @@ var userPool = new CognitoUserPool({
 
 
 const AuthContext = ({ children }) => {
+    const [cookie, setCookie, removeCookie] = useCookies();
 
     // ********************************* Utilites ****************************************
     const check_code = (value) => {
@@ -64,6 +66,9 @@ const AuthContext = ({ children }) => {
             });
             user.authenticateUser(authDetails, {
                 onSuccess: (res) => {
+                    let { email, name, phone_number, } = res.idToken.payload;
+                    let role = res.idToken.payload['custom:role'];
+                    setCookie('user_data', JSON.stringify({ email, name, phone_number, role }), { path: '/' });
                     resolve(res);
                 },
                 onFailure: (err) => {
@@ -149,12 +154,21 @@ const AuthContext = ({ children }) => {
             });
         });
     };
+    // *************************** Logout *************************************
+    const logout = () => {
+        removeCookie('user_data', { path: '/' });
+        setTimeout(() => {
+            window.location.reload();
+        }, 1000);
+    }
 
     return <createAuthContext.Provider value={{
         sign_in,
         sign_up,
         forgot_password,
-        reset_code_operation
+        reset_code_operation,
+        logout,
+        cookie,
     }}>
         {children}
     </createAuthContext.Provider>

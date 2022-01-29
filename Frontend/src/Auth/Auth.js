@@ -5,40 +5,36 @@ import { Link, useLocation } from "react-router-dom";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
 import Svg2 from "./Svg2";
-import { AuthContext } from "./AuthContext";
 import Forgot from "./Forgot";
 
 const Auth = () => {
   const [signup, setSignUp] = useState(false);
   var loc = useLocation();
 
-  return (
-    <AuthContext>
+  return <>
+    <article className="not--member">
+      {(loc.pathname === "/forgot")
+        ? <Link to="/auth">
+          <button className="btn">
+            Sign In
+          </button> </Link>
+        : <> {!signup ? "Not a member?" : "Already have account?"} &nbsp;
+          <button onClick={() => setSignUp(!signup)} className="btn">
+            {!signup ? "SignUp" : "SignIn"}
+          </button> </>
+      }
+    </article>
 
-      <article className="not--member">
-        {(loc.pathname === "/forgot")
-          ? <Link to="/auth">
-            <button className="btn">
-              Sign In
-            </button> </Link>
-          : <> {!signup ? "Not a member?" : "Already have account?"} &nbsp;
-            <button onClick={() => setSignUp(!signup)} className="btn">
-              {!signup ? "SignUp" : "SignIn"}
-            </button> </>
-        }
-      </article>
-
-      <main className="signin--section">
-        <div className="section--img">
-          <Link to="/">
-            <FaLongArrowAltLeft className="back--btn" size={30} />
-          </Link>
-          {signup ? <Svg2 /> : <Svg1 />}
-        </div>
-        {signup ? <SignUp /> : (loc.pathname === '/forgot') ? <Forgot /> : <SignIn />}
-      </main>
-    </AuthContext >
-  );
+    <main className="signin--section">
+      <div className="section--img">
+        <Link to="/">
+          <FaLongArrowAltLeft className="back--btn" size={30} />
+        </Link>
+        {signup ? <Svg2 /> : <Svg1 />}
+      </div>
+      {signup ? <SignUp /> : (loc.pathname === '/forgot') ? <Forgot /> : <SignIn />}
+    </main>
+  </ >
 };
 
 export default Auth;

@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { RiEyeFill, RiEyeOffFill } from "react-icons/ri";
 import { createAuthContext } from "./AuthContext";
-import { exception_handler } from "../Exception";
+import { exception_handler } from "../Utils/Exception";
 import { toast } from "react-toastify";
 import ProcessSpinner from "../Components/Spinners/ProcessSpinner";
 import { useForm } from 'react-hook-form';

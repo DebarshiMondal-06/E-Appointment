@@ -4,7 +4,7 @@ import { RiEyeFill, RiEyeOffFill } from "react-icons/ri";
 import { toast } from 'react-toastify';
 import ProcessSpinner from "../Components/Spinners/ProcessSpinner";
 import { createAuthContext } from "./AuthContext";
-import { exception_handler } from "../Exception";
+import { exception_handler } from "../Utils/Exception";
 import { useForm } from 'react-hook-form';
 
 
@@ -22,7 +22,6 @@ const SignIn = () => {
     setLoader(true);
     sign_in(data.email, data.password).then((el) => {
       setLoader(false);
-      console.log(el);
       navigate('/dashboard');
     }).catch((err) => {
       toast.error(exception_handler(err && err.code));

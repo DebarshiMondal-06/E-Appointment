@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import ProcessSpinner from '../Components/Spinners/ProcessSpinner';
-import { exception_handler } from '../Exception';
+import { exception_handler } from '../Utils/Exception';
 import { createAuthContext } from './AuthContext';
 
 

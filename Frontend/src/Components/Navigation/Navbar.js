@@ -1,6 +1,7 @@
 import React from "react";
 import NavList from "./NavList";
-import "./component.css";
+import "../component.css";
+
 
 const Navbar = () => {
   return (
