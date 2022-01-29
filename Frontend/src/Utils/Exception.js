@@ -4,6 +4,7 @@ export const exception_handler = (message) => {
     case "CodeMismatchException": return 'Invalid Code, Try Again!';
     case "LimitExceededException": return 'Limit Exceeded, Try Later!';
     case 'UsernameExistsException': return 'Account already exists!';
+    case "NetworkError": return 'Network Error!';
 
     default: return 'Something Went Wrong!';
   }

@@ -1,9 +1,15 @@
-import React, { createContext } from 'react';
+import React, { createContext, useState } from 'react';
 
 const createGlobalContext = createContext();
 
 const GlobalContext = ({ children }) => {
-  return <createGlobalContext.Provider>
+  const [openSidebar, setOpenSidebar] = useState(false);
+
+
+  return <createGlobalContext.Provider value={{
+    openSidebar,
+    setOpenSidebar
+  }}>
     {children}
   </createGlobalContext.Provider>
 }

@@ -4,6 +4,7 @@ import Home from "./LandingView/Home";
 import Auth from "./Auth/Auth";
 import Dashboard from "./Pages/Dashboard";
 import { SignInAuth, ProtectAuth } from "./Utils/ProtectedRoutes";
+import Error from "./Pages/Error";
 
 
 
@@ -14,6 +15,7 @@ const App = () => {
       <Route index element={<SignInAuth><Auth /></SignInAuth>} path="/auth" />
       <Route index element={<SignInAuth><Auth /></SignInAuth>} path="/forgot" />
       <Route index element={<ProtectAuth><Dashboard /></ProtectAuth>} path="/dashboard" />
+      <Route element={<Error />} path="*" />
     </Routes>
   );
 };

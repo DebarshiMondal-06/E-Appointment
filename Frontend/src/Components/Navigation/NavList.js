@@ -1,11 +1,15 @@
 import React, { useContext } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import { createAuthContext } from '../../Auth/AuthContext';
+import { FaSignOutAlt } from 'react-icons/fa';
+import { RiDashboard2Fill } from 'react-icons/ri';
+import { BiLogInCircle } from 'react-icons/bi';
 
 const NavList = () => {
   const [cookie] = useCookies();
   let { logout } = useContext(createAuthContext);
+  let { pathname } = useLocation();
 
 
   const ContactMe = () => {
@@ -24,10 +28,10 @@ const NavList = () => {
 
   return <ul className="navbar-nav">
     {
-      cookie.user_data ?
+      cookie.user_data && pathname === '/dashboard' ?
         <li className='mt-1'>
           <Link to="/auth">
-            <button onClick={() => logout()} className='signin--button btn'>Logout</button>
+            <button onClick={() => logout()} className='logout--button btn'>Logout <FaSignOutAlt /></button>
           </Link>
         </li>
         : <>
@@ -44,8 +48,9 @@ const NavList = () => {
             <NavLink onClick={ContactMe} className="nav--text nav-link" to="/contact"> Contact </NavLink>
           </li>
           <li className='mt-1'>
-            <Link to="/auth">
-              <button className='signin--button btn'>SignIn</button>
+            <Link to={!cookie.user_data ? '/dashboard' : '/auth'}>
+              <button className='signin--button btn'>{!cookie.user_data ? <>  SignIn <BiLogInCircle /> </>
+                : <> DashBoard <RiDashboard2Fill fontSize={18} /> </>}</button>
             </Link>
           </li>
         </>

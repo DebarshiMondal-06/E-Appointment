@@ -29,8 +29,17 @@
   letter-spacing: 1px;
   padding: 5px 25px;
 }
+.nav--items .logout--button {
+  border: 2.5px solid tomato;
+  letter-spacing: 1px;
+  padding: 5px 25px;
+}
 .nav--items .signin--button:hover {
   background: #00bfa6;
+  color: white;
+}
+.nav--items .logout--button:hover {
+  background: tomato;
   color: white;
 }
 @media only screen and (max-width: 990px) {
@@ -39,3 +48,42 @@
     text-align: center;
   }
 }
+
+
+
+.error--section{
+  margin-top: 15%;
+  text-align: center;
+  margin-bottom: 20%;
+}
+.error--section h2{
+  color: #333;
+  padding: 10px 20px;
+  font-family: 'Roboto Slab', serif;
+}
+.error--btn{
+  text-align: center;
+}
+.error--btn button{
+  font-size: 20px;
+  width: 250px;
+  padding: 8px 10px;
+  border: none;
+  border-radius: 8px;
+  background: #00bfa6; 
+  color: aliceblue;
+  border: 1px solid white;
+}
+.error--btn button:hover{
+  color: #fff;
+}
+
+
+.sidebar{
+  position: absolute;
+  background: #00bfa6;
+  width: 25%;
+  top: 0%;
+  height: 100vh;
+  z-index: 2;
+} 
