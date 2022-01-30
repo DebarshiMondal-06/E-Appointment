@@ -152,4 +152,19 @@ body {
   background-color: #00bfa6;
   width: 50%;
   gap: 0em;
-};
+}
+
+
+.arrow--right{
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  left: -15px;
+  cursor: pointer;
+  transition: 0.2s all ease-in-out;
+  z-index: 1;
+}
+.arrow--right:hover{
+  color: #00bfa6;
+}
+

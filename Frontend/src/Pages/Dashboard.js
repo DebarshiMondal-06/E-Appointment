@@ -3,7 +3,7 @@ import Navbar from '../Components/Navigation/Navbar';
 import { FaArrowAltCircleRight } from 'react-icons/fa';
 import SideBar from '../Components/Navigation/SideBar';
 import { createGlobalContext } from '../Utils/GlobalContext';
-import './pages.css';
+import "../index.css";
 
 
 const Dashboard = () => {

@@ -5,6 +5,7 @@ import Auth from "./Auth/Auth";
 import Dashboard from "./Pages/Dashboard";
 import { SignInAuth, ProtectAuth } from "./Utils/ProtectedRoutes";
 import Error from "./Pages/Error";
+import "./index.css";
 
 
 
