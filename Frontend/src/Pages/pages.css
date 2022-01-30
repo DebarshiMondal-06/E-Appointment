@@ -5,4 +5,8 @@
   transform: translateY(-50%);
   left: -15px;
   cursor: pointer;
+  transition: 0.2s all ease-in-out;
+}
+.arrow--right:hover{
+  color: #00bfa6;
 }

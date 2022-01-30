@@ -7,12 +7,12 @@ import { createGlobalContext } from '../Utils/GlobalContext';
 
 
 const Dashboard = () => {
-    let { openSidebar, setOpenSidebar } = useContext(createGlobalContext);
+    let { openSidebar, handleOpen, handleClose, closeSidebar } = useContext(createGlobalContext);
 
     return <>
         <Navbar />
-        {openSidebar ? <SideBar setOpenSidebar={setOpenSidebar} /> : null}
-        <FaArrowAltCircleRight className='arrow--right' size={40} onClick={() => setOpenSidebar(!openSidebar)} />
+        <SideBar openSidebar={openSidebar} handleClose={handleClose} closeSidebar={closeSidebar} />
+        <FaArrowAltCircleRight className='arrow--right' size={40} onClick={() => handleOpen()} />
         <div className='container'>
             <h1 className='text-center'>Dashboard</h1>
         </div>
