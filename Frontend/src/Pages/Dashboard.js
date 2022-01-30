@@ -3,7 +3,6 @@ import Navbar from '../Components/Navigation/Navbar';
 import { FaArrowAltCircleRight } from 'react-icons/fa';
 import SideBar from '../Components/Navigation/SideBar';
 import { createGlobalContext } from '../Utils/GlobalContext';
-import "../index.css";
 
 
 const Dashboard = () => {
@@ -15,6 +14,7 @@ const Dashboard = () => {
         <FaArrowAltCircleRight className='arrow--right' size={40} onClick={() => handleOpen()} />
         <div className='container'>
             <h1 className='text-center'>Dashboard</h1>
+
         </div>
     </>
 }

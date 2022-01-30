@@ -24,11 +24,11 @@ const SignIn = () => {
       setLoader(false);
       navigate('/dashboard');
     }).catch((err) => {
-      toast.error(exception_handler(err && err.code));
+      toast.error(exception_handler(err.code));
       setLoader(false);
     });
   };
-  
+
 
   return (
     <div className="section--login">

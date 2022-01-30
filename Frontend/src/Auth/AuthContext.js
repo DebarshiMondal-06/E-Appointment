@@ -1,7 +1,8 @@
 import React, { createContext } from 'react';
-import { AuthenticationDetails, CognitoUser, CognitoUserAttribute, CognitoUserPool } from 'amazon-cognito-identity-js';
+import { AuthenticationDetails, CognitoUser, CognitoUserPool } from 'amazon-cognito-identity-js';
 import Swal from 'sweetalert2';
 import { useCookies } from 'react-cookie';
+import { getData, sendData } from '../Utils/API';
 
 
 const createAuthContext = createContext();
@@ -12,8 +13,10 @@ var userPool = new CognitoUserPool({
 });
 
 
+
 const AuthContext = ({ children }) => {
     const [cookie, setCookie, removeCookie] = useCookies();
+
 
     // ********************************* Utilites ****************************************
     const check_code = (value) => {
@@ -29,6 +32,7 @@ const AuthContext = ({ children }) => {
         return new Promise((resolve, reject) => {
             User.confirmRegistration(code, true, (err, data) => {
                 if (err) {
+                    console.log(err);
                     reject(err);
                 }
                 else resolve('Success');
@@ -65,53 +69,33 @@ const AuthContext = ({ children }) => {
                 Username: email,
             });
             user.authenticateUser(authDetails, {
-                onSuccess: (res) => {
+                onSuccess: async (res) => {
                     let { email, name, phone_number, } = res.idToken.payload;
-                    let role = res.idToken.payload['custom:role'];
-                    setCookie('user_data', JSON.stringify({ email, name, phone_number, role }), { path: '/' });
-                    resolve(res);
+                    try {
+                        let { data: { isAdminApprove } } = await getData('/get_admin_approve', 'GET', email);
+                        if (!isAdminApprove) return reject({ code: "isAdminApprove" });
+                        let role = res.idToken.payload['custom:role'];
+                        setCookie('user_data', JSON.stringify({ email, name, phone_number, role }), { path: '/' });
+                        resolve(res);
+                    }
+                    catch (err) { reject(err) };
                 },
                 onFailure: (err) => {
-                    console.log(err);
                     reject(err);
                 },
             });
         });
     };
 
-    // ************************** Registartion ***************************************
+    // ************************** Registration ***************************************
     const sign_up = async ({ username, password, phone, firstname, lastname, dob }) => {
         return new Promise((res, rej) => {
-            let attributeList = [];
-            var dataPhoneNumber = {
-                Name: 'phone_number',
-                Value: phone,
-            };
-            var dataFullName = {
-                Name: 'name',
-                Value: firstname + lastname,
-            };
-            var dataBirthDate = {
-                Name: 'birthdate',
-                Value: dob
-            }
-            var role = {
-                Name: 'custom:role',
-                Value: 'Patient'
-            };
-            var attributePhoneNumber = new CognitoUserAttribute(dataPhoneNumber);
-            var attributeFullName = new CognitoUserAttribute(dataFullName);
-            var attributeBirthDate = new CognitoUserAttribute(dataBirthDate);
-            var attributeRole = new CognitoUserAttribute(role);
-            attributeList.push(attributePhoneNumber);
-            attributeList.push(attributeFullName);
-            attributeList.push(attributeBirthDate);
-            attributeList.push(attributeRole);
-            userPool.signUp(username, password, attributeList, null, (err, data) => {
+            userPool.signUp(username, password, null, null, async (err, data) => {
                 if (err) {
                     rej(err);
                 }
                 else {
+                    await sendData('/auth', 'POST', { username, name: `${firstname + lastname}`, dob, phone });
                     verify_modal(username).then(() => res()).catch(err => rej(err));
                 }
             });

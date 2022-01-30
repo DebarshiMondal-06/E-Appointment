@@ -5,6 +5,7 @@ export const exception_handler = (message) => {
     case "LimitExceededException": return 'Limit Exceeded, Try Later!';
     case 'UsernameExistsException': return 'Account already exists!';
     case "NetworkError": return 'Network Error!';
+    case "isAdminApprove": return 'Admin Not Approved';
 
     default: return 'Something Went Wrong!';
   }
