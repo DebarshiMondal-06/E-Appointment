@@ -6,14 +6,17 @@ import ProcessSpinner from "../Components/Spinners/ProcessSpinner";
 import { createAuthContext } from "./AuthContext";
 import { exception_handler } from "../Utils/Exception";
 import { useForm } from 'react-hook-form';
+import Swal from "sweetalert2";
 
 
 
 const SignIn = () => {
-  const { sign_in } = useContext(createAuthContext);
+  const { sign_in, verify_modal, resetCode } = useContext(createAuthContext);
   const [hide, setHide] = useState(false);
   const [loader, setLoader] = useState(false);
   const navigate = useNavigate();
+  const [needVerify, setNeedVerify] = useState(false);
+
 
   const { formState: { errors }, register, handleSubmit } = useForm();
 
@@ -24,10 +27,32 @@ const SignIn = () => {
       setLoader(false);
       navigate('/dashboard');
     }).catch((err) => {
+      if (err.code === 'UserNotConfirmedException') setNeedVerify(true);
       toast.error(exception_handler(err.code));
       setLoader(false);
     });
   };
+
+  const verify_email = async () => {
+    return Swal.fire({
+      title: 'Type Email',
+      input: 'email',
+      inputLabel: 'Enter your registered email ID',
+      inputPlaceholder: 'Enter email Id here',
+      confirmButtonColor: '#00bfa6',
+      confirmButtonText: 'Proceed',
+      allowOutsideClick: false,
+      showCancelButton: true,
+      preConfirm: (value) => {
+        return resetCode(value).catch(() => Swal.showValidationMessage('Something Went Wrong!'));
+      }
+    }).then(async (val) => {
+      if (val.isConfirmed) await verify_modal(val.value).then(() => {
+        toast.info('SignIn to Continue!');
+      });
+      else Swal.close();
+    });
+  }
 
 
   return (
@@ -53,6 +78,8 @@ const SignIn = () => {
             {loader ? <ProcessSpinner /> : 'Sign In'}
           </button>
         </div>
+        {needVerify ? <p className="mt-3">Seems! You haven't Verified <Link onClick={() => verify_email()}
+          to="#!">Wanna Verify?</Link> </p> : null}
       </form>
       <br></br><br></br>
       <p>{Object.values(errors).some(val => val) ? <span className="text-danger">All feilds are required!</span> : null}</p>

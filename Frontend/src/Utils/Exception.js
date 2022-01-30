@@ -6,6 +6,7 @@ export const exception_handler = (message) => {
     case 'UsernameExistsException': return 'Account already exists!';
     case "NetworkError": return 'Network Error!';
     case "isAdminApprove": return 'Admin Not Approved';
+    case "UserNotConfirmedException": return 'User is not Verified!';
 
     default: return 'Something Went Wrong!';
   }

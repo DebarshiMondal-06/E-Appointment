@@ -56,6 +56,18 @@ const AuthContext = ({ children }) => {
             Swal.close();
         });
     };
+    const resetCode = (username) => {
+        const User = new CognitoUser({
+            Username: username,
+            Pool: userPool
+        });
+        return new Promise((resolve, reject) => {
+            User.resendConfirmationCode((err, data) => {
+                if (err) reject(err);
+                else resolve();
+            });
+        });
+    }
 
     // ************************** SignIn *******************************************
     const sign_in = async (email, password) => {
@@ -152,6 +164,8 @@ const AuthContext = ({ children }) => {
         forgot_password,
         reset_code_operation,
         logout,
+        verify_modal,
+        resetCode,
         cookie,
     }}>
         {children}
