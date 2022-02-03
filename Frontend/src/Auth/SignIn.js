@@ -7,6 +7,7 @@ import { createAuthContext } from "./AuthContext";
 import { exception_handler } from "../Utils/Exception";
 import { useForm } from 'react-hook-form';
 import Swal from "sweetalert2";
+import { useCookies } from "react-cookie";
 
 
 
@@ -16,6 +17,7 @@ const SignIn = () => {
   const [loader, setLoader] = useState(false);
   const navigate = useNavigate();
   const [needVerify, setNeedVerify] = useState(false);
+  const [, setCookie] = useCookies();
 
 
   const { formState: { errors }, register, handleSubmit } = useForm();
@@ -23,8 +25,11 @@ const SignIn = () => {
 
   const authenicate = (data) => {
     setLoader(true);
-    sign_in(data.email, data.password).then((el) => {
+    sign_in(data.email, data.password).then((result) => {
+      let { name, user_role, email } = result;
       setLoader(false);
+      console.log('hwlll');
+      setCookie('user_data', JSON.stringify({ email, name, user_role }), { path: '/' });
       navigate('/dashboard');
     }).catch((err) => {
       if (err.code === 'UserNotConfirmedException') setNeedVerify(true);
@@ -79,10 +84,10 @@ const SignIn = () => {
           </button>
         </div>
         {needVerify ? <p className="mt-3">Seems! You haven't Verified <Link onClick={() => verify_email()}
-          to="#!">Wanna Verify?</Link> </p> : null}
+          to="#!"> &nbsp; Wanna Verify?</Link> </p> : null}
       </form>
       <br></br><br></br>
-      <p>{Object.values(errors).some(val => val) ? <span className="text-danger">All feilds are required!</span> : null}</p>
+      <p>{Object.values(errors).some(val => val) ? <span className="text-danger">All feilds must be valid!</span> : null}</p>
       <p>{errors.email?.type === 'pattern' ? <span className="text-danger"> <b>Email:</b> Must be a Valid Email</span> : null}</p>
     </div>
   );

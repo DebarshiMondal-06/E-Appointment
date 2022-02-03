@@ -16,6 +16,8 @@ const App = () => {
       <Route index element={<SignInAuth><Auth /></SignInAuth>} path="/auth" />
       <Route index element={<SignInAuth><Auth /></SignInAuth>} path="/forgot" />
       <Route index element={<ProtectAuth><Dashboard /></ProtectAuth>} path="/dashboard" />
+      <Route element={<ProtectAuth><Dashboard /></ProtectAuth>} path="/dashboard/doctors" />
+      <Route element={<ProtectAuth><Dashboard /></ProtectAuth>} path="/dashboard/patients" />
       <Route element={<Error />} path="*" />
     </Routes>
   );

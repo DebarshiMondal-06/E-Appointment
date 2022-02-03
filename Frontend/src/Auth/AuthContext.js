@@ -81,14 +81,12 @@ const AuthContext = ({ children }) => {
                 Username: email,
             });
             user.authenticateUser(authDetails, {
-                onSuccess: async (res) => {
-                    let { email, name, phone_number, } = res.idToken.payload;
+                onSuccess: async () => {
+                    // let { email, name, phone_number, } = res.idToken.payload;
                     try {
-                        let { data: { isAdminApprove } } = await getData('/get_admin_approve', 'GET', email);
-                        if (!isAdminApprove) return reject({ code: "isAdminApprove" });
-                        let role = res.idToken.payload['custom:role'];
-                        setCookie('user_data', JSON.stringify({ email, name, phone_number, role }), { path: '/' });
-                        resolve(res);
+                        let { data: { isAdminApprove, user_role, name } } = await getData('/get_admin_approve', 'GET', email);
+                        if (!isAdminApprove && user_role !== 'admin') return reject({ code: "isAdminApprove" });
+                        resolve({ email, name, user_role });
                     }
                     catch (err) { reject(err) };
                 },
@@ -107,7 +105,7 @@ const AuthContext = ({ children }) => {
                     rej(err);
                 }
                 else {
-                    await sendData('/auth', 'POST', { username, name: `${firstname + lastname}`, dob, phone });
+                    await sendData('/auth', 'POST', { username, name: `${firstname + lastname}`, dob, phone, user_role: "patient" });
                     verify_modal(username).then(() => res()).catch(err => rej(err));
                 }
             });

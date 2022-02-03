@@ -28,7 +28,7 @@ const NavList = () => {
 
   return <ul className="navbar-nav">
     {
-      cookie.user_data && pathname === '/dashboard' ?
+      cookie.user_data && pathname.includes('/dashboard') ?
         <li className='mt-1'>
           <Link to="/auth">
             <button onClick={() => logout()} className='logout--button btn'>Logout <FaSignOutAlt /></button>

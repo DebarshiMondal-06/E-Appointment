@@ -9,3 +9,56 @@
 .arrow--right:hover{
   color: #00bfa6;
 }
+
+@media only screen and (max-width: 690px) {
+  .dashboard--container{
+    margin-top: 10%;
+  }
+  .dashboard--card{
+    width: 100%!important;
+  }
+  .dashboard--card .cards--info{
+    justify-content: center!important;
+  }
+}
+.dashboard--container{
+  width: 85%;
+}
+.dashboard--main{
+  display: flex;
+  gap: 2em;
+  justify-content: center;
+  margin-top: 8%;
+  flex-wrap: wrap;
+}
+.dashboard--card{
+  width: 30%;
+  border-radius: 10px;
+  border: none;
+  padding: 10px 10px;
+}
+.dashboard--card h3{
+  padding: 10px 20px;
+  font-size: 20px;
+}
+.dashboard--card .cards--info{
+  display: flex;
+  justify-content: space-between;
+}
+.cards--info .cards--text{
+  font-size: 3em;
+  padding: 0px 30px;
+  margin: 0%;
+}
+.cards--info .cards--icon{
+  font-size: 3em;
+  padding: 0px 30px;
+  margin-top: -5px!important;
+  margin: 0%;
+}
+
+
+
+
+
+

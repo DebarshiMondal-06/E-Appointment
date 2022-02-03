@@ -1,3 +1,6 @@
+.opacity--reduce{
+  opacity: 0.5;
+}
 .brand {
   font-size: 30px;
   padding: 10px 20px;
@@ -144,6 +147,22 @@
 }
 
 .sidebar--list .items--list li:hover{
+  color: aliceblue;
+  font-weight: 600;
+}
+
+.sidebar--list ul .items--list .lists{
+  list-style: none;
+  margin: 10px -10px!important;
+  cursor: pointer;
+  color: #36454F;
+  font-size: 14px;
+  transition: 0.2s ease-in-out all;
+  display: flex;
+  text-decoration: none;
+}
+
+.sidebar--list .items--list .lists:hover{
   color: aliceblue;
   font-weight: 600;
 }
