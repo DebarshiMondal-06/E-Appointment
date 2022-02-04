@@ -16,9 +16,7 @@ const Dashboard = () => {
             <Navbar />
             <FaArrowAltCircleRight className='arrow--right' size={40} onClick={() => handleOpen()} />
             <div className='dashboard--container container'>
-
                 <Paths />
-
             </div>
         </section>
     </>

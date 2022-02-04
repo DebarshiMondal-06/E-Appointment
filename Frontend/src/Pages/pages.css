@@ -23,6 +23,7 @@
 }
 .dashboard--container{
   width: 85%;
+  margin-top: 50px;
 }
 .dashboard--main{
   display: flex;
@@ -59,6 +60,12 @@
 
 
 
-
+.doctors{
+  margin-top: 50px;
+}
+.doctors article{
+  display: flex;
+  justify-content: space-between;
+}
 
 

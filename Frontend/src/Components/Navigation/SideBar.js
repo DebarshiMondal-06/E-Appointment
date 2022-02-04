@@ -1,8 +1,7 @@
 import React from 'react';
-import { FaWindowClose, FaUsers } from 'react-icons/fa';
-import { MdAssistantNavigation, MdPolicy, MdAdminPanelSettings } from 'react-icons/md';
-import { RiHomeGearFill, RiLogoutBoxFill } from 'react-icons/ri';
+import { FaWindowClose } from 'react-icons/fa';
 import { NavLink } from 'react-router-dom';
+import { arr } from './sidebar_data';
 
 const SideBar = ({ openSidebar, closeSidebar, handleClose }) => {
 
@@ -15,25 +14,20 @@ const SideBar = ({ openSidebar, closeSidebar, handleClose }) => {
     </article>
     <main className='sidebar--list'>
       <ul>
-        <li className='items'> <MdAssistantNavigation /> &nbsp; Navigation </li>
-        <ol className='items--list'>
-          <NavLink className="lists" onClick={() => handleClose(500)} to="/dashboard">DashBoard</NavLink>
-          <li>Profile</li>
-        </ol>
-        <li className='items'> <RiHomeGearFill /> &nbsp; Master Settings</li>
-        <ol className='items--list'>
-          <li>Manage Hospitals</li>
-          <li>Manage Payment</li>
-          <li>Manage Appointment</li>
-        </ol>
-        <li className='items'> <FaUsers /> &nbsp; Users Management </li>
-        <ol className='items--list'>
-          <NavLink className="lists" onClick={() => handleClose(500)} to="/dashboard/doctors">Manage Doctors</NavLink>
-          <NavLink className="lists" onClick={() => handleClose(500)} to="/dashboard/patients">Manage Patient</NavLink>
-        </ol>
-        <li className='items'> <MdPolicy /> &nbsp; CMS</li>
-        <li className='items'> <MdAdminPanelSettings /> &nbsp;  Settings</li>
-        <li className='items'> <RiLogoutBoxFill /> &nbsp; Logout</li>
+        {
+          arr && arr.map((items, i) => {
+            let { header, sub_list, icon } = items;
+            return <section key={i}>
+              <li className='items'> {icon} &nbsp; {header} </li>
+              {sub_list && sub_list.map((item, i) => {
+                let { name, route } = item;
+                return <ol className='items--list' key={i}>
+                  <NavLink className="lists" onClick={() => handleClose(500)} to={route}>{name}</NavLink>
+                </ol>
+              })}
+            </section>
+          })
+        }
       </ul>
     </main>
   </div>;
