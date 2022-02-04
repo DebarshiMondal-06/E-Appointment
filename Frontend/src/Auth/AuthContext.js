@@ -15,7 +15,7 @@ var userPool = new CognitoUserPool({
 
 
 const AuthContext = ({ children }) => {
-    const [cookie, setCookie, removeCookie] = useCookies();
+    const [cookie, , removeCookie] = useCookies();
 
 
     // ********************************* Utilites ****************************************
