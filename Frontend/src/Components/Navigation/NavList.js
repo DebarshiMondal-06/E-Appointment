@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import { createAuthContext } from '../../Auth/AuthContext';
-import { FaSignOutAlt } from 'react-icons/fa';
+import { FaSignOutAlt, FaUserCircle } from 'react-icons/fa';
 import { RiDashboard2Fill } from 'react-icons/ri';
 import { BiLogInCircle } from 'react-icons/bi';
 
@@ -28,12 +28,19 @@ const NavList = () => {
 
   return <ul className="navbar-nav">
     {
-      cookie.user_data && pathname.includes('/dashboard') ?
+      cookie.user_data && pathname.includes('/dashboard') ? <>
+        <li className="nav-item">
+          <NavLink onClick={Home} className="nav--text nav-link" to="/">
+            <RiDashboard2Fill className='dashboard--icon' size={35} /> &nbsp;&nbsp;
+            <FaUserCircle className='dashboard--icon' size={30} />
+          </NavLink>
+        </li>
         <li className='mt-1'>
           <Link to="/auth">
             <button onClick={() => logout()} className='logout--button btn'>Logout <FaSignOutAlt /></button>
           </Link>
         </li>
+      </>
         : <>
           <li className="nav-item">
             <NavLink onClick={Home} activeclassName='menu_active' className="nav--text nav-link" to="/"> Home </NavLink>

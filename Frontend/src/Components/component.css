@@ -14,6 +14,7 @@
   background-color: gainsboro;
   border: none;
 }
+
 .nav--items {
   display: flex;
   justify-content: flex-end;
@@ -45,6 +46,14 @@
   background: tomato;
   color: white;
 }
+.dashboard--icon{
+  color: #000;
+  margin-top: -2px;
+}
+.dashboard--icon:hover{
+  color: #00bfa6;
+}
+
 @media only screen and (max-width: 990px) {
   .nav--items {
     justify-content: center;

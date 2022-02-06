@@ -16,9 +16,10 @@ const App = () => {
       <Route index element={<SignInAuth><Auth /></SignInAuth>} path="/auth" />
       <Route index element={<SignInAuth><Auth /></SignInAuth>} path="/forgot" />
       <Route index element={<ProtectAuth><Dashboard /></ProtectAuth>} path="/dashboard" />
-      <Route element={<ProtectAuth><Dashboard /></ProtectAuth>} path="/doctors" />
-      <Route element={<ProtectAuth><Dashboard /></ProtectAuth>} path="/doctors/add" />
-      <Route element={<ProtectAuth><Dashboard /></ProtectAuth>} path="/patients" />
+      <Route element={<ProtectAuth><Dashboard /></ProtectAuth>} path="/dashboard/doctors" />
+      <Route element={<ProtectAuth><Dashboard /></ProtectAuth>} path="/dashboard/doctors_add" />
+      <Route element={<ProtectAuth><Dashboard /></ProtectAuth>} path="/dashboard/patients" />
+      <Route element={<ProtectAuth><Dashboard /></ProtectAuth>} path="/dashboard/patients_add" />
       <Route element={<Error />} path="*" />
     </Routes>
   );

@@ -19,8 +19,8 @@ export const arr = [
   {
     header: "Users Management", icon: <FaUsers />,
     sub_list: [
-      { name: "Manage Doctors", route: "/doctors" },
-      { name: "Manage Patient", route: "/patients" },
+      { name: "Manage Doctors", route: "/dashboard/doctors" },
+      { name: "Manage Patient", route: "/dashboard/patients" },
     ]
   },
   {

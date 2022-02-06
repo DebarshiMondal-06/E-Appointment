@@ -8,9 +8,9 @@ import AddDoctor from './Doctors/AddDoctor';
 const Paths = () => {
   let { pathname } = useLocation();
 
-  if (pathname === '/doctors') return <Doctor />
-  if (pathname === '/doctors/add') return <AddDoctor />
-  if (pathname === '/patients') return <Patient />
+  if (pathname === '/dashboard/doctors') return <Doctor />
+  if (pathname === '/dashboard/doctors_add') return <AddDoctor />
+  if (pathname === '/dashboard/patients') return <Patient />
 
 
   return <DashboardCard />
