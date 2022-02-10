@@ -109,3 +109,58 @@
   padding: 0px 10px!important;
   margin-top: -1px;
 }
+
+
+@media only screen and (max-width: 990px) {
+  .doctors--add--form{
+    width: 100%!important;
+  }
+}
+.add--doctor--section{
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 50px;
+}
+.doctors--add--form {
+  margin-top: 5%;
+  width: 80%;
+  padding: 30px;
+  border-radius: 10px;
+}
+.doctors--add--form input{
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: whitesmoke;
+}
+.doctors--add--form input:focus{
+  background-color: whitesmoke;
+  box-shadow: none;
+  border-bottom: 3px solid #348AC7;
+}
+.doctors--add--form select{
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: whitesmoke;
+}
+.doctors--add--form select:focus{
+  background-color: whitesmoke;
+  box-shadow: none;
+  border-bottom: 3px solid #348AC7;
+}
+.btns--operate{
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5em;
+  margin-top: 20px;
+}
+.btns--operate .btn--add{
+  background-color: #00bfa6;
+  color: white
+}
+.btns--operate .btn--cancel{
+  background-color: #333;
+  color: aliceblue;
+}

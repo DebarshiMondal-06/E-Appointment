@@ -8,5 +8,5 @@ export function SignInAuth({ children }) {
 
 export function ProtectAuth({ children }) {
   const [cookie] = useCookies();
-  return cookie.user_data ? children : <Navigate to="/auth" />;
+  return !cookie.user_data ? children : <Navigate to="/auth" />;
 }

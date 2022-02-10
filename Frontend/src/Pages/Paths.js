@@ -4,6 +4,8 @@ import Doctor from './Doctors/Doctor';
 import DashboardCard from './DashboardCard';
 import Patient from './Patients/Patient';
 import AddDoctor from './Doctors/AddDoctor';
+import './pages.css';
+
 
 const Paths = () => {
   let { pathname } = useLocation();
