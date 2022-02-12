@@ -20,6 +20,7 @@ const App = () => {
       <Route element={<ProtectAuth><Dashboard /></ProtectAuth>} path="/dashboard/doctors_add" />
       <Route element={<ProtectAuth><Dashboard /></ProtectAuth>} path="/dashboard/patients" />
       <Route element={<ProtectAuth><Dashboard /></ProtectAuth>} path="/dashboard/patients_add" />
+      <Route element={<ProtectAuth><Dashboard /></ProtectAuth>} path="/dashboard/pending" />
       <Route element={<Error />} path="*" />
     </Routes>
   );

@@ -98,18 +98,20 @@ const AuthContext = ({ children }) => {
     };
 
     // ************************** Registration ***************************************
-    const sign_up = async ({ username, password, phone, firstname, lastname, dob }) => {
+    const sign_up = async ({ username, password, user_role, isAdminApprove, data_items }) => {
         return new Promise((res, rej) => {
             userPool.signUp(username, password, null, null, async (err, data) => {
                 if (err) {
                     rej(err);
                 }
                 else {
-                    await sendData('/auth', 'POST', { username, name: `${firstname + lastname}`, dob, phone, user_role: "patient" });
+                    await sendData('/auth', 'POST', {
+                        username, user_role, isVerified: false, isAdminApprove, ...data_items
+                    });
                     verify_modal(username).then(() => res()).catch(err => rej(err));
                 }
             });
-        })
+        });
     };
     // ************************** Forgot Password ********************************
     const forgot_password = async (email) => {

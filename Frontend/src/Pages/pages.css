@@ -93,7 +93,7 @@
   background: silver;
 }
 .doctors .table--head th{
-  font-size: 17px;
+  font-size: 18px;
   padding: 25px;
 }
 .doctors .table--head th:first-child{
@@ -103,11 +103,41 @@
   border-top-right-radius: 10px;
 }
 .doctors .table--body td{
-  padding: 22px 0px;
+  padding: 25px 0px;
+  font-size: 15px;
 }
 .doctors .table--body td button{
   padding: 0px 10px!important;
   margin-top: -1px;
+}
+.doctors .table--body .user--role--icon{
+  font-size: 20px;
+  margin-top: -4px;
+}
+.doctors .table--body td .badge{
+  padding: 5px 15px;
+  margin: 0%;
+  font-size: small;
+}
+.doctors .table--body .bg-success{
+  background-color: #00bfa6!important;
+}
+.doctors .approve--btns{
+  display: flex;
+  justify-content: center;
+  gap: 1em;
+}
+.doctors .table--body .btn_approve{
+  background: #3cb371;
+  color: aliceblue;
+  margin-top: -1px;
+  font-size: large;
+}
+.doctors .table--body .btn_disapprove{
+  background: #e05656;
+  color: aliceblue;
+  margin-top: -1px;
+  font-size: large;
 }
 
 

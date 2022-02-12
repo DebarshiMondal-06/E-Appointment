@@ -175,3 +175,15 @@
   color: aliceblue;
   font-weight: 600;
 }
+
+.select--box--div{
+  position: relative;
+}
+.select--box--div i{
+  position: absolute;
+  right: 30px;
+  top: 45%;
+}
+.select--boxes{
+  text-transform: capitalize;
+}

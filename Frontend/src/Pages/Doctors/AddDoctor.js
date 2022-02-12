@@ -1,18 +1,38 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import { HiOutlineArrowNarrowLeft } from 'react-icons/hi'
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import Inputs from '../../Components/Inputs/Input';
 import SelectBox from '../../Components/Inputs/SelectBox';
+import { district_data, state_data, doctor_speacility } from '../../Utils/data';
+import { createAuthContext } from '../../Auth/AuthContext';
+import ProcessSpinner from '../../Components/Spinners/ProcessSpinner';
+
 
 const AddDoctor = () => {
+  const { sign_up } = useContext(createAuthContext);
+  const { handleSubmit, formState: { errors }, register, watch, setValue } = useForm();
+  const [loader, setLoader] = useState(false);
 
-  const { handleSubmit, formState: { errors }, register } = useForm();
+
+  let getState = watch('state');
+  if (!getState) setValue('district', null);
 
 
-  const submit_data = () => {
-
+  const submit_data = (data) => {
+    setLoader(true);
+    let { emailid, password, firstname, lastname, district } = data;
+    let { pincode } = district_data.find((items) => items.district === district);
+    data.name = firstname + lastname;
+    data.pincode = pincode;
+    sign_up({ username: emailid, password, isAdminApprove: 1, user_role: 'doctor', data_items: data }).then((res) => {
+      setLoader(false);
+    }).catch((err) => {
+      setLoader(false);
+      console.log(err);
+    })
   };
+
 
   return <div>
     <h4><Link to="/dashboard/doctors"><HiOutlineArrowNarrowLeft className="back--icon" /></Link>  &nbsp;
@@ -28,19 +48,22 @@ const AddDoctor = () => {
         <section className='row'>
           {<Inputs errors={errors} register={register} name1={'Email Address'} register1={'emailid'}
             pattern1={/\S+@\S+\.\S+/} message1={'Not a valid Email'} />}
-          {<Inputs errors={errors} register={register} name1={'Contact'} register1={'contactno'}
+          {<Inputs errors={errors} register={register} name1={'Contact'} register1={'phone'}
             pattern1={/^[0-9]{10}$/} message1={'Not a valid Contact'} />}
         </section>
 
         <section className="row">
           {<Inputs errors={errors} register={register} name1={'DOB'} register1={'dob'} type={'date'} />}
-          {<SelectBox errors={errors} register={register} name1={'Specality'} register1={'Specality'} />}
+          {<SelectBox errors={errors} register={register} name1={'Specality'} register1={'specality'}
+            data={[doctor_speacility, 'type']} />}
         </section>
 
 
         <section className="row">
-          {<SelectBox errors={errors} register={register} name1={'Pincode'} register1={'pincode'} />}
-          {<SelectBox errors={errors} register={register} name1={'District'} register1={'district'} />}
+          {<SelectBox errors={errors} register={register} name1={'State'} register1={'state'}
+            data={[state_data, 'state']} />}
+          {<SelectBox errors={errors} register={register} name1={'District'} register1={'district'}
+            data={[district_data, 'district']} message={!getState ? 'Choose State First' : null} />}
         </section>
 
         <section className='row'>
@@ -51,7 +74,7 @@ const AddDoctor = () => {
 
         <div className='btns--operate'>
           <button className='btn btn--cancel'>Cancel</button>
-          <button className='btn btn--add'>Add</button>
+          <button className='btn btn--add'>{loader ? <ProcessSpinner /> : 'Add'}</button>
         </div>
       </form>
     </main>

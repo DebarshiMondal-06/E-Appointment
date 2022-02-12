@@ -7,8 +7,8 @@ const ProcessSpinner = () => {
   return <div className="lds-ring">
     <div
       style={{
-        width: '25px',
-        height: "25px",
+        width: '27px',
+        height: "27px",
         border: `4px solid #fff`,
         borderColor: `transparent transparent transparent #fff`
       }}

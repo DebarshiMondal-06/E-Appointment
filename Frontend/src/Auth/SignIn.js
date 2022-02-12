@@ -28,7 +28,6 @@ const SignIn = () => {
     sign_in(data.email, data.password).then((result) => {
       let { name, user_role, email } = result;
       setLoader(false);
-      console.log('hwlll');
       setCookie('user_data', JSON.stringify({ email, name, user_role }), { path: '/' });
       navigate('/dashboard');
     }).catch((err) => {

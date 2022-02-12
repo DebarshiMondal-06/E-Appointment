@@ -168,3 +168,20 @@ body {
   color: #00bfa6;
 }
 
+
+
+
+.footer{
+  margin-top: 10%;
+  box-shadow: 0px -1px 4px gainsboro!important;
+}
+.footer-section{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+.footer-section span{
+  font-weight: bold;
+  padding:5px;
+  font-family: cursive;
+}
