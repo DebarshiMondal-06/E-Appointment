@@ -20,10 +20,11 @@ const SignUp = () => {
 
 
 
-
   const execute = (data) => {
     setLoader(true);
-    sign_up(data).then((el) => {
+    let { firstname, lastname, password, username } = data;
+    data.name = firstname + " " + lastname;
+    sign_up({ username, password, user_role: "patient", isAdminApprove: 0, data_items: data }).then(() => {
       setLoader(false);
       toast.success('Account Registered!');
       setBtnTxt('Redirecting...');

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { FaUserMd, FaHospitalUser, FaTimes, FaCheck } from 'react-icons/fa';
-import { getData } from '../Utils/API';
+import { getData, sendData } from '../Utils/API';
 
 
 const PendingUser = () => {
@@ -18,11 +18,26 @@ const PendingUser = () => {
     }).catch((err) => {
       console.log(err);
     })
-  }
-
+  };
   useEffect(() => {
     load_pending_data();
   }, []);
+
+
+  let approve = async (id) => {
+    await sendData('/users/approve', 'POST', { emailid: id }).then(() => {
+      load_pending_data();
+    }).catch(err => console.log(err));
+  };
+
+  let disapprove = async (id) => {
+    try {
+      let result = await getData(`/users/delete_user?id=${id}`, 'DELETE');
+      if (result) load_pending_data();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
 
 
@@ -57,8 +72,8 @@ const PendingUser = () => {
                   {isVerified ? 'Yes' : 'No'}
                 </span> </td>
                 <td className='approve--btns'>
-                  <button onClick={() => ''} className='btn btn_approve'><FaCheck className='icon-1' /></button>
-                  <button onClick={() => ''} className='btn btn_disapprove'><FaTimes /></button>
+                  <button onClick={() => approve(emailid)} className='btn btn_approve'><FaCheck /></button>
+                  <button onClick={() => disapprove(emailid)} className='btn btn_disapprove'><FaTimes /></button>
                 </td>
               </tr>
             })

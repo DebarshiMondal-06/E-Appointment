@@ -10,7 +10,7 @@ const Doctor = () => {
   const get_doctors = async () => {
     setLoader(true);
     try {
-      let result = await getData('/users/get_doctors', 'GET', null);
+      let result = await getData('/users/get_user_role?role=doctor', 'GET');
       let { Items } = result.data.message;
       if (Items) setData(Items);
       setLoader(false);
@@ -22,7 +22,7 @@ const Doctor = () => {
 
   const delete_doctor = async (id) => {
     try {
-      let result = await getData('/users/delete_doctor', 'DELETE', id);
+      let result = await getData(`/users/delete_user?id=${id}`, 'DELETE');
       if (result) get_doctors();
     } catch (error) {
       console.log(error);

@@ -23,7 +23,7 @@ const AddDoctor = () => {
     setLoader(true);
     let { emailid, password, firstname, lastname, district } = data;
     let { pincode } = district_data.find((items) => items.district === district);
-    data.name = firstname + lastname;
+    data.name = firstname + " " + lastname;
     data.pincode = pincode;
     sign_up({ username: emailid, password, isAdminApprove: 1, user_role: 'doctor', data_items: data }).then((res) => {
       setLoader(false);
