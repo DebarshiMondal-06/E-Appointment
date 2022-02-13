@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { BsFillTrashFill } from 'react-icons/bs';
 import { getData } from '../../Utils/API';
 import NoData from '../../Components/Images/NoData.png';

@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { FaUserMd, FaHospitalUser, FaTimes, FaCheck } from 'react-icons/fa';
-import { getData, sendData } from '../Utils/API';
-import NoData from '../Components/Images/NoData.png';
-import MainLoader from '../Components/Spinners/MainLoader';
+import { FaUserMd, FaHospitalUser } from 'react-icons/fa';
+import { getData } from '../../Utils/API';
+import NoData from '../../Components/Images/NoData.png';
+import MainLoader from '../../Components/Spinners/MainLoader';
 import { toast } from 'react-toastify';
-import { exception_handler } from '../Utils/Exception';
+import { exception_handler } from '../../Utils/Exception';
+import ApproveReject from './ApproveReject';
 
 const PendingUser = () => {
   const [data, setData] = useState(false);
   const [loader, setLoader] = useState(false);
+
 
 
   let load_pending_data = async () => {
@@ -23,20 +25,6 @@ const PendingUser = () => {
     load_pending_data();
   }, []);
 
-
-  let approve = async (id) => {
-    await sendData('/users/approve', 'POST', { emailid: id }).then(() => {
-      load_pending_data();
-    }).catch(err => toast.error(exception_handler(err)));
-  };
-  let disapprove = async (id) => {
-    try {
-      let result = await getData(`/users/delete_user?id=${id}`, 'DELETE');
-      if (result) load_pending_data();
-    } catch (error) {
-      toast.error(exception_handler(error));
-    }
-  };
 
 
   if (loader) return <MainLoader />
@@ -73,9 +61,8 @@ const PendingUser = () => {
                     <td> <span className={`badge ${isVerified ? 'bg-success' : 'bg-warning'} `}>
                       {isVerified ? 'Yes' : 'No'}
                     </span> </td>
-                    <td className='approve--btns'>
-                      <button onClick={() => approve(emailid)} className='btn btn_approve'><FaCheck /></button>
-                      <button onClick={() => disapprove(emailid)} className='btn btn_disapprove'><FaTimes /></button>
+                    <td>
+                      <ApproveReject emailid={emailid} load_pending_data={load_pending_data} />
                     </td>
                   </tr>
                 })

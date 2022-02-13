@@ -128,22 +128,18 @@
 .doctors .table--body .bg-success{
   background-color: #00bfa6!important;
 }
-.doctors .approve--btns{
-  display: flex;
-  justify-content: center;
-  gap: 1em;
-}
+
 .doctors .table--body .btn_approve{
   background: #3cb371;
   color: aliceblue;
-  margin-top: -1px;
-  font-size: large;
+  font-size: small;
+  padding: 5px 0px;
 }
 .doctors .table--body .btn_disapprove{
   background: #e05656;
   color: aliceblue;
-  margin-top: -1px;
-  font-size: large;
+  font-size: small;
+  padding: 5px 0px;
 }
 .doctors .no--data{
   display: flex;

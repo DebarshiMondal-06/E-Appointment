@@ -11,6 +11,7 @@ const Auth = () => {
   const [signup, setSignUp] = useState(false);
   var loc = useLocation();
 
+
   return <>
     <article className="not--member">
       {(loc.pathname === "/forgot")

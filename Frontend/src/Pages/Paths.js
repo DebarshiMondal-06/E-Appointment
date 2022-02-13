@@ -5,7 +5,7 @@ import DashboardCard from './DashboardCard';
 import Patient from './Patients/Patient';
 import AddDoctor from './Doctors/AddDoctor';
 import './pages.css';
-import PendingUser from './PendingUser';
+import PendingUser from './PendingUsers/PendingUser';
 
 
 const Paths = () => {
