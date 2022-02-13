@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { BsFillTrashFill } from 'react-icons/bs';
 import { getData } from '../../Utils/API';
+import NoData from '../../Components/Images/NoData.png';
 
 
 const Patient = () => {
@@ -36,37 +37,41 @@ const Patient = () => {
       <h4>Patient</h4>
       <Link to="/dashboard/doctors_add"><button className='btn--add btn btn-info'>Add</button></Link>
     </article>
-    <main className='table-responsive'>
-      <table className="table table-striped table-hover mt-5">
-        <thead>
-          <tr className='table--head'>
-            <th scope="col">#</th>
-            <th scope="col">Name</th>
-            <th scope="col">Email</th>
-            <th scope="col">Phone</th>
-            <th scope="col">Date of Birth(DOB)</th>
-            <th scope="col">Action</th>
-          </tr>
-        </thead>
-        <tbody className='table--body'>
-          {
-            data && data.map((items, i) => {
-              let { name, dob, emailid, phone } = items;
-              return <tr key={i}>
-                <td><b>{i + 1}</b></td>
-                <td>{name}</td>
-                <td>{emailid}</td>
-                <td>{phone}</td>
-                <td>{dob}</td>
-                <td><button onClick={() => delete_patient(emailid)} className='btn btn-danger'>
-                  <BsFillTrashFill />
-                </button></td>
+    {
+      !data
+        ? <article className='no--data'><img src={<NoData />} alt="" /></article>
+        : <main className='table-responsive'>
+          <table className="table table-striped table-hover mt-5">
+            <thead>
+              <tr className='table--head'>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Date of Birth(DOB)</th>
+                <th scope="col">Action</th>
               </tr>
-            })
-          }
-        </tbody>
-      </table>
-    </main>
+            </thead>
+            <tbody className='table--body'>
+              {
+                data && data.map((items, i) => {
+                  let { name, dob, emailid, phone } = items;
+                  return <tr key={i}>
+                    <td><b>{i + 1}</b></td>
+                    <td>{name}</td>
+                    <td>{emailid}</td>
+                    <td>{phone}</td>
+                    <td>{dob}</td>
+                    <td><button onClick={() => delete_patient(emailid)} className='btn btn-danger'>
+                      <BsFillTrashFill />
+                    </button></td>
+                  </tr>
+                })
+              }
+            </tbody>
+          </table>
+        </main>
+    }
   </div>;
 };
 

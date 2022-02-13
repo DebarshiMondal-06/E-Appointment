@@ -10,6 +10,8 @@
   color: #00bfa6;
 }
 
+
+
 @media only screen and (max-width: 690px) {
   .dashboard--container{
     margin-top: 10%;
@@ -139,11 +141,24 @@
   margin-top: -1px;
   font-size: large;
 }
-
+.doctors .no--data{
+  display: flex;
+  margin-top: 5%;
+  align-content: center;
+  flex-direction: column;
+  font-size: large;
+}
+.doctors .no--data img{
+  width: 400px;
+}
 
 @media only screen and (max-width: 990px) {
   .doctors--add--form{
     width: 100%!important;
+  }
+  .doctors .no--data img{
+    margin-top: 15%;
+    width: 300px;
   }
 }
 .add--doctor--section{
