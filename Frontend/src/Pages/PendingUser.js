@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { FaUserMd, FaHospitalUser, FaTimes, FaCheck } from 'react-icons/fa';
 import { getData, sendData } from '../Utils/API';
 import NoData from '../Components/Images/NoData.png';
-
+import MainLoader from '../Components/Spinners/MainLoader';
+import { toast } from 'react-toastify';
+import { exception_handler } from '../Utils/Exception';
 
 const PendingUser = () => {
   const [data, setData] = useState(false);
-  const [, setLoader] = useState(false);
+  const [loader, setLoader] = useState(false);
 
 
   let load_pending_data = async () => {
@@ -15,10 +17,7 @@ const PendingUser = () => {
       setLoader(false);
       let { message: { Items } } = res.data;
       if (Items) setData(Items);
-      console.log(Items);
-    }).catch((err) => {
-      console.log(err);
-    })
+    }).catch((err) => toast.error(exception_handler(err)));
   };
   useEffect(() => {
     load_pending_data();
@@ -28,20 +27,19 @@ const PendingUser = () => {
   let approve = async (id) => {
     await sendData('/users/approve', 'POST', { emailid: id }).then(() => {
       load_pending_data();
-    }).catch(err => console.log(err));
+    }).catch(err => toast.error(exception_handler(err)));
   };
-
   let disapprove = async (id) => {
     try {
       let result = await getData(`/users/delete_user?id=${id}`, 'DELETE');
       if (result) load_pending_data();
     } catch (error) {
-      console.log(error);
+      toast.error(exception_handler(error));
     }
   };
 
 
-
+  if (loader) return <MainLoader />
   return <div className='doctors text-center'>
     <article>
       <h4>Pending Users</h4>

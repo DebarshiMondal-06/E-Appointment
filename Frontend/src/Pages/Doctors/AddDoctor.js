@@ -1,19 +1,21 @@
 import React, { useContext, useState } from 'react';
 import { HiOutlineArrowNarrowLeft } from 'react-icons/hi'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import Inputs from '../../Components/Inputs/Input';
 import SelectBox from '../../Components/Inputs/SelectBox';
 import { district_data, state_data, doctor_speacility } from '../../Utils/data';
 import { createAuthContext } from '../../Auth/AuthContext';
 import ProcessSpinner from '../../Components/Spinners/ProcessSpinner';
+import { toast } from 'react-toastify';
+import { exception_handler } from '../../Utils/Exception';
 
 
 const AddDoctor = () => {
   const { sign_up } = useContext(createAuthContext);
   const { handleSubmit, formState: { errors }, register, watch, setValue } = useForm();
   const [loader, setLoader] = useState(false);
-
+  const navigate = useNavigate();
 
   let getState = watch('state');
   if (!getState) setValue('district', null);
@@ -25,11 +27,15 @@ const AddDoctor = () => {
     let { pincode } = district_data.find((items) => items.district === district);
     data.name = firstname + " " + lastname;
     data.pincode = pincode;
-    sign_up({ username: emailid, password, isAdminApprove: 1, user_role: 'doctor', data_items: data }).then((res) => {
+    sign_up({ username: emailid, password, isAdminApprove: 1, user_role: 'doctor', data_items: data }).then(() => {
       setLoader(false);
+      toast.success('Added Successfully!');
+      setTimeout(() => {
+        navigate('/dashboard/doctors');
+      }, 1500)
     }).catch((err) => {
       setLoader(false);
-      console.log(err);
+      toast.error(exception_handler(err));
     })
   };
 
@@ -73,7 +79,7 @@ const AddDoctor = () => {
 
 
         <div className='btns--operate'>
-          <button className='btn btn--cancel'>Cancel</button>
+          <Link to="/dashboard/doctors"><button className='btn btn--cancel'>Cancel</button></Link>
           <button className='btn btn--add'>{loader ? <ProcessSpinner /> : 'Add'}</button>
         </div>
       </form>

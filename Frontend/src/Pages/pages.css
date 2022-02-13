@@ -105,12 +105,16 @@
   border-top-right-radius: 10px;
 }
 .doctors .table--body td{
-  padding: 25px 0px;
+  padding: 28px 0px;
   font-size: 15px;
 }
 .doctors .table--body td button{
-  padding: 0px 10px!important;
-  margin-top: -1px;
+  padding: 2px 0px;
+  margin-top: -3px;
+  width: 50px;
+}
+.doctors .table--body td button:focus{
+  box-shadow: none;
 }
 .doctors .table--body .user--role--icon{
   font-size: 20px;

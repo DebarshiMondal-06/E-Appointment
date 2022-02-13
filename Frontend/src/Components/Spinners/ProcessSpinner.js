@@ -3,14 +3,14 @@ import './loader.css';
 
 
 
-const ProcessSpinner = () => {
+const ProcessSpinner = ({ size, border }) => {
   return <div className="lds-ring">
     <div
       style={{
-        width: '27px',
-        height: "27px",
-        border: `4px solid #fff`,
-        borderColor: `transparent transparent transparent #fff`
+        width: size ? size : '26px',
+        height: size ? size : '26px',
+        border: `${border ? border : '4px'} solid #fff`,
+        borderColor: `transparent transparent transparent #fff`,
       }}
     ></div><div></div><div></div><div></div>
   </div>
