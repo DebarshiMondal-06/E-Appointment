@@ -1,5 +1,6 @@
 .opacity--reduce{
   opacity: 0.8;
+  pointer-events: none;
 }
 .brand {
   font-size: 30px;
@@ -92,14 +93,13 @@
 
 
 .sidebar{
-  position: absolute;
+  position: fixed;
   background: #00bfa6;
   width: 20%;
   top: 0%;
-  height: 100vh;
-  z-index: 2;
+  z-index: 4;
   border-top-right-radius: 8px;
-  overflow-y: scroll;
+  bottom: 0%;
 } 
 @media only screen and (max-width: 1190px) {
   .sidebar{

@@ -62,7 +62,7 @@ const PendingUser = () => {
                       {isVerified ? 'Yes' : 'No'}
                     </span> </td>
                     <td>
-                      <ApproveReject emailid={emailid} load_pending_data={load_pending_data} />
+                      <ApproveReject emailid={emailid} load_pending_data={load_pending_data} isVerified={isVerified} />
                     </td>
                   </tr>
                 })

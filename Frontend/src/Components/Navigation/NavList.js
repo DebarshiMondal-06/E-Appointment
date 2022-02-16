@@ -5,6 +5,7 @@ import { createAuthContext } from '../../Auth/AuthContext';
 import { FaSignOutAlt, FaUserCircle } from 'react-icons/fa';
 import { RiDashboard2Fill } from 'react-icons/ri';
 import { BiLogInCircle } from 'react-icons/bi';
+import Swal from 'sweetalert2';
 
 const NavList = () => {
   const [cookie] = useCookies();
@@ -25,6 +26,19 @@ const NavList = () => {
     document.getElementById('home-sect').scrollIntoView({ behavior: "smooth" });
   };
 
+  const alert_logout = () => {
+    return Swal.fire({
+      title: 'Are you sure!',
+      allowOutsideClick: false,
+      confirmButtonText: "Proceed",
+      showCancelButton: true,
+      icon: "warning"
+    }).then((val) => {
+      if (val.isConfirmed) logout();
+    })
+  };
+
+
 
   return <ul className="navbar-nav">
     {
@@ -36,9 +50,7 @@ const NavList = () => {
           </NavLink>
         </li>
         <li className='mt-1'>
-          <Link to="/auth">
-            <button onClick={() => logout()} className='logout--button btn'>Logout <FaSignOutAlt /></button>
-          </Link>
+          <button onClick={() => alert_logout()} className='logout--button btn'>Logout <FaSignOutAlt /></button>
         </li>
       </>
         : <>
