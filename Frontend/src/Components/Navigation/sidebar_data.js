@@ -6,7 +6,10 @@ import { FaUsers } from 'react-icons/fa';
 export const arr = [
   {
     header: "Navigation", icon: <MdAssistantNavigation />,
-    sub_list: [{ name: "Dashboard", route: "/dashboard" }, { name: "Profile", route: "/profile" }]
+    sub_list: [
+      { name: "Dashboard", route: "/dashboard" },
+      { name: "Profile", route: "/dashboard/profile" }
+    ]
   },
   {
     header: "Master Settings", icon: <RiHomeGearFill />,

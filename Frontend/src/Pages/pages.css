@@ -209,3 +209,82 @@
   background-color: #333;
   color: aliceblue;
 }
+
+
+.profile--section article{
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0px;
+}
+.profile--section article h4{
+  font-size: 1.8em;
+  align-self: flex-start;
+}
+.profile--section article .btn--edit{
+  padding: 0px 20px;
+  font-weight: bolder;
+  font-size: 20px;
+  border-radius: 6px;
+}
+.profile--section .profile{
+  padding: 30px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1em;
+  border-radius: 10px;
+  width: 100%;
+}
+.profile--section .profile p{
+  width: 350px;
+  font-size: 1.1em;
+  font-weight: bolder;
+  color: black;
+  letter-spacing: 1px;
+}
+.profile--section .profile p span{
+  font-weight: normal;
+  color: #333;
+  font-size: 1em;
+  letter-spacing: normal;
+}
+
+.profile--section h3{
+  font-size: 1.8em;
+  align-self: flex-start;
+  margin-top: 50px;
+  margin-bottom: 20px;
+}
+
+
+.update--password{
+  display: flex;
+  border-radius: 10px;
+}
+.update--password .password--form{
+  padding: 30px;
+  border-radius: 10px;
+}
+.update--password .password--form section div{
+  margin-bottom: 10px!important;
+}
+.update--password .password--form input{
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: whitesmoke;
+}
+.update--password .password--form input:focus{
+  background-color: whitesmoke;
+  box-shadow: none;
+  border-bottom: 3px solid #348AC7;
+}
+.update--password .update--btn{
+  background: #00bfa6;
+  color: aliceblue;
+  padding: 8px 30px;
+  margin: 10px 0px;
+}
+.update--password .update--btn:focus{
+  box-shadow: none;
+}
