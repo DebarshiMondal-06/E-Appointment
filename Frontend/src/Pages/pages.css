@@ -11,7 +11,11 @@
 }
 
 
-
+@media only screen and (max-width: 990px) {
+  .dashboard--card{
+    width: 45%!important;
+  }
+}
 @media only screen and (max-width: 690px) {
   .dashboard--container{
     margin-top: 10%;
@@ -43,32 +47,36 @@
 .dashboard--main{
   display: flex;
   gap: 2em;
-  justify-content: center;
-  margin-top: 8%;
+  margin-top: 40px;
   flex-wrap: wrap;
+  width: 100%;
+  justify-content: space-between;
 }
 .dashboard--card{
-  width: 30%;
-  border-radius: 10px;
+  width: 26%;
+  border-radius: 8px;
   border: none;
-  padding: 10px 10px;
+  padding: 0px 10px;
 }
 .dashboard--card h3{
-  padding: 10px 20px;
+  padding: 20px;
   font-size: 20px;
+  margin: 0%;
 }
 .dashboard--card .cards--info{
   display: flex;
   justify-content: space-between;
+  margin-top: -10px;
+  margin-bottom: 10px;
 }
 .cards--info .cards--text{
-  font-size: 3em;
-  padding: 0px 30px;
+  font-size: 2em;
+  padding: 0px 20px;
   margin: 0%;
 }
 .cards--info .cards--icon{
-  font-size: 3em;
-  padding: 0px 30px;
+  font-size: 2em;
+  padding: 0px 20px;
   margin-top: -5px!important;
   margin: 0%;
 }
@@ -236,11 +244,23 @@
   width: 100%;
 }
 .profile--section .profile p{
+  text-transform: capitalize;
   width: 350px;
   font-size: 1.1em;
   font-weight: bolder;
   color: black;
   letter-spacing: 1px;
+}
+.profile--section .profile .email{
+  text-transform: none;
+}
+.profile--section .profile .role span{
+    background: #60aeee;
+    padding: 2px 10px;
+    letter-spacing: 1px;
+    border-radius: 5px;
+    color: aliceblue;
+    font-size: 0.9em;
 }
 .profile--section .profile p span{
   font-weight: normal;
@@ -282,7 +302,7 @@
 .update--password .update--btn{
   background: #00bfa6;
   color: aliceblue;
-  padding: 8px 30px;
+  padding: 5px 30px;
   margin: 10px 0px;
 }
 .update--password .update--btn:focus{

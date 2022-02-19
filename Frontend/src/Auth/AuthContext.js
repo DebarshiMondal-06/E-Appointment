@@ -149,6 +149,24 @@ const AuthContext = ({ children }) => {
             });
         });
     };
+
+    const update_password = async (oldpass, newpass) => {
+        return await new Promise((res, rej) => {
+            var cogntioUser = userPool.getCurrentUser();
+            if (cogntioUser != null) {
+                return cogntioUser.getSession(function (err) {
+                    if (err) rej(JSON.stringify({ code: null }));
+                    return cogntioUser.changePassword(oldpass, newpass, function (err, result) {
+                        if (err) return rej(JSON.stringify(err))
+                        else res('Password Successfully Updated');
+                    });
+                })
+            }
+            return rej(JSON.stringify({ code: null }));
+        })
+    }
+
+
     // *************************** Logout *************************************
     const logout = () => {
         removeCookie('user_data', { path: '/' });
@@ -166,6 +184,7 @@ const AuthContext = ({ children }) => {
         verify_modal,
         resetCode,
         cookie,
+        update_password
     }}>
         {children}
     </createAuthContext.Provider>
