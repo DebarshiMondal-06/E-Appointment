@@ -2,6 +2,9 @@
   opacity: 0.8;
   pointer-events: none;
 }
+.navbar{
+  box-shadow: 2px 2px 32px -12px rgb(104, 236, 219)!important;
+}
 .brand {
   font-size: 30px;
   padding: 10px 20px;
@@ -17,7 +20,6 @@
   background-color: gainsboro;
   border: none;
 }
-
 .nav--items {
   display: flex;
   justify-content: flex-end;
