@@ -6,6 +6,8 @@
   font-size: 30px;
   padding: 10px 20px;
   font-family: cursive;
+  color: #00bfa6!important;
+  font-weight: bold;
 }
 .toggler {
   box-shadow: none !important;

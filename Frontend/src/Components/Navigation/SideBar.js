@@ -1,9 +1,14 @@
 import React from 'react';
 import { FaWindowClose } from 'react-icons/fa';
 import { NavLink } from 'react-router-dom';
-import { arr } from './sidebar_data';
+import { doctorOption, patientOption, adminOption } from './sidebar_data';
+import { useCookies } from 'react-cookie';
 
 const SideBar = ({ openSidebar, closeSidebar, handleClose }) => {
+  const [cookie] = useCookies();
+  let { user_role } = cookie.user_data || {};
+  let data = user_role && user_role === 'admin' ? adminOption
+    : user_role === 'doctor' ? doctorOption : patientOption;
 
 
   return <div className={`sidebar shadow-lg animate__animated ${openSidebar ? 'animate__fadeInLeft animate__faster' : 'd-none'} 
@@ -15,7 +20,7 @@ const SideBar = ({ openSidebar, closeSidebar, handleClose }) => {
     <main className='sidebar--list'>
       <ul>
         {
-          arr && arr.map((items, i) => {
+          data && data.map((items, i) => {
             let { header, sub_list, icon } = items;
             return <section key={i}>
               <li className='items'> {icon} &nbsp; {header} </li>

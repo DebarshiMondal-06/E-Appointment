@@ -3,7 +3,7 @@ import { RiHomeGearFill, RiLogoutBoxFill } from 'react-icons/ri';
 import { FaUsers } from 'react-icons/fa';
 
 
-export const arr = [
+export const adminOption = [
   {
     header: "Navigation", icon: <MdAssistantNavigation />,
     sub_list: [
@@ -14,17 +14,69 @@ export const arr = [
   {
     header: "Master Settings", icon: <RiHomeGearFill />,
     sub_list: [
-      { name: "Manage Hospitals", route: "/hospitals" },
-      { name: "Manage Payment", route: "/payment" },
-      { name: "Manage Appointment", route: "/appointment" }
+      { name: "Hospitals", route: "/hospitals" },
+      { name: "Payments", route: "/payment" },
+      { name: "Appointments", route: "/appointment" }
     ]
   },
   {
     header: "Users Management", icon: <FaUsers />,
     sub_list: [
-      { name: "Pending Users", route: "/dashboard/pending" },
-      { name: "Manage Doctors", route: "/dashboard/doctors" },
-      { name: "Manage Patient", route: "/dashboard/patients" },
+      { name: "Users", route: "/dashboard/pending" },
+      { name: "Doctors", route: "/dashboard/doctors" },
+      { name: "Patient", route: "/dashboard/patients" },
+    ]
+  },
+  {
+    header: "CMS", icon: <MdPolicy />
+  },
+  {
+    header: "Settings", icon: <MdAdminPanelSettings />
+  },
+  {
+    header: "Logout", icon: <RiLogoutBoxFill />
+  }
+];
+
+export const doctorOption = [
+  {
+    header: "Navigation", icon: <MdAssistantNavigation />,
+    sub_list: [
+      { name: "Dashboard", route: "/dashboard" },
+      { name: "Profile", route: "/dashboard/profile" }
+    ]
+  },
+  {
+    header: "Management", icon: <FaUsers />,
+    sub_list: [
+      { name: "Appointments", route: "/appointment" },
+      { name: "Patients", route: "/dashboard/patients" },
+      { name: "Payments", route: "/payment" }
+    ]
+  },
+  {
+    header: "CMS", icon: <MdPolicy />
+  },
+  {
+    header: "Settings", icon: <MdAdminPanelSettings />
+  },
+  {
+    header: "Logout", icon: <RiLogoutBoxFill />
+  }
+];
+
+export const patientOption = [
+  {
+    header: "Navigation", icon: <MdAssistantNavigation />,
+    sub_list: [
+      { name: "Dashboard", route: "/dashboard" },
+      { name: "Profile", route: "/dashboard/profile" }
+    ]
+  },
+  {
+    header: "Management", icon: <RiHomeGearFill />,
+    sub_list: [
+      { name: "Appointments", route: "/appointment" }
     ]
   },
   {
