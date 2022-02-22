@@ -53,7 +53,7 @@ const Doctor = () => {
   return <div className='doctors text-center'>
     <article>
       <h4>Doctors</h4>
-      <Link to="/dashboard/doctors_add"><button className='btn--add btn btn-info'>Add</button></Link>
+      <Link to="/dashboard/doctors_add"><button className='btn--add btn'>Add</button></Link>
     </article>
     {
       !data.length > 0

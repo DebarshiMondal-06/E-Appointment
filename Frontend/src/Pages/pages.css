@@ -29,8 +29,9 @@
 }
 .btn--add{
   width: 100px;
-  color: white;
+  color: white!important;
   font-weight: bold;
+  background: #05bda4;
 }
 .back--icon{
   font-size: 40px;
@@ -139,7 +140,6 @@
 .doctors .table--body .bg-success{
   background-color: #00bfa6!important;
 }
-
 .doctors .table--body .btn_approve{
   background: #3cb371;
   color: aliceblue;
