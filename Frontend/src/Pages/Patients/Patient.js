@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { BsFillTrashFill } from 'react-icons/bs';
+import { RiEyeFill } from 'react-icons/ri';
 import { getData } from '../../Utils/API';
 import NoData from '../../Components/Images/NoData.png';
 import MainLoader from '../../Components/Spinners/MainLoader';
 import ProcessSpinner from '../../Components/Spinners/ProcessSpinner';
 import { toast } from 'react-toastify';
 import { exception_handler } from '../../Utils/Exception';
+import { useCookies } from 'react-cookie';
 
 
 const Patient = () => {
+  const [cookie] = useCookies();
   const [loader, setLoader] = useState(true);
   const [data, setData] = useState([]);
   const [processLoader, setProcessLoader] = useState({
@@ -77,12 +80,19 @@ const Patient = () => {
                     <td>{emailid}</td>
                     <td>{phone}</td>
                     <td>{dob}</td>
-                    <td><button onClick={() => delete_patient(emailid, i)} className='btn btn-danger'>
-                      {(processLoader.loader && i === processLoader.index)
-                        ? <ProcessSpinner size={22} border={'3px'} />
-                        : <BsFillTrashFill />
-                      }
-                    </button></td>
+                    <td>
+                      {(cookie.user_data && cookie.user_data.user_role === 'admin') ? <>
+                        <button onClick={() => delete_patient(emailid, i)} className='btn btn-danger'>
+                          {(processLoader.loader && i === processLoader.index)
+                            ? <ProcessSpinner size={22} border={'3px'} />
+                            : <BsFillTrashFill />
+                          }
+                        </button> &nbsp; </>
+                        : null}
+                      <button onClick={() => ''} className='btn btn-info'>
+                        <RiEyeFill size={20} className='eye' />
+                      </button>
+                    </td>
                   </tr>
                 })
               }

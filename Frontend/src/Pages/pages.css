@@ -124,6 +124,9 @@
 .doctors .table--body td button:focus{
   box-shadow: none;
 }
+.doctors .table--body button .eye{
+  color: aliceblue;
+}
 .doctors .table--body .user--role--icon{
   font-size: 20px;
   margin-top: -4px;

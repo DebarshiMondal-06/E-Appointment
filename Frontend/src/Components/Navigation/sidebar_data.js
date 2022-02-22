@@ -22,7 +22,7 @@ export const adminOption = [
   {
     header: "Users Management", icon: <FaUsers />,
     sub_list: [
-      { name: "Users", route: "/dashboard/pending" },
+      { name: "Pending Users", route: "/dashboard/pending" },
       { name: "Doctors", route: "/dashboard/doctors" },
       { name: "Patient", route: "/dashboard/patients" },
     ]
