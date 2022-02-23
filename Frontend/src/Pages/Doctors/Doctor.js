@@ -9,6 +9,8 @@ import ProcessSpinner from '../../Components/Spinners/ProcessSpinner';
 import NoData from '../../Components/Images/NoData.png';
 import { useCookies } from 'react-cookie';
 import { RiEyeFill } from 'react-icons/ri';
+import { BiPlusMedical } from 'react-icons/bi';
+
 
 
 const Doctor = () => {
@@ -53,7 +55,7 @@ const Doctor = () => {
   return <div className='doctors text-center'>
     <article>
       <h4>Doctors</h4>
-      <Link to="/dashboard/doctors_add"><button className='btn--add btn'>Add</button></Link>
+      <Link to="/dashboard/doctors_add"><button className='btn--add btn'>Add <BiPlusMedical /> </button></Link>
     </article>
     {
       !data.length > 0

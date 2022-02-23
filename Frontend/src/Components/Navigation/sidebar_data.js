@@ -14,7 +14,7 @@ export const adminOption = [
   {
     header: "Master Settings", icon: <RiHomeGearFill />,
     sub_list: [
-      { name: "Hospitals", route: "/hospitals" },
+      { name: "Hospitals", route: "/dashboard/hospital" },
       { name: "Payments", route: "/payment" },
       { name: "Appointments", route: "/appointment" }
     ]

@@ -101,7 +101,9 @@
   text-align: center;
 }
 .doctors .table--head{
-  background: silver;
+  background: #34c9b5;
+  color: white;
+  border: none!important;
 }
 .doctors .table--head th{
   font-size: 18px;
