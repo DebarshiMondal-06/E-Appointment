@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useContext, useEffect, useState } from 'react';
 import { FaUserMd, FaHospitalUser } from 'react-icons/fa';
 import { getData } from '../../Utils/API';
 import NoData from '../../Components/Images/NoData.png';
@@ -6,11 +7,11 @@ import MainLoader from '../../Components/Spinners/MainLoader';
 import { toast } from 'react-toastify';
 import { exception_handler } from '../../Utils/Exception';
 import ApproveReject from './ApproveReject';
+import { createGlobalContext } from '../../Utils/GlobalContext';
 
 const PendingUser = () => {
   const [data, setData] = useState(false);
-  const [loader, setLoader] = useState(false);
-
+  const { loader, setLoader } = useContext(createGlobalContext);
 
 
   let load_pending_data = async () => {
@@ -36,7 +37,7 @@ const PendingUser = () => {
       !data.length > 0
         ? <article className='no--data'><img src={NoData} alt="" /> No Data Found </article>
         : <main className='table-responsive'>
-          <table className="table table-striped table-hover mt-5">
+          <table className="table table-striped mt-5">
             <thead>
               <tr className='table--head'>
                 <th scope="col">#</th>

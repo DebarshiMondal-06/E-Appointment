@@ -4,7 +4,7 @@ import './loader.css';
 
 
 const ProcessSpinner = ({ size, border }) => {
-  return <div className="lds-ring">
+  return <div className="lds-ring" style={{ padding: '4px 20px' }}>
     <div
       style={{
         width: size ? size : '26px',

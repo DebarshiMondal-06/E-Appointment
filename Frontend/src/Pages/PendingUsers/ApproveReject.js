@@ -46,11 +46,11 @@ const ApproveReject = ({ emailid, load_pending_data, isVerified }) => {
 
   return <>
     <button onClick={() => !isVerified ? alert_box(emailid) : approve(emailid)} className='btn btn_approve'>
-      {loading.approve ? <ProcessSpinner size={20} border={'3px'} /> : <FaCheck />}
+      {loading.approve ? <ProcessSpinner size={18} border={'3px'} /> : <FaCheck />}
     </button> &nbsp;&nbsp;
 
     <button onClick={() => disapprove(emailid)} className='btn btn_disapprove'>
-      {loading.disapprove ? <ProcessSpinner size={20} border={'3px'} /> : <FaTimes />}
+      {loading.disapprove ? <ProcessSpinner size={18} border={'3px'} /> : <FaTimes />}
     </button>
   </>
 }

@@ -27,12 +27,6 @@
     justify-content: center!important;
   }
 }
-.btn--add{
-  width: 100px;
-  color: white!important;
-  font-weight: bold;
-  background: #05bda4;
-}
 .back--icon{
   font-size: 40px;
   margin-top: -5px;
@@ -97,6 +91,12 @@
   justify-content: space-between;
   flex-wrap: wrap;
 }
+.doctors .btn--add{
+  width: 100px;
+  color: white!important;
+  font-weight: bold;
+  background: #05b69e;
+}
 .doctors .table{
   text-align: center;
 }
@@ -115,14 +115,18 @@
 .doctors .table--head th:last-child{
   border-top-right-radius: 10px;
 }
+.doctors .table--body tr:hover{
+  background: rgb(230, 227, 227);
+}
 .doctors .table--body td{
-  padding: 28px 0px;
-  font-size: 15px;
+  padding: 25px 0px;
+  font-size: 14px;
+  text-transform: capitalize;
 }
 .doctors .table--body td button{
-  padding: 2px 0px;
+  padding: 1px 0px;
   margin-top: -3px;
-  width: 50px;
+  width: 40px;
 }
 .doctors .table--body td button:focus{
   box-shadow: none;
@@ -216,7 +220,8 @@
 }
 .btns--operate .btn--add{
   background-color: #00bfa6;
-  color: white
+  color: white;
+  padding: 0px 30px;
 }
 .btns--operate .btn--cancel{
   background-color: #333;

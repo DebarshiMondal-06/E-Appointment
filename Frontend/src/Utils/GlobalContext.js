@@ -5,6 +5,7 @@ const createGlobalContext = createContext();
 const GlobalContext = ({ children }) => {
   const [openSidebar, setOpenSidebar] = useState(false);
   const [closeSidebar, setCloseSidebar] = useState(false);
+  const [loader, setLoader] = useState(false);
 
   const handleOpen = () => {
     setOpenSidebar(true);
@@ -23,7 +24,9 @@ const GlobalContext = ({ children }) => {
     openSidebar,
     closeSidebar,
     handleClose,
-    handleOpen
+    handleOpen,
+    loader,
+    setLoader
   }}>
     {children}
   </createGlobalContext.Provider>

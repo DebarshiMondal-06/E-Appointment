@@ -8,6 +8,7 @@ import './pages.css';
 import PendingUser from './PendingUsers/PendingUser';
 import Profile from './UserProfile/Profile';
 import Hospital from './Hospitals/Hospital';
+import AddHospital from './Hospitals/AddHospital';
 
 
 
@@ -20,6 +21,7 @@ const Paths = () => {
   if (pathname === '/dashboard/pending') return <PendingUser />
   if (pathname === '/dashboard/profile') return <Profile />
   if (pathname === '/dashboard/hospital') return <Hospital />
+  if (pathname === '/dashboard/hospital_add') return <AddHospital />
 
 
   return <DashboardCard />

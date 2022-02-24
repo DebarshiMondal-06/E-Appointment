@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useContext, useEffect, useState } from 'react';
 import { BsFillTrashFill } from 'react-icons/bs';
 import { RiEyeFill } from 'react-icons/ri';
 import { getData } from '../../Utils/API';
@@ -8,11 +9,13 @@ import ProcessSpinner from '../../Components/Spinners/ProcessSpinner';
 import { toast } from 'react-toastify';
 import { exception_handler } from '../../Utils/Exception';
 import { useCookies } from 'react-cookie';
+import { createGlobalContext } from '../../Utils/GlobalContext';
+
 
 
 const Patient = () => {
   const [cookie] = useCookies();
-  const [loader, setLoader] = useState(true);
+  const { loader, setLoader } = useContext(createGlobalContext);
   const [data, setData] = useState([]);
   const [processLoader, setProcessLoader] = useState({
     index: 0,
@@ -59,7 +62,7 @@ const Patient = () => {
       !data.length > 0
         ? <article className='no--data'><img src={NoData} alt="" /> No Patient Found! </article>
         : <main className='table-responsive'>
-          <table className="table table-striped table-hover mt-5">
+          <table className="table table-striped mt-5">
             <thead>
               <tr className='table--head'>
                 <th scope="col">#</th>
@@ -84,13 +87,13 @@ const Patient = () => {
                       {(cookie.user_data && cookie.user_data.user_role === 'admin') ? <>
                         <button onClick={() => delete_patient(emailid, i)} className='btn btn-danger'>
                           {(processLoader.loader && i === processLoader.index)
-                            ? <ProcessSpinner size={22} border={'3px'} />
+                            ? <ProcessSpinner size={18} border={'3px'} />
                             : <BsFillTrashFill />
                           }
                         </button> &nbsp; </>
                         : null}
                       <button onClick={() => ''} className='btn btn-info'>
-                        <RiEyeFill size={20} className='eye' />
+                        <RiEyeFill size={18} className='eye' />
                       </button>
                     </td>
                   </tr>
