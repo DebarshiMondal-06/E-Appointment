@@ -90,7 +90,7 @@ const Doctor = () => {
                       {(cookie.user_data && cookie.user_data.user_role === 'admin') ? <>
                         <button onClick={() => delete_doctor(emailid, i)} className='btn btn-danger'>
                           {(processLoader.loader && i === processLoader.index)
-                            ? <ProcessSpinner size={18} border={'3px'} />
+                            ? <ProcessSpinner padding={'2px 20px'} size={18} border={'3px'} />
                             : <BsFillTrashFill />
                           }
                         </button> &nbsp; </>

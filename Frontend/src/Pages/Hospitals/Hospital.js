@@ -8,10 +8,11 @@ import MainLoader from '../../Components/Spinners/MainLoader';
 import { toast } from 'react-toastify';
 import { exception_handler } from '../../Utils/Exception';
 import { createGlobalContext } from '../../Utils/GlobalContext';
+import View from './View';
 
 const Hospital = () => {
   const [data, setData] = useState([]);
-  const { loader, setLoader } = useContext(createGlobalContext);
+  const { loader, setLoader, setViewModal, setViewData } = useContext(createGlobalContext);
 
   const getHospital = async () => {
     setLoader(true);
@@ -33,6 +34,7 @@ const Hospital = () => {
 
   if (loader) return <MainLoader />
   return <div className='doctors text-center'>
+    <View />
     <article>
       <h4>Hospitals</h4>
       <Link to="/dashboard/hospital_add"><button className='btn--add btn shadow'>Add <BiPlusMedical /> </button></Link>
@@ -60,7 +62,10 @@ const Hospital = () => {
                 <td>{district}</td>
                 <td>{contact}</td>
                 <td>
-                  <button onClick={() => ''} className='btn btn-info'>
+                  <button onClick={() => {
+                    setViewData(items);
+                    setViewModal(true)
+                  }} className='btn btn-info' type='button'>
                     <RiEyeFill size={18} className='eye' />
                   </button>
                 </td>

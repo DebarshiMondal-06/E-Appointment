@@ -66,7 +66,7 @@ const AddHospital = () => {
 
         <div className='btns--operate'>
           <Link to="/dashboard/hospital"><button className='btn btn--cancel'>Cancel</button></Link>
-          <button className='btn btn--add'> {loader ? <ProcessSpinner /> : 'Add'}</button>
+          <button className='btn btn--add'> {loader ? <ProcessSpinner padding={'4px 20px'} /> : 'Add'}</button>
         </div>
       </form>
     </main>

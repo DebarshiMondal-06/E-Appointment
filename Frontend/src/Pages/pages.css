@@ -318,3 +318,48 @@
 .update--password .update--btn:focus{
   box-shadow: none;
 }
+
+
+@media only screen and (max-width: 990px) {
+  .view--modal article p{
+    width: 100%!important;
+  }
+  .view--modal article{
+    flex-direction: column;
+  }
+}
+
+.modal-content{
+  border-radius: 10px;
+  padding: 10px;
+}
+.modal-title p{
+  font-size: 15px;
+  margin: 0%;
+  padding: 0%;
+  font-weight: bolder;
+}
+.modal-title p span{
+  font-weight: normal!important;
+  background: #51aae9;
+  padding: 0px 8px;
+  font-size: 14px;
+  letter-spacing: 1px;
+  color: white;
+  border-radius: 5px;
+}
+.view--modal article{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap!important;
+}
+.view--modal article p{
+  width: 50%;
+  font-weight: bolder;
+  color: rgb(0, 0, 0);
+}
+.view--modal article p span{
+  font-weight: normal;
+  color: #333;
+  text-transform: capitalize;
+}
