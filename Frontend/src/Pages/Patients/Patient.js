@@ -10,12 +10,13 @@ import { toast } from 'react-toastify';
 import { exception_handler } from '../../Utils/Exception';
 import { useCookies } from 'react-cookie';
 import { createGlobalContext } from '../../Utils/GlobalContext';
+import ViewData from '../../Components/ViewData';
 
 
 
 const Patient = () => {
   const [cookie] = useCookies();
-  const { loader, setLoader } = useContext(createGlobalContext);
+  const { loader, setLoader, setViewModal, setViewData } = useContext(createGlobalContext);
   const [data, setData] = useState([]);
   const [processLoader, setProcessLoader] = useState({
     index: 0,
@@ -55,6 +56,7 @@ const Patient = () => {
 
   if (loader) return <MainLoader />
   return <div className='doctors text-center'>
+    <ViewData />
     <article>
       <h4>Patient</h4>
     </article>
@@ -92,7 +94,10 @@ const Patient = () => {
                           }
                         </button> &nbsp; </>
                         : null}
-                      <button onClick={() => ''} className='btn btn-info'>
+                      <button onClick={() => {
+                        setViewData(items);
+                        setViewModal(true);
+                      }} className='btn btn-info'>
                         <RiEyeFill size={18} className='eye' />
                       </button>
                     </td>

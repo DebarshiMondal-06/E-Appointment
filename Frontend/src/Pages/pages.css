@@ -333,6 +333,9 @@
   border-radius: 10px;
   padding: 10px;
 }
+.modal-title{
+  text-transform: capitalize;
+}
 .modal-title p{
   font-size: 15px;
   margin: 0%;
@@ -342,7 +345,7 @@
 .modal-title p span{
   font-weight: normal!important;
   background: #51aae9;
-  padding: 0px 8px;
+  padding: 0px 5px;
   font-size: 14px;
   letter-spacing: 1px;
   color: white;
@@ -362,4 +365,41 @@
   font-weight: normal;
   color: #333;
   text-transform: capitalize;
+}
+.view--modal article p .bg-info{
+  padding: 2px 5px;
+  font-size: 14px;
+  border-radius: 5px;
+  color: white;
+  letter-spacing: 1px;
+}
+
+
+
+.edit--profile {
+  width: 100%;
+  padding: 30px;
+  border-radius: 10px;
+}
+.edit--profile input{
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: whitesmoke;
+}
+.edit--profile input:focus{
+  background-color: whitesmoke;
+  box-shadow: none;
+  border-bottom: 3px solid #348AC7;
+}
+.edit--profile select{
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: whitesmoke;
+}
+.edit--profile select:focus{
+  background-color: whitesmoke;
+  box-shadow: none;
+  border-bottom: 3px solid #348AC7;
 }

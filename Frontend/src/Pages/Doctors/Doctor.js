@@ -12,12 +12,13 @@ import { useCookies } from 'react-cookie';
 import { RiEyeFill } from 'react-icons/ri';
 import { BiPlusMedical } from 'react-icons/bi';
 import { createGlobalContext } from '../../Utils/GlobalContext';
+import ViewData from '../../Components/ViewData';
 
 
 
 const Doctor = () => {
   const [cookie] = useCookies();
-  const { loader, setLoader } = useContext(createGlobalContext);
+  const { loader, setLoader, setViewModal, setViewData } = useContext(createGlobalContext);
 
 
   const [data, setData] = useState([]);
@@ -57,6 +58,7 @@ const Doctor = () => {
 
   if (loader) return <MainLoader />
   return <div className='doctors text-center'>
+    <ViewData />
     <article>
       <h4>Doctors</h4>
       <Link to="/dashboard/doctors_add"><button className='btn--add btn'>Add <BiPlusMedical /> </button></Link>
@@ -95,7 +97,10 @@ const Doctor = () => {
                           }
                         </button> &nbsp; </>
                         : null}
-                      <button onClick={() => ''} className='btn btn-info'>
+                      <button onClick={() => {
+                        setViewData(items);
+                        setViewModal(true);
+                      }} className='btn btn-info'>
                         <RiEyeFill size={18} className='eye' />
                       </button>
                     </td>

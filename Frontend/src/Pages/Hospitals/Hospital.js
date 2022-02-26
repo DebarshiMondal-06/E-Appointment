@@ -8,7 +8,7 @@ import MainLoader from '../../Components/Spinners/MainLoader';
 import { toast } from 'react-toastify';
 import { exception_handler } from '../../Utils/Exception';
 import { createGlobalContext } from '../../Utils/GlobalContext';
-import View from './View';
+import ViewData from '../../Components/ViewData';
 
 const Hospital = () => {
   const [data, setData] = useState([]);
@@ -32,9 +32,11 @@ const Hospital = () => {
     getHospital();
   }, []);
 
+
+
   if (loader) return <MainLoader />
   return <div className='doctors text-center'>
-    <View />
+    <ViewData />
     <article>
       <h4>Hospitals</h4>
       <Link to="/dashboard/hospital_add"><button className='btn--add btn shadow'>Add <BiPlusMedical /> </button></Link>

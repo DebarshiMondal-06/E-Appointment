@@ -1,14 +1,18 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import { FaUserEdit } from 'react-icons/fa'
 import UpdatePassword from './UpdatePassword';
 import { useCookies } from 'react-cookie';
 import { getData } from '../../Utils/API';
 import MainLoader from '../../Components/Spinners/MainLoader';
+import { createGlobalContext } from '../../Utils/GlobalContext';
+import EditProfile from './EditProfile';
 
 const Profile = () => {
+  const { setViewModal, setViewData } = useContext(createGlobalContext)
   const [cookie] = useCookies();
+  let { user_role } = cookie.user_data || {};
   const [data, setData] = useState({});
   const [loader, setLoader] = useState(false);
 
@@ -31,10 +35,20 @@ const Profile = () => {
 
   if (loader) return <MainLoader />
   return <section className='profile--section'>
+    <EditProfile />
+    {
+      (user_role === 'patient' && !data.state) ? <div class="alert alert-warning" role="alert">
+        Seems <b>Profile not updated!</b> please update your address in order to book appointment.
+      </div> : null
+    }
     <article>
       <h4>Profile</h4>
-      <Link to="/dashboard/doctors_add"><button className='btn--edit btn btn-danger'> <FaUserEdit /> </button></Link>
+      <button onClick={() => {
+        setViewData(data)
+        setViewModal(true)
+      }} className='btn--edit btn btn-danger'> <FaUserEdit /> </button>
     </article>
+
 
     <main className='card shadow-sm profile'>
       <p>Name: <span>{data.name}</span></p>

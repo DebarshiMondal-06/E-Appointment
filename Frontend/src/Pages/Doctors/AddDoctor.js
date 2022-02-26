@@ -60,7 +60,7 @@ const AddDoctor = () => {
 
         <section className="row">
           {<Inputs errors={errors} register={register} name1={'DOB'} register1={'dob'} type={'date'} />}
-          {<SelectBox errors={errors} register={register} name1={'Specality'} register1={'specality'}
+          {<SelectBox errors={errors} register={register} name1={'Speciality'} register1={'speciality'}
             data={[doctor_speacility, 'type']} />}
         </section>
 
@@ -77,10 +77,9 @@ const AddDoctor = () => {
           {<Inputs errors={errors} register={register} name1={'Verify Password'} register1={'confirmpass'} />}
         </section>
 
-
         <div className='btns--operate'>
           <Link to="/dashboard/doctors"><button className='btn btn--cancel'>Cancel</button></Link>
-          <button className='btn btn--add'>{loader ? <ProcessSpinner /> : 'Add'}</button>
+          <button className='btn btn--add'>{loader ? <ProcessSpinner padding={'4px 20px'} /> : 'Add'}</button>
         </div>
       </form>
     </main>
