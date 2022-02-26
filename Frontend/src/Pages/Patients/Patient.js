@@ -78,10 +78,10 @@ const Patient = () => {
             <tbody className='table--body'>
               {
                 data && data.map((items, i) => {
-                  let { name, dob, emailid, phone } = items;
+                  let { fullname, dob, emailid, phone } = items;
                   return <tr key={i}>
                     <td><b>{i + 1}</b></td>
-                    <td>{name}</td>
+                    <td>{fullname}</td>
                     <td>{emailid}</td>
                     <td>{phone}</td>
                     <td>{dob}</td>

@@ -4,7 +4,7 @@ import { createGlobalContext } from '../Utils/GlobalContext';
 
 const ViewData = () => {
   const { viewModal, setViewModal, viewData } = useContext(createGlobalContext);
-  const { speciality, contact, district, address, pincode, emailid, hospitalId, dob, phone, state } = viewData;
+  const { speciality, contact, district, address, pincode, emailid, hospitalId, dob, phone, given_state } = viewData;
 
   let handleClose = () => {
     setViewModal(false);
@@ -13,7 +13,7 @@ const ViewData = () => {
   return <Modal show={viewModal} size="lg" className='view--modal' onHide={handleClose} backdrop="static"
     keyboard={false} centered>
     <Modal.Header closeButton>
-      <Modal.Title>{viewData.name}
+      <Modal.Title>{viewData.fullname}
         <br />
         {hospitalId ? <p>Hospital ID: <span>{hospitalId}</span></p> : null}
       </Modal.Title>
@@ -27,7 +27,7 @@ const ViewData = () => {
         {speciality ? <p>Speciality: <span className='bg-info'>{speciality}</span></p> : null}
         {contact ? <p>Contact: <span> {contact}</span></p> : null}
         {district ? <p>District: <span> {district}</span></p> : null}
-        {state ? <p>State: <span> {state}</span></p> : null}
+        {given_state ? <p>State: <span> {given_state}</span></p> : null}
         {address ? <p>Address: <span> {address}</span></p> : null}
         {pincode ? <p>Pincode: <span> {pincode}</span></p> : null}
       </article>

@@ -25,7 +25,7 @@ const AddDoctor = () => {
     setLoader(true);
     let { emailid, password, firstname, lastname, district } = data;
     let { pincode } = district_data.find((items) => items.district === district);
-    data.name = firstname + " " + lastname;
+    data.fullname = firstname + " " + lastname;
     data.pincode = pincode;
     sign_up({ username: emailid, password, isAdminApprove: 1, user_role: 'doctor', data_items: data }).then(() => {
       setLoader(false);
@@ -66,7 +66,7 @@ const AddDoctor = () => {
 
 
         <section className="row">
-          {<SelectBox errors={errors} register={register} name1={'State'} register1={'state'}
+          {<SelectBox errors={errors} register={register} name1={'State'} register1={'given_state'}
             data={[state_data, 'state']} />}
           {<SelectBox errors={errors} register={register} name1={'District'} register1={'district'}
             data={[district_data, 'district']} message={!getState ? 'Choose State First' : null} />}

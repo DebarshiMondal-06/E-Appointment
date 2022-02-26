@@ -27,9 +27,9 @@ const SignIn = () => {
   const authenicate = (data) => {
     setLoader(true);
     sign_in(data.email, data.password).then((result) => {
-      let { name, user_role, email } = result;
+      let { fullname, user_role, email } = result;
       setLoader(false);
-      setCookie('user_data', JSON.stringify({ email, name, user_role }), { path: '/' });
+      setCookie('user_data', JSON.stringify({ email, fullname, user_role }), { path: '/' });
       navigate('/dashboard');
     }).catch((err) => {
       if (err.code === 'UserNotConfirmedException') setNeedVerify(true);

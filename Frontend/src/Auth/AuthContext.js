@@ -83,9 +83,9 @@ const AuthContext = ({ children }) => {
                 onSuccess: async () => {
                     // let { email, name, phone_number, } = res.idToken.payload;
                     try {
-                        let { data: { isAdminApprove, user_role, name } } = await getData(`/get_admin_approve?id=${email}`, 'GET');
+                        let { data: { isAdminApprove, user_role, fullname } } = await getData(`/get_admin_approve?id=${email}`, 'GET');
                         if (!isAdminApprove && user_role !== 'admin') return reject({ code: "isAdminApprove" });
-                        resolve({ email, name, user_role });
+                        resolve({ email, fullname, user_role });
                     }
                     catch (err) { reject(err) };
                 },
