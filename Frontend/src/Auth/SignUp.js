@@ -97,7 +97,7 @@ const SignUp = () => {
         </div>
         <div className="col-8 signin--btn" onClick={!confirmPass ? handleSubmit(execute) : null}>
           <button type="button" className="btn">
-            {loader ? <ProcessSpinner padding={'2px 20px'} /> : btnTxt}
+            {loader ? <ProcessSpinner /> : btnTxt}
           </button>
         </div>
       </form>

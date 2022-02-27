@@ -51,10 +51,10 @@ const PendingUser = () => {
             <tbody className='table--body'>
               {
                 data && data.map((items, i) => {
-                  let { name, isVerified, emailid, user_role } = items;
+                  let { fullname, isVerified, emailid, user_role } = items;
                   return <tr key={i}>
                     <td><b>{i + 1}</b></td>
-                    <td>{name}</td>
+                    <td>{fullname}</td>
                     <td>{emailid}</td>
                     <td className='text-capitalize'> {user_role}
                       &nbsp; {user_role === 'patient' ? <FaHospitalUser className='user--role--icon' /> : <FaUserMd className='user--role--icon' />}
