@@ -191,3 +191,22 @@
 .select--boxes{
   text-transform: capitalize;
 }
+
+
+
+
+
+.delete--section{
+  position: absolute;
+  right: 10px;
+}
+.delete--section .btn--delete{
+  padding: 2px 5px;
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+.close--btn{
+  padding: 2px 5px;
+  font-size: 15px;
+  margin-bottom: 0%;
+}

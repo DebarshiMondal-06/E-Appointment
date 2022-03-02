@@ -134,6 +134,10 @@
 .doctors .table--body button .eye{
   color: aliceblue;
 }
+.doctors .table--body .assign--doctor{
+  color: aliceblue;
+  background: rgb(29, 197, 141);
+}
 .doctors .table--body .user--role--icon{
   font-size: 20px;
   margin-top: -4px;
@@ -402,4 +406,17 @@
   background-color: whitesmoke;
   box-shadow: none;
   border-bottom: 3px solid #348AC7;
+}
+
+
+.edit--profile .assign--hospital--loader{
+  position: absolute;
+  left: 10px;
+}
+.assign--btn{
+  padding: 3px 8px;
+  font-size: 15px;
+  margin-bottom: 0%;
+  background: #00bfa6!important;
+  border: none;
 }

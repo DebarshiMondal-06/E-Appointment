@@ -46,7 +46,7 @@ const AddHospital = () => {
     <main className='add--doctor--section'>
       <form className="doctors--add--form card shadow-sm" onSubmit={handleSubmit(submit_data)}>
         <section className='row'>
-          {<Inputs errors={errors} register={register} name1={'Hospital Name'} register1={'name'} />}
+          {<Inputs errors={errors} register={register} name1={'Hospital Name'} register1={'fullname'} />}
           {<Inputs errors={errors} register={register} name1={'Contact'} register1={'contact'}
             pattern1={/^[0-9]{10}$/} message1={'Not a valid Contact'} />}
         </section>

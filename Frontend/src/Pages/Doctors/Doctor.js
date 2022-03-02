@@ -1,31 +1,26 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { BsFillTrashFill } from 'react-icons/bs';
 import { getData } from '../../Utils/API';
 import MainLoader from '../../Components/Spinners/MainLoader';
 import { toast } from 'react-toastify';
 import { exception_handler } from '../../Utils/Exception';
-import ProcessSpinner from '../../Components/Spinners/ProcessSpinner';
 import NoData from '../../Components/Images/NoData.png';
-import { useCookies } from 'react-cookie';
 import { RiEyeFill } from 'react-icons/ri';
 import { BiPlusMedical } from 'react-icons/bi';
 import { createGlobalContext } from '../../Utils/GlobalContext';
 import ViewData from '../../Components/ViewData';
+import { FaUserNurse } from 'react-icons/fa';
+import AssignHospital from './AssignHospital';
 
 
 
 const Doctor = () => {
-  const [cookie] = useCookies();
   const { loader, setLoader, setViewModal, setViewData } = useContext(createGlobalContext);
-
-
   const [data, setData] = useState([]);
-  const [processLoader, setProcessLoader] = useState({
-    index: 0,
-    loader: false
-  });
+  const [modalAssign, setModalAssign] = useState(false);
+
+
 
   const get_doctors = async () => {
     setLoader(true);
@@ -41,24 +36,13 @@ const Doctor = () => {
   useEffect(() => get_doctors(), []);
 
 
-  const delete_doctor = async (id, index) => {
-    try {
-      setProcessLoader({ loader: true, index });
-      let result = await getData(`/users/delete_user?id=${id}`, 'DELETE');
-      if (result) {
-        setProcessLoader({ loader: false, index: 0 });
-        get_doctors();
-      }
-    } catch (err) {
-      setProcessLoader({ loader: false, index: 0 });
-      toast.error(exception_handler(err));
-    }
-  };
+
 
 
   if (loader) return <MainLoader />
   return <div className='doctors text-center'>
-    <ViewData />
+    <ViewData reloadData={get_doctors} />
+    <AssignHospital modalAssign={modalAssign} setModalAssign={setModalAssign} reloadData={get_doctors} />
     <article>
       <h4>Doctors</h4>
       <Link to="/dashboard/doctors_add"><button className='btn--add btn'>Add <BiPlusMedical /> </button></Link>
@@ -81,7 +65,7 @@ const Doctor = () => {
             <tbody className='table--body'>
               {
                 data && data.map((items, i) => {
-                  let { fullname, dob, emailid, phone } = items;
+                  let { fullname, dob, emailid, phone, pincode, hospitalassign } = items;
                   return <tr key={i}>
                     <td><b>{i + 1}</b></td>
                     <td>{fullname}</td>
@@ -89,14 +73,14 @@ const Doctor = () => {
                     <td>{phone}</td>
                     <td>{dob}</td>
                     <td>
-                      {(cookie.user_data && cookie.user_data.user_role === 'admin') ? <>
-                        <button onClick={() => delete_doctor(emailid, i)} className='btn btn-danger'>
-                          {(processLoader.loader && i === processLoader.index)
-                            ? <ProcessSpinner padding={'2px 20px'} size={18} border={'3px'} />
-                            : <BsFillTrashFill />
-                          }
+                      {
+                        (hospitalassign === 'yes') ? null : <> <button onClick={() => {
+                          setViewData({ fullname, pincode, emailid });
+                          setModalAssign(true);
+                        }} className='btn assign--doctor' type='button'>
+                          <FaUserNurse size={18} />
                         </button> &nbsp; </>
-                        : null}
+                      }
                       <button onClick={() => {
                         setViewData(items);
                         setViewModal(true);

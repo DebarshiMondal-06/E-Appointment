@@ -10,6 +10,7 @@ import { exception_handler } from '../../Utils/Exception';
 import { createGlobalContext } from '../../Utils/GlobalContext';
 import ViewData from '../../Components/ViewData';
 
+
 const Hospital = () => {
   const [data, setData] = useState([]);
   const { loader, setLoader, setViewModal, setViewData } = useContext(createGlobalContext);
@@ -56,10 +57,10 @@ const Hospital = () => {
         <tbody className='table--body'>
           {
             data && data.map((items, i) => {
-              let { name, speciality, contact, district } = items;
+              let { fullname, speciality, contact, district } = items;
               return <tr key={i}  >
                 <td><b>{i + 1}</b></td>
-                <td>{name} <span style={{ cursor: 'pointer' }}><RiEdit2Fill size={18} color='red' /></span> </td>
+                <td>{fullname} <span style={{ cursor: 'pointer' }}><RiEdit2Fill size={18} color='red' /></span> </td>
                 <td>{speciality}</td>
                 <td>{district}</td>
                 <td>{contact}</td>

@@ -1,4 +1,6 @@
 import React, { createContext, useState } from 'react';
+import { toast } from 'react-toastify';
+import { getData } from './API';
 
 const createGlobalContext = createContext();
 
@@ -19,7 +21,16 @@ const GlobalContext = ({ children }) => {
       setOpenSidebar(false);
       setCloseSidebar(false);
     }, time);
-  }
+  };
+
+  const get_doctor_assign = async (doctorId) => {
+    try {
+      return await getData(`/hospital/assign?doctorId=${doctorId}`, 'GET');
+    } catch (error) {
+      toast.error('Went Wrong!');
+    }
+  };
+
 
 
   return <createGlobalContext.Provider value={{
@@ -32,7 +43,8 @@ const GlobalContext = ({ children }) => {
     viewModal,
     setViewModal,
     setViewData,
-    viewData
+    viewData,
+    get_doctor_assign
   }}>
     {children}
   </createGlobalContext.Provider>

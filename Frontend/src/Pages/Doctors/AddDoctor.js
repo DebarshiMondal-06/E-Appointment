@@ -17,7 +17,7 @@ const AddDoctor = () => {
   const [loader, setLoader] = useState(false);
   const navigate = useNavigate();
 
-  let getState = watch('state');
+  let getState = watch('given_state');
   if (!getState) setValue('district', null);
 
 
