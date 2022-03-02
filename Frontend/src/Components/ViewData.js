@@ -1,21 +1,19 @@
+/* eslint-disable react-hooks/exhaustive-deps  */
 import React, { useContext, useEffect, useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import { useCookies } from 'react-cookie';
 import { useLocation } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import { getData } from '../Utils/API';
-import { exception_handler } from '../Utils/Exception';
 import { createGlobalContext } from '../Utils/GlobalContext';
 import ProcessSpinner from './Spinners/ProcessSpinner';
 
 const ViewData = ({ reloadData }) => {
   const [cookie] = useCookies();
   const { user_role } = cookie.user_data || {}
-  const { viewModal, setViewModal, viewData, get_doctor_assign } = useContext(createGlobalContext);
+  const { viewModal, setViewModal, viewData, get_doctor_assign, deleteLoader, deleteItem } = useContext(createGlobalContext);
   const { speciality, contact, district, address, pincode, emailid, hospitalId, dob, phone, given_state } = viewData;
-  const [loader, setDeleteLoader] = useState(false);
   const [hospitalAssign, setHospitalAssign] = useState([]);
   const { pathname } = useLocation();
+  const [assignLoader, setAssignLoader] = useState(false);
 
 
   let handleClose = () => {
@@ -23,33 +21,16 @@ const ViewData = ({ reloadData }) => {
   };
 
 
-  const deleteItem = async (id) => {
-    setDeleteLoader(true);
-    try {
-      let result = await getData(`/users/delete_user?id=${id}`, 'DELETE');
-      if (result) {
-        setDeleteLoader(false);
-        toast.info('Deleted!');
-        setViewModal(false);
-        setTimeout(() => {
-          reloadData();
-        }, 800);
-      }
-    } catch (err) {
-      setDeleteLoader(false);
-      toast.error(exception_handler(err));
-    }
-  };
-
-
   useEffect(() => {
-    if (emailid) {
+    if (emailid && pathname === '/dashboard/doctors') {
+      setAssignLoader(true);
       get_doctor_assign(emailid).then((res) => {
+        setAssignLoader(false);
         let { message } = res.data;
         if (message) setHospitalAssign(message[0]);
       })
     }
-  }, [emailid]);
+  }, [emailid, pathname]);
 
 
   return <Modal show={viewModal} size="lg" className='view--modal' onHide={handleClose} backdrop="static"
@@ -58,8 +39,8 @@ const ViewData = ({ reloadData }) => {
       <Modal.Title>
         <section className='delete--section'>
           {(user_role === 'admin' && !hospitalId) ? <>
-            <button onClick={() => deleteItem(emailid)} className='btn btn-danger btn--delete'>
-              {loader ? <ProcessSpinner padding={'2px 15px'} size={18} border={'3px'} /> : 'Delete'}
+            <button onClick={() => deleteItem(emailid, reloadData)} className='btn btn-danger btn--delete'>
+              {deleteLoader ? <ProcessSpinner padding={'2px 15px'} size={18} border={'3px'} /> : 'Delete'}
             </button> &nbsp; </>
             : null}
         </section>
@@ -83,11 +64,15 @@ const ViewData = ({ reloadData }) => {
         {pathname === '/dashboard/doctors' ? <p className='mt-3'> <big>Hospital Assigned</big> </p> : null}
       </article>
       {
-        pathname === '/dashboard/doctors' ? hospitalAssign ? <article>
-          <p>Name: <span> {hospitalAssign.fullname}</span></p>
-          <p>Address: <span> {hospitalAssign.address}</span></p>
-        </article> : 'Not Yet Assigned!' : null
+        pathname === '/dashboard/doctors'
+          ? assignLoader
+            ? <ProcessSpinner color={'#00bfa6'} size={30} />
+            : hospitalAssign ? <article>
+              <p>Name: <span> {hospitalAssign.fullname}</span></p>
+              <p>Address: <span> {hospitalAssign.address}</span></p>
+            </article> : 'Not Yet Assigned!' : null
       }
+      <br />
     </Modal.Body>
     <Modal.Footer>
       <Button className='close--btn' variant="dark" onClick={handleClose}>

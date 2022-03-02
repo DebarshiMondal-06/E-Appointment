@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
-import { useCookies } from 'react-cookie';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import SelectBox from '../../Components/Inputs/SelectBox';
@@ -54,7 +53,7 @@ const AssignHospital = ({ modalAssign, setModalAssign, reloadData }) => {
     } catch (error) {
       toast.error('Something Went Wrong!');
     }
-  }
+  };
 
 
   return <Modal show={modalAssign} size="lg" className='view--modal' onHide={handleClose} backdrop="static"
@@ -71,11 +70,10 @@ const AssignHospital = ({ modalAssign, setModalAssign, reloadData }) => {
         <p><big><u>Hospital</u></big></p>
       </article>
       {
-        loader ?
-          <ProcessSpinner color={'#00bfa6'} size={30} />
+        loader ? <ProcessSpinner color={'#00bfa6'} size={30} />
           : <>
-            <p>Avialable: <span className='text-danger'> {hospital.length}</span></p>
             <section className='row'>
+            <p>Avialable: <span className='text-danger'> {hospital.length}</span></p>
               {<SelectBox errors={errors} register={register} name1={'Select'} register1={'hospitalname'}
                 data={[hospital, 'fullname']} />}
             </section></>

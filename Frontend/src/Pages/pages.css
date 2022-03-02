@@ -162,6 +162,11 @@
   font-size: small;
   padding: 5px 0px;
 }
+.doctors .table--body .check--doctors{
+  color: #2477b3;
+  font-weight: bold;
+  cursor: pointer;
+}
 .doctors .no--data{
   display: flex;
   margin-top: 5%;
@@ -172,6 +177,7 @@
 .doctors .no--data img{
   width: 400px;
 }
+
 
 @media only screen and (max-width: 990px) {
   .doctors--add--form{

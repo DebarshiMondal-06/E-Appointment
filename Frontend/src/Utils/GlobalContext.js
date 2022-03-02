@@ -1,6 +1,8 @@
 import React, { createContext, useState } from 'react';
 import { toast } from 'react-toastify';
 import { getData } from './API';
+import { exception_handler } from './Exception';
+
 
 const createGlobalContext = createContext();
 
@@ -10,6 +12,7 @@ const GlobalContext = ({ children }) => {
   const [loader, setLoader] = useState(false);
   const [viewModal, setViewModal] = useState(false);
   const [viewData, setViewData] = useState({});
+  const [deleteLoader, setDeleteLoader] = useState(false);
 
   const handleOpen = () => {
     setOpenSidebar(true);
@@ -31,6 +34,25 @@ const GlobalContext = ({ children }) => {
     }
   };
 
+  const deleteItem = async (id, reloadData) => {
+    setDeleteLoader(true);
+    try {
+      let result = await getData(`/users/delete_user?id=${id}`, 'DELETE');
+      if (result) {
+        setDeleteLoader(false);
+        toast.info('Deleted!');
+        setViewModal(false);
+        setTimeout(() => {
+          reloadData();
+        }, 800);
+      }
+    } catch (err) {
+      setDeleteLoader(false);
+      toast.error(exception_handler(err));
+    }
+  };
+
+
 
 
   return <createGlobalContext.Provider value={{
@@ -44,7 +66,9 @@ const GlobalContext = ({ children }) => {
     setViewModal,
     setViewData,
     viewData,
-    get_doctor_assign
+    get_doctor_assign,
+    deleteItem,
+    deleteLoader
   }}>
     {children}
   </createGlobalContext.Provider>

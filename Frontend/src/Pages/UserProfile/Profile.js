@@ -35,7 +35,7 @@ const Profile = () => {
   return <section className='profile--section'>
     <EditProfile fetchData={fetchData} emailid={email} />
     {
-      (user_role === 'patient' && !data.given_state) ? <div class="alert alert-warning" role="alert">
+      (user_role === 'patient' && !data.given_state) ? <div className="alert alert-warning" role="alert">
         Seems <b>Profile not updated!</b> please update your address in order to book appointment.
       </div> : null
     }
