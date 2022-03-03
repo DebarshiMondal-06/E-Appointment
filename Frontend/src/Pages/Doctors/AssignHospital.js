@@ -10,11 +10,13 @@ import { createGlobalContext } from '../../Utils/GlobalContext';
 
 const AssignHospital = ({ modalAssign, setModalAssign, reloadData }) => {
   const [loader, setLoader] = useState(false);
-  const { viewData } = useContext(createGlobalContext);
+  const { viewData, setViewData } = useContext(createGlobalContext);
   const [hospital, setHospital] = useState([]);
-  const { handleSubmit, formState: { errors }, register } = useForm();
+  const { handleSubmit, formState: { errors }, register, setValue } = useForm();
 
   let handleClose = () => {
+    setViewData({});
+    setValue('hospitalname', null);
     setModalAssign(false);
   };
 
@@ -73,7 +75,7 @@ const AssignHospital = ({ modalAssign, setModalAssign, reloadData }) => {
         loader ? <ProcessSpinner color={'#00bfa6'} size={30} />
           : <>
             <section className='row'>
-            <p>Avialable: <span className='text-danger'> {hospital.length}</span></p>
+              <p>Avialable: <span className='text-danger'> {hospital.length}</span></p>
               {<SelectBox errors={errors} register={register} name1={'Select'} register1={'hospitalname'}
                 data={[hospital, 'fullname']} />}
             </section></>

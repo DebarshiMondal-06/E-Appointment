@@ -74,7 +74,7 @@ const Doctor = () => {
                     <td>{dob}</td>
                     <td>
                       {
-                        (hospitalassign === 'yes') ? null : <> <button onClick={() => {
+                        (hospitalassign) ? null : <> <button onClick={() => {
                           setViewData({ fullname, pincode, emailid });
                           setModalAssign(true);
                         }} className='btn assign--doctor' type='button'>

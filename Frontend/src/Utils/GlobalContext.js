@@ -26,9 +26,9 @@ const GlobalContext = ({ children }) => {
     }, time);
   };
 
-  const get_doctor_assign = async (doctorId) => {
+  const get_hospital_assign = async (hospitalId) => {
     try {
-      return await getData(`/hospital/assign?doctorId=${doctorId}`, 'GET');
+      return await getData(`/hospital/assign?hospitalId=${hospitalId}`, 'GET');
     } catch (error) {
       toast.error('Went Wrong!');
     }
@@ -66,7 +66,7 @@ const GlobalContext = ({ children }) => {
     setViewModal,
     setViewData,
     viewData,
-    get_doctor_assign,
+    get_hospital_assign,
     deleteItem,
     deleteLoader
   }}>

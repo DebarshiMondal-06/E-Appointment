@@ -18,9 +18,9 @@ const ViewDoctor = ({ setModal, modal }) => {
     setTimeout(() => setDoctors([]), 400);
   };
 
-  const get_doctors_from_hospital = (id) => {
+  const get_doctors_to_hospital = (id) => {
     setLoader(true);
-    getData(`/hospital/doctors?hospital_Id=${id}`, 'GET').then((res) => {
+    getData(`/hospital/doctors?hospitalId=${id}`, 'GET').then((res) => {
       setLoader(false);
       let { message } = res.data;
       if (message && message.length > 0) setDoctors(message);
@@ -31,7 +31,7 @@ const ViewDoctor = ({ setModal, modal }) => {
   };
 
   useEffect(() => {
-    if (hospitalId) get_doctors_from_hospital(hospitalId);
+    if (hospitalId) get_doctors_to_hospital(hospitalId);
   }, [hospitalId]);
 
 
@@ -50,8 +50,11 @@ const ViewDoctor = ({ setModal, modal }) => {
           loader
             ? <ProcessSpinner color={'#00bfa6'} size={30} />
             : (doctors && doctors.length > 0) ? doctors.map((item, i) => {
-              let { doctorId } = item;
-              return <p key={i}> {i + 1}. <span>{doctorId}</span></p>
+              let { emailid, fullname } = item;
+              return <>
+                <p> {i + 1}. Name: <span>{fullname} </span></p>
+                <p> Email: <span className='emailid'>{emailid} </span></p>
+              </>
             }) : <div className="alert alert-warning" role="alert">
               Seems No Doctor Found!
             </div>

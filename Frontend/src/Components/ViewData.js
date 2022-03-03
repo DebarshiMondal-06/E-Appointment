@@ -9,28 +9,30 @@ import ProcessSpinner from './Spinners/ProcessSpinner';
 const ViewData = ({ reloadData }) => {
   const [cookie] = useCookies();
   const { user_role } = cookie.user_data || {}
-  const { viewModal, setViewModal, viewData, get_doctor_assign, deleteLoader, deleteItem } = useContext(createGlobalContext);
-  const { speciality, contact, district, address, pincode, emailid, hospitalId, dob, phone, given_state } = viewData;
-  const [hospitalAssign, setHospitalAssign] = useState([]);
+  const { viewModal, setViewModal, viewData, get_hospital_assign, deleteLoader, deleteItem, setViewData } = useContext(createGlobalContext);
+  const { speciality, contact, district, address, pincode, emailid, hospitalId, dob, phone, given_state, hospitalassign } = viewData;
+  const [hospitaldata, setHospitalData] = useState([]);
   const { pathname } = useLocation();
   const [assignLoader, setAssignLoader] = useState(false);
 
 
   let handleClose = () => {
     setViewModal(false);
+    setViewData({});
+    setHospitalData([]);
   };
 
 
   useEffect(() => {
-    if (emailid && pathname === '/dashboard/doctors') {
+    if (pathname === '/dashboard/doctors' && hospitalassign) {
       setAssignLoader(true);
-      get_doctor_assign(emailid).then((res) => {
-        setAssignLoader(false);
+      get_hospital_assign(hospitalassign).then((res) => {
         let { message } = res.data;
-        if (message) setHospitalAssign(message[0]);
+        if (message) setHospitalData(message);
+        setAssignLoader(false);
       })
     }
-  }, [emailid, pathname]);
+  }, [hospitalassign]);
 
 
   return <Modal show={viewModal} size="lg" className='view--modal' onHide={handleClose} backdrop="static"
@@ -51,7 +53,7 @@ const ViewData = ({ reloadData }) => {
     </Modal.Header>
     <Modal.Body>
       <article>
-        {emailid ? <p>Email: <span> {emailid}</span></p> : null}
+        {emailid ? <p>Email: <span className='emailid'> {emailid}</span></p> : null}
         {phone ? <p>Phone: <span> {phone}</span></p> : null}
         {dob ? <p>DOB(Date of Birth): <span> {dob}</span></p> : null}
 
@@ -67,9 +69,9 @@ const ViewData = ({ reloadData }) => {
         pathname === '/dashboard/doctors'
           ? assignLoader
             ? <ProcessSpinner color={'#00bfa6'} size={30} />
-            : hospitalAssign ? <article>
-              <p>Name: <span> {hospitalAssign.fullname}</span></p>
-              <p>Address: <span> {hospitalAssign.address}</span></p>
+            : hospitaldata && hospitaldata.length > 0 ? <article>
+              <p>Name: <span> {hospitaldata[0].fullname}</span></p>
+              <p>Address: <span> {hospitaldata[0].address}</span></p>
             </article> : 'Not Yet Assigned!' : null
       }
       <br />
