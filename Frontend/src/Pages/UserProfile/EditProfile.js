@@ -1,42 +1,46 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { createGlobalContext } from '../../Utils/GlobalContext';
 import { Modal, Button } from 'react-bootstrap';
 import Inputs from '../../Components/Inputs/Input';
 import { useForm } from 'react-hook-form';
-import SelectBox from '../../Components/Inputs/SelectBox';
-import { district_data, state_data } from '../../Utils/data';
+// import SelectBox from '../../Components/Inputs/SelectBox';
+// import { district_data, state_data } from '../../Utils/data';
 import { sendData } from '../../Utils/API';
 import { toast } from 'react-toastify';
 import moment from 'moment';
+import ProcessSpinner from '../../Components/Spinners/ProcessSpinner';
 
 
 const EditProfile = ({ emailid }) => {
   const { viewData, viewModal, setViewModal } = useContext(createGlobalContext);
-  let { fullname, phone, dob, given_state, district } = viewData || {};
-  const { handleSubmit, formState: { errors }, register, watch, setValue } = useForm();
+  let { fullname, phone, dob } = viewData || {};
+  const [updateLoader, setUpdateLoader] = useState(false);
+  const { handleSubmit, formState: { errors }, register, setValue } = useForm();
   let handleClose = () => {
     setViewModal(false);
   };
 
 
-  let getState = watch('given_state');
-  if (!getState) setValue('district', null);
-  if (!getState && given_state) setValue('district', district);
+  // let getState = watch('given_state');
+  // if (!getState) setValue('district', null);
+  // if (!getState && given_state) setValue('district', district);
   if (dob) setValue('dob', moment(dob).format('YYYY-MM-DD'));
 
 
   let submit = async (data) => {
     try {
-      let { pincode } = district_data.find((items) => items.district === data.district);
-      data.pincode = pincode;
+      setUpdateLoader(true);
+      // let { pincode } = district_data.find((items) => items.district === data.district);
+      // data.pincode = pincode;
       data.emailid = emailid;
       await sendData('/users/profile', 'PUT', data);
+      setUpdateLoader(false);
       toast.info('Profile Updated!');
       setTimeout(() => {
         window.location.reload();
       }, 1500)
     } catch (error) {
-      console.log(error);
+      setUpdateLoader(false);
       toast.error(error);
     }
   };
@@ -56,20 +60,20 @@ const EditProfile = ({ emailid }) => {
       </section>
       <section className='row'>
         {<Inputs type={'date'} errors={errors} register={register} name1={'DOB'} register1={'dob'} />}
-        {<SelectBox value={given_state} errors={errors} register={register} name1={'State'} register1={'given_state'}
-          data={[state_data, 'state']} />}
+        {/* {<SelectBox value={given_state} errors={errors} register={register} name1={'State'} register1={'given_state'}
+          data={[state_data, 'state']} />} */}
       </section>
-      <section className="row">
+      {/* <section className="row">
         {<SelectBox value={district} errors={errors} register={register} name1={'District'} register1={'district'}
           data={[district_data, 'district']} message={(!getState && !given_state) ? 'Choose State First' : null} />}
-      </section>
+      </section> */}
     </Modal.Body>
     <Modal.Footer>
       <Button variant="dark" onClick={handleClose}>
         Close
       </Button>
       <Button variant="success" onClick={handleSubmit(submit)}>
-        Update
+        {updateLoader ? <ProcessSpinner padding={'0px 25px'} size={'22px'} border={'3px'} /> : 'Update'}
       </Button>
     </Modal.Footer>
   </Modal>

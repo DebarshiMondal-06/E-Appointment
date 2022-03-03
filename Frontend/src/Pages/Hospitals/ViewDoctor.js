@@ -9,12 +9,13 @@ import { createGlobalContext } from '../../Utils/GlobalContext';
 
 const ViewDoctor = ({ setModal, modal }) => {
   const [doctors, setDoctors] = useState([]);
-  const { viewData } = useContext(createGlobalContext);
+  const { viewData, setViewData } = useContext(createGlobalContext);
   const [loader, setLoader] = useState(false);
   let { hospitalId, fullname } = viewData || {};
 
   let handleClose = () => {
     setModal(false);
+    setViewData({});
     setTimeout(() => setDoctors([]), 400);
   };
 
