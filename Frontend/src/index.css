@@ -221,6 +221,11 @@ body {
 
 
 
+.error--lines{
+  display: flex!important;
+  justify-content: flex-start!important;
+  font-size: small;
+}
 
 
 .footer{

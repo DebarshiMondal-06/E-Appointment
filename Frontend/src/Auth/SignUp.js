@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import ProcessSpinner from "../Components/Spinners/ProcessSpinner";
 import { useForm } from 'react-hook-form';
 import '../index.css';
+import Input from "../Components/Inputs/Input";
 
 
 
@@ -54,59 +55,45 @@ const SignUp = () => {
       <h1>Create Account</h1>
       <p>You are creating account as Patient.</p>
       <form className="login_card">
-        <div className="col-8">
-          <label className="form-label">First Name</label>
-          <input {...register("firstname", { required: true })} type="text"
-            className={`form-control ${errors.firstname ? 'border border-danger' : null}`} />
-        </div>
-        <div className="col-8 mt-3">
-          <label className="form-label">Last Name</label>
-          <input {...register("lastname", { required: true })} type="text"
-            className={`form-control ${errors.lastname ? 'border border-danger' : null}`} />
-        </div>
-        <div className="col-8 mt-3">
-          <label className="form-label">Email Address</label>
-          <input {...register("username", { required: true, pattern: /\S+@\S+\.\S+/ })} type="email"
-            className={`form-control ${errors.username ? 'border border-danger' : null}`} />
-        </div>
-        <div className="col-8 mt-3">
-          <label className="form-label">Phone Number</label>
-          <input {...register("phone", { required: true, pattern: /^\+[1-9]{1}[0-9]{3,14}$/ })} type="text"
-            className={`form-control ${errors.phone ? 'border border-danger' : null}`} />
-        </div>
-        <div className="col-8 mt-3">
-          <label className="form-label">Date of Birth</label>
-          <input {...register("dob", { required: true })} type="date"
-            className={`form-control ${errors.dob ? 'border border-danger' : null}`} />
-        </div>
-        <div className="col-8 mt-3 password">
+        {<Input col="8" errors={errors} register={register} name1={'First Name'} register1={'firstname'} />}
+        {<Input col="8" errors={errors} register={register} name1={'Last Name'} register1={'lastname'} />}
+
+        {<Input col="8" errors={errors} register={register} name1={'Email Address'} register1={'username'}
+          pattern1={/\S+@\S+\.\S+/} message1={'Not a valid Email'} />}
+        {<Input col="8" errors={errors} register={register} name1={'Phone'} register1={'phone'}
+          pattern1={/^[0-9]{10}$/} message1={'Not a valid Phone no'} />}
+
+        {<Input col="8" errors={errors} register={register} name1={'DOB'} register1={'dob'} type={'date'} />}
+
+
+        <div className="col-8 mb-4 password">
           <label className="form-label">Password</label>
           <input {...register("password", { required: true, pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/ })}
-            type={`${hide.password ? "text" : "password"}`} className={`form-control ${errors.password ? 'border border-danger' : null}`} />
+            type={`${hide.password ? "text" : "password"}`} className="form-control" />
+          <p className="error--lines">{errors.password ? errors.password?.type === 'pattern'
+            ? <span className="text-danger"> Ateast contain 1 upper, 1 lower, 1 digit, 1 special & 8 char</span>
+            : <span className="text-danger">This field is required!</span> : null}</p>
           <span onClick={() => setHide({ ...hide, password: !hide.password })} className="eye--password">
             {hide.password ? <RiEyeFill /> : <RiEyeOffFill />}
           </span>
         </div>
-        <div className="col-8 mt-3 password">
+        <div className="col-8 mb-4 password">
           <label className="form-label">Verify</label>
           <input type={`${hide.verify ? "text" : "password"}`} {...register("verify", { required: true })}
-            className={`form-control ${errors.verify && !confirmPass ? 'border border-danger' : null}`} />
+            className="form-control" />
+          {confirmPass ? <p className="error--lines"> <span className="text-danger"> Password didn't match</span></p> : null}
           <span onClick={() => setHide({ ...hide, verify: !hide.verify })}
             className="eye--password">{hide.verify ? <RiEyeFill /> : <RiEyeOffFill />}
           </span>
         </div>
+
+
         <div className="col-8 signin--btn" onClick={!confirmPass ? handleSubmit(execute) : null}>
           <button type="button" className="btn">
             {loader ? <ProcessSpinner /> : btnTxt}
           </button>
         </div>
       </form>
-      <br></br>
-      <p>{Object.values(errors).some(val => val) ? <span className="text-danger">All feilds are required!</span> : null}</p>
-      <p>{errors.password?.type === 'pattern' ? <span className="text-danger"> <b>Password:</b> Ateast contain 1 upper, 1 lower, 1 digit, 1 special & 8 char</span> : null}</p>
-      <p>{errors.username?.type === 'pattern' ? <span className="text-danger"> <b>Email:</b> Must be a Valid Email</span> : null}</p>
-      <p>{errors.phone?.type === 'pattern' ? <span className="text-danger"> <b>Phone:</b> Must be a Valid Phone Number.</span> : null}</p>
-      <p>{confirmPass ? <span className="text-danger"> <b>Verify:</b> Password didn't matches</span> : null}</p>
     </div>
   );
 };
