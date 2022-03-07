@@ -33,6 +33,7 @@ const Hospital = () => {
 
   useEffect(() => {
     getHospital();
+    setViewData({});
   }, []);
 
 
@@ -64,7 +65,9 @@ const Hospital = () => {
               let { fullname, speciality, contact, district, hospitalId } = items;
               return <tr key={i}  >
                 <td><b>{i + 1}</b></td>
-                <td>{fullname} <span style={{ cursor: 'pointer' }}><RiEdit2Fill size={18} color='red' /></span> </td>
+                <td>{fullname} <Link to="/dashboard/hospital_edit" onClick={() => setViewData(items)}>
+                  <span><RiEdit2Fill size={18} color='red' /></span>
+                </Link> </td>
                 <td>{speciality}</td>
                 <td>{district}</td>
                 <td>{contact}</td>

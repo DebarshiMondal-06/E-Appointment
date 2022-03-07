@@ -72,6 +72,7 @@ const ViewData = ({ reloadData }) => {
             : hospitaldata && hospitaldata.length > 0 ? <article>
               <p>Name: <span> {hospitaldata[0].fullname}</span></p>
               <p>Address: <span> {hospitaldata[0].address}</span></p>
+              <p>Contact: <span> {hospitaldata[0].contact}</span></p>
             </article> : 'Not Yet Assigned!' : null
       }
       <br />
