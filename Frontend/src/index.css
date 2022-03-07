@@ -173,6 +173,10 @@ body {
       flex-wrap: wrap;
       justify-content: center;
   }
+  .first--section div h2{
+    margin-top: 20%!important;
+    font-size: 2.5em!important;
+  }
   .first--section div{
     text-align: center!important;
     justify-content: center;
@@ -258,7 +262,12 @@ body {
 
 @media only screen and (max-width: 990px) {
   .second--section .card{
-      width: 50%!important;
+      width: 40%!important;
+  }
+}
+@media only screen and (max-width: 590px) {
+  .second--section .card{
+      width: 90%!important;
   }
 }
 .second--section{
