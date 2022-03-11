@@ -70,6 +70,7 @@ const AuthContext = ({ children }) => {
 
     // ************************** SignIn *******************************************
     const sign_in = async (email, password) => {
+        email = email.toLowerCase();
         return await new Promise((resolve, reject) => {
             const user = new CognitoUser({
                 Username: email,

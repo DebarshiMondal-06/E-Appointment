@@ -271,8 +271,8 @@
   color: black;
   letter-spacing: 1px;
 }
-.profile--section .profile .email{
-  text-transform: none;
+ .email{
+  text-transform: none!important;
 }
 .profile--section .profile .role span{
     background: #60aeee;

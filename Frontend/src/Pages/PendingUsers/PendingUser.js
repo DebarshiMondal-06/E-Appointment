@@ -55,7 +55,7 @@ const PendingUser = () => {
                   return <tr key={i}>
                     <td><b>{i + 1}</b></td>
                     <td>{fullname}</td>
-                    <td>{emailid}</td>
+                    <td className='email'>{emailid}</td>
                     <td className='text-capitalize'> {user_role}
                       &nbsp; {user_role === 'patient' ? <FaHospitalUser className='user--role--icon' /> : <FaUserMd className='user--role--icon' />}
                     </td>

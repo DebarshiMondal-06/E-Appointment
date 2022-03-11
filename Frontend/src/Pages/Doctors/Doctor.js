@@ -69,7 +69,7 @@ const Doctor = () => {
                   return <tr key={i}>
                     <td><b>{i + 1}</b></td>
                     <td>{fullname}</td>
-                    <td>{emailid}</td>
+                    <td className='email'>{emailid}</td>
                     <td>{phone}</td>
                     <td>{dob}</td>
                     <td>

@@ -1,27 +1,19 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect, useState } from 'react';
-import { BsFillTrashFill } from 'react-icons/bs';
 import { RiEyeFill } from 'react-icons/ri';
 import { getData } from '../../Utils/API';
 import NoData from '../../Components/Images/NoData.png';
 import MainLoader from '../../Components/Spinners/MainLoader';
-import ProcessSpinner from '../../Components/Spinners/ProcessSpinner';
 import { toast } from 'react-toastify';
 import { exception_handler } from '../../Utils/Exception';
-import { useCookies } from 'react-cookie';
 import { createGlobalContext } from '../../Utils/GlobalContext';
 import ViewData from '../../Components/ViewData';
 
 
 
 const Patient = () => {
-  const [cookie] = useCookies();
   const { loader, setLoader, setViewModal, setViewData } = useContext(createGlobalContext);
   const [data, setData] = useState([]);
-  const [processLoader, setProcessLoader] = useState({
-    index: 0,
-    loader: false
-  });
 
 
   const get_patients = async () => {
@@ -38,20 +30,6 @@ const Patient = () => {
   useEffect(() => get_patients(), []);
 
 
-  const delete_patient = async (id, index) => {
-    try {
-      setProcessLoader({ loader: true, index });
-      let result = await getData(`/users/delete_user?id=${id}`, 'DELETE');
-      if (result) {
-        toast.success('Deleted Successfully!');
-        setProcessLoader({ loader: false, index: 0 });
-        get_patients();
-      }
-    } catch (err) {
-      setProcessLoader({ loader: false, index: 0 });
-      toast.error(exception_handler(err));
-    };
-  };
 
 
   if (loader) return <MainLoader />
@@ -82,18 +60,10 @@ const Patient = () => {
                   return <tr key={i}>
                     <td><b>{i + 1}</b></td>
                     <td>{fullname}</td>
-                    <td>{emailid}</td>
+                    <td className='email'>{emailid}</td>
                     <td>{phone}</td>
                     <td>{dob}</td>
                     <td>
-                      {(cookie.user_data && cookie.user_data.user_role === 'admin') ? <>
-                        <button onClick={() => delete_patient(emailid, i)} className='btn btn-danger'>
-                          {(processLoader.loader && i === processLoader.index)
-                            ? <ProcessSpinner size={18} border={'3px'} />
-                            : <BsFillTrashFill />
-                          }
-                        </button> &nbsp; </>
-                        : null}
                       <button onClick={() => {
                         setViewData(items);
                         setViewModal(true);
