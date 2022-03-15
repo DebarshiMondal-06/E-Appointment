@@ -69,7 +69,7 @@ const Profile = () => {
       <p className='role'>Role: <span> {data.user_role} </span> </p>
       <p></p>
       {
-        hospitaldata ? <> <h4>Hospitals</h4>
+        hospitaldata && hospitaldata.fullname ? <> <h4>Hospitals</h4>
           <p>Name: <span> {hospitaldata.fullname} </span> </p>
           <p>Contact: <span> {hospitaldata.contact} </span> </p>
           <p>Address: <span> {hospitaldata.address} </span> </p>
