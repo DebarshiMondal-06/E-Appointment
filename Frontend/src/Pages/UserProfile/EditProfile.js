@@ -35,11 +35,13 @@ const EditProfile = ({ emailid }) => {
 
 
   let submit = async (data) => {
+    let { pincode } = district_data.find((items) => items.district === data.district || district);
+    data.pincode = pincode;
+    data.emailid = emailid;
+    data.given_state = 'Odisha';
+    if (district) data.district = district;
     try {
       setUpdateLoader(true);
-      let { pincode } = district_data.find((items) => items.district === data.district);
-      data.pincode = pincode;
-      data.emailid = emailid;
       await sendData('/users/profile', 'PUT', data);
       setUpdateLoader(false);
       toast.info('Profile Updated!');
@@ -67,7 +69,7 @@ const EditProfile = ({ emailid }) => {
         {<Inputs value={phone} errors={errors} register={register} name1={'Phone'} register1={'phone'} />}
       </section>
       {
-        viewData && !given_state ? <section className="row">
+        viewData && (!given_state && !district) ? <section className="row">
           {<SelectBox value={given_state} errors={errors} register={register} name1={'State'} register1={'given_state'}
             data={[state_data, 'state']} />}
           {<SelectBox errors={errors} register={register} name1={'District'} register1={'district'}

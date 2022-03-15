@@ -288,14 +288,27 @@
   font-size: 1em;
   letter-spacing: normal;
 }
-
 .profile--section h3{
   font-size: 1.8em;
   align-self: flex-start;
   margin-top: 50px;
   margin-bottom: 20px;
 }
-
+.profile h4{
+  width: 100%;
+  text-align: left;
+  font-size: 22px!important;
+}
+.profile .profile_hospital_assign{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  /* gap: 1em; */
+}
+.profile_hospital_assign p{
+  width: 350px!important;
+  background: lightblue;
+}
 
 .update--password{
   display: flex;
