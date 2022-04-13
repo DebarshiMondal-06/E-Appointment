@@ -1,6 +1,5 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import Home from "./LandingView/Home";
 import Auth from "./Auth/Auth";
 import Dashboard from "./Pages/Dashboard";
 import { SignInAuth, ProtectAuth, ProtectAdminDoctor, ProtectAdmin } from "./Utils/ProtectedRoutes";
@@ -12,6 +11,7 @@ import Footer from './Components/Footer';
 import Services from "./Pages/Public/Services";
 import Contact from "./Pages/Public/Contact";
 import About from "./Pages/Public/About";
+import Home from "./Pages/Public/Home";
 
 
 const App = () => {
