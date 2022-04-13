@@ -1,19 +1,19 @@
 import React from "react";
-import Navbar from "../Components/Navigation/Navbar";
+import Navbar from "../../Components/Navigation/Navbar";
 import { BsFillCalendar2EventFill } from 'react-icons/bs'
 import { FaHandHoldingMedical } from 'react-icons/fa'
 import { RiHospitalFill } from 'react-icons/ri'
-import DcotorImage from '../Components/Images/doctor.png';
-import DoctorIcon from '../Components/Images/doctoricon.png';
-import Shield from '../Components/Images/insurance.png';
-import Working from '../Components/Images/working.png';
-import CustomerCare from '../Components/Images/customerservice.png';
+import DcotorImage from '../../Components/Images/doctor.png';
+import DoctorIcon from '../../Components/Images/doctoricon.png';
+import Shield from '../../Components/Images/insurance.png';
+import Working from '../../Components/Images/working.png';
+import CustomerCare from '../../Components/Images/customerservice.png';
+import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
     <div className="landing--page">
       <Navbar />
-
       <section className="first--section">
         <div>
           <h2>Protect Your Health and Take Care of Health</h2>
@@ -26,8 +26,8 @@ const Home = () => {
             <h3> <FaHandHoldingMedical size={20} className="icon" /> &nbsp; Health Guarantee Forever </h3>
           </article>
           <div className="btns">
-            <button className="btn btn--1 shadow-sm">Book Now</button> &nbsp;&nbsp;
-            <button className="btn btn--2 shadow-sm">Get Started</button>
+            <Link to="/"><button className="btn btn--1 shadow-sm">Book Now</button></Link> &nbsp;&nbsp;
+            <Link to="/auth"><button className="btn btn--2 shadow-sm">Get Started</button></Link>
           </div>
         </div>
         <div className="doctor--image">

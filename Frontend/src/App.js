@@ -9,6 +9,9 @@ import "./index.css";
 import { useContext } from "react";
 import { createGlobalContext } from "./Utils/GlobalContext";
 import Footer from './Components/Footer';
+import Services from "./Pages/Public/Services";
+import Contact from "./Pages/Public/Contact";
+import About from "./Pages/Public/About";
 
 
 const App = () => {
@@ -17,6 +20,9 @@ const App = () => {
   return <>
     <Routes>
       <Route element={<Home />} path="/" />
+      <Route element={<About />} path="/about" />
+      <Route element={<Services />} path="/services" />
+      <Route element={<Contact />} path="/contact" />
       <Route index element={<SignInAuth><Auth /></SignInAuth>} path="/auth" />
       <Route index element={<SignInAuth><Auth /></SignInAuth>} path="/forgot" />
       <Route index element={<ProtectAuth><Dashboard /></ProtectAuth>} path="/dashboard" />

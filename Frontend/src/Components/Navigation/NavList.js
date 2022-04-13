@@ -58,10 +58,10 @@ const NavList = () => {
             {/* <NavLink onClick={Home} className='menu_active' className="nav--text nav-link" to="/"> Home </NavLink> */}
           </li>
           <li className="nav-item">
-            <NavLink onClick={AboutMe} className="nav--text nav-link" to="/about-section"> About </NavLink>
+            <NavLink onClick={AboutMe} className="nav--text nav-link" to="/about"> About </NavLink>
           </li>
           <li className="nav-item">
-            <NavLink onClick={Project} className="nav--text nav-link" to="/project"> Services </NavLink>
+            <NavLink onClick={Project} className="nav--text nav-link" to="/services"> Services </NavLink>
           </li>
           <li className="nav-item">
             <NavLink onClick={ContactMe} className="nav--text nav-link" to="/contact"> Contact </NavLink>

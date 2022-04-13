@@ -234,22 +234,27 @@ body {
 .first--section div .btn--1{
   margin: 20px 0px;
   background: #00bfa6;
-  color: white;
   font-size: 1em;
+  color: #fff;
   padding: 6px 15px;
+  border: 2px solid #00bfa6!important;
+  transition: 0.3s all ease-in-out;
 }
 .first--section div .btn--2{
   margin: 20px 0px;
   border: 2px solid #00bfa6!important;
   font-size: 1em;
   padding: 6px 15px;
+  transition: 0.3s all ease-in-out;
 }
 .first--section div .btn--1:hover{
+  transform: translateY(-4px);
   color: white;
 }
 .first--section div .btn--2:hover{
   color: white;
   background: #00bfa6;
+  transform: translateY(-4px);
 }
 .first--section .doctor--image{
   display: flex;
