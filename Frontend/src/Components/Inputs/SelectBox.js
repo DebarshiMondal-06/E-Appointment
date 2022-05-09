@@ -16,7 +16,7 @@ const SelectBox = ({ errors, register, name1, register1, pattern1, message1, dat
         })
       }
     </select>
-    <p>{errors[register1] ? errors[register1]?.type === 'pattern' ? <span className="text-danger">{message1}</span>
+    <p className='error--lines'>{errors[register1] ? errors[register1]?.type === 'pattern' ? <span className="text-danger">{message1}</span>
       : <span className="text-danger">This field is required</span>
       : null
     }</p>

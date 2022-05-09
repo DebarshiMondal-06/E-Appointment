@@ -168,6 +168,17 @@
   font-weight: bold;
   cursor: pointer;
 }
+.doctors .table--body .check--appointId{
+  font-weight: bold;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  text-transform: lowercase;
+}
+.doctors .table--body .check--appointId:hover{
+  text-decoration: underline;
+  letter-spacing: 1.2px;
+}
+
 .doctors .no--data{
   display: flex;
   margin-top: 5%;
@@ -200,6 +211,9 @@
   padding: 30px;
   border-radius: 10px;
 }
+.doctors--add--form .form-label{
+  color: #745d5d;
+}
 .doctors--add--form input{
   border: none;
   padding: 10px;
@@ -207,6 +221,17 @@
   background-color: whitesmoke;
 }
 .doctors--add--form input:focus{
+  background-color: whitesmoke;
+  box-shadow: none;
+  border-bottom: 3px solid #348AC7;
+}
+.doctors--add--form textarea{
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: whitesmoke;
+}
+.doctors--add--form textarea:focus{
   background-color: whitesmoke;
   box-shadow: none;
   border-bottom: 3px solid #348AC7;
@@ -221,6 +246,13 @@
   background-color: whitesmoke;
   box-shadow: none;
   border-bottom: 3px solid #348AC7;
+}
+.doctors--add--form .appoint--edit--details{
+  font-size: large;
+}
+.appoint--edit--details .badge{
+  font-size: 14px;
+  letter-spacing: 1px;
 }
 .btns--operate{
   display: flex;

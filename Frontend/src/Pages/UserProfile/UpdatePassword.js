@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react'
 import { useForm } from 'react-hook-form';
 import { createAuthContext } from '../../Auth/AuthContext';
-import Inputs from '../../Components/Inputs/Input';
+import { Inputs } from '../../Components/Inputs/Input';
 import { exception_handler } from '../../Utils/Exception';
 import { toast } from 'react-toastify';
 import ProcessSpinner from '../../Components/Spinners/ProcessSpinner';

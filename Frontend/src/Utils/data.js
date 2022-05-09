@@ -18,3 +18,15 @@ export const doctor_speacility = [
   { id: 4, type: "general surgeon" },
   { id: 5, type: "psychiatrist" }
 ];
+
+export const health_category = [
+  { id: 1, type: "Ears, Nose, Throat" },
+  { id: 2, type: "Diabetes" },
+  { id: 3, type: "Digestive Health" },
+  { id: 4, type: "Bones, Joints and Muscles" },
+  { id: 5, type: "Infections" },
+  { id: 6, type: "Chest and Lungs" },
+  { id: 7, type: "Children's Health" },
+  { id: 8, type: "Allergies, Blood & Immune System" },
+  { id: 8, type: "Other" },
+]

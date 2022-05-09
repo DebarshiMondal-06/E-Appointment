@@ -9,6 +9,8 @@ import PendingUser from './PendingUsers/PendingUser';
 import Profile from './UserProfile/Profile';
 import Hospital from './Hospitals/Hospital';
 import AddHospital from './Hospitals/AddHospital';
+import Book from './Appointment/Book';
+import Appointments from './Appointment/Appointments';
 
 
 
@@ -23,6 +25,9 @@ const Paths = () => {
   if (pathname === '/dashboard/hospital') return <Hospital />
   if (pathname === '/dashboard/hospital_add') return <AddHospital />
   if (pathname === '/dashboard/hospital_edit') return <AddHospital />
+  if (pathname === '/dashboard/appointments') return <Appointments />
+  if (pathname === '/dashboard/book') return <Book />
+  if (pathname === '/dashboard/book_edit') return <Book />
 
 
   return <DashboardCard />

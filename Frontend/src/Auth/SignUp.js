@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import ProcessSpinner from "../Components/Spinners/ProcessSpinner";
 import { useForm } from 'react-hook-form';
 import '../index.css';
-import Input from "../Components/Inputs/Input";
+import { Inputs } from "../Components/Inputs/Input";
 
 
 
@@ -55,15 +55,15 @@ const SignUp = () => {
       <h1>Create Account</h1>
       <p>You are creating account as Patient.</p>
       <form className="login_card">
-        {<Input col="8" errors={errors} register={register} name1={'First Name'} register1={'firstname'} />}
-        {<Input col="8" errors={errors} register={register} name1={'Last Name'} register1={'lastname'} />}
+        {<Inputs col="8" errors={errors} register={register} name1={'First Name'} register1={'firstname'} />}
+        {<Inputs col="8" errors={errors} register={register} name1={'Last Name'} register1={'lastname'} />}
 
-        {<Input col="8" errors={errors} register={register} name1={'Email Address'} register1={'username'}
+        {<Inputs col="8" errors={errors} register={register} name1={'Email Address'} register1={'username'}
           pattern1={/\S+@\S+\.\S+/} message1={'Not a valid Email'} />}
-        {<Input col="8" errors={errors} register={register} name1={'Phone'} register1={'phone'}
+        {<Inputs col="8" errors={errors} register={register} name1={'Phone'} register1={'phone'}
           pattern1={/^[0-9]{10}$/} message1={'Not a valid Phone no'} />}
 
-        {<Input col="8" errors={errors} register={register} name1={'DOB'} register1={'dob'} type={'date'} />}
+        {<Inputs col="8" errors={errors} register={register} name1={'DOB'} register1={'dob'} type={'date'} />}
 
 
         <div className="col-8 mb-4 password">

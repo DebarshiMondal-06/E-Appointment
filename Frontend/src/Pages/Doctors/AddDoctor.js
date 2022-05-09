@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { HiOutlineArrowNarrowLeft } from 'react-icons/hi'
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import Inputs from '../../Components/Inputs/Input';
+import { Inputs } from '../../Components/Inputs/Input';
 import SelectBox from '../../Components/Inputs/SelectBox';
 import { district_data, state_data, doctor_speacility } from '../../Utils/data';
 import { createAuthContext } from '../../Auth/AuthContext';

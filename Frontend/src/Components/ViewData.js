@@ -10,7 +10,8 @@ const ViewData = ({ reloadData }) => {
   const [cookie] = useCookies();
   const { user_role } = cookie.user_data || {}
   const { viewModal, setViewModal, viewData, get_hospital_assign, deleteLoader, deleteItem, setViewData } = useContext(createGlobalContext);
-  const { speciality, contact, district, address, pincode, emailid, hospitalId, dob, phone, given_state, hospitalassign } = viewData;
+  const { speciality, contact, district, address, pincode, emailid, hospitalId, dob, phone, given_state, hospitalassign,
+    appoint_id, concern, description, status, category } = viewData;
   const [hospitaldata, setHospitalData] = useState([]);
   const { pathname } = useLocation();
   const [assignLoader, setAssignLoader] = useState(false);
@@ -47,8 +48,10 @@ const ViewData = ({ reloadData }) => {
             : null}
         </section>
         {viewData.fullname}
+        {concern}
         <br />
-        {hospitalId ? <p>Hospital ID: <span>{hospitalId}</span></p> : null}
+        {hospitalId ? <p>Hospital ID: <span style={{ textTransform: "lowercase" }}>{hospitalId}</span></p> : null}
+        {appoint_id ? <p>Appoint ID: <span style={{ textTransform: "lowercase" }}>{appoint_id}</span></p> : null}
       </Modal.Title>
     </Modal.Header>
     <Modal.Body>
@@ -63,8 +66,11 @@ const ViewData = ({ reloadData }) => {
         {address ? <p>Address: <span> {address}</span></p> : null}
         {pincode ? <p>Pincode: <span> {pincode}</span></p> : null}
         {speciality ? <p>Speciality: <span className='bg-info'>{speciality}</span></p> : null}
+        {status ? <p>Status: <span> {status}</span></p> : null}
+        {category ? <p>Category: <span> {category}</span></p> : null}
         {pathname === '/dashboard/doctors' ? <p className='mt-3'> <big>Hospital Assigned</big> </p> : null}
       </article>
+      {description ? <p><b>Description</b>: <span> {description}</span></p> : null}
       {
         pathname === '/dashboard/doctors'
           ? assignLoader

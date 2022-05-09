@@ -76,7 +76,7 @@ export const patientOption = [
   {
     header: "Management", icon: <RiHomeGearFill />,
     sub_list: [
-      { name: "Appointments", route: "/appointment" }
+      { name: "Appointments", route: "/dashboard/appointments" }
     ]
   },
   {

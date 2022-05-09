@@ -27,3 +27,11 @@ export function ProtectAdminDoctor({ children }) {
     ? children
     : <Navigate to="/dashboard" />;
 };
+
+export function ProtectPatient({ children }) {
+  const [cookie] = useCookies();
+  const { user_role } = cookie.user_data || {};
+  return user_role && user_role === 'patient'
+    ? children
+    : <Navigate to="/dashboard" />;
+};

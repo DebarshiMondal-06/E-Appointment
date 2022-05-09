@@ -2,7 +2,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { createGlobalContext } from '../../Utils/GlobalContext';
 import { Modal, Button } from 'react-bootstrap';
-import Inputs from '../../Components/Inputs/Input';
+import { Inputs } from '../../Components/Inputs/Input';
 import { useForm } from 'react-hook-form';
 import SelectBox from '../../Components/Inputs/SelectBox';
 import { district_data, state_data } from '../../Utils/data';
