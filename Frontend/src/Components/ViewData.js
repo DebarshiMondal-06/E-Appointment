@@ -1,8 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps  */
+import moment from 'moment';
 import React, { useContext, useEffect, useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import { useCookies } from 'react-cookie';
 import { useLocation } from 'react-router-dom';
+import { getData } from '../Utils/API';
 import { createGlobalContext } from '../Utils/GlobalContext';
 import ProcessSpinner from './Spinners/ProcessSpinner';
 
@@ -11,8 +13,9 @@ const ViewData = ({ reloadData }) => {
   const { user_role } = cookie.user_data || {}
   const { viewModal, setViewModal, viewData, get_hospital_assign, deleteLoader, deleteItem, setViewData } = useContext(createGlobalContext);
   const { speciality, contact, district, address, pincode, emailid, hospitalId, dob, phone, given_state, hospitalassign,
-    appoint_id, concern, description, status, category } = viewData;
+    appoint_id, concern, description, status, category, user_id } = viewData;
   const [hospitaldata, setHospitalData] = useState([]);
+  const [userdata, setUserData] = useState([]);
   const { pathname } = useLocation();
   const [assignLoader, setAssignLoader] = useState(false);
 
@@ -35,18 +38,31 @@ const ViewData = ({ reloadData }) => {
     }
   }, [hospitalassign]);
 
+  useEffect(() => {
+    if (pathname.includes('appointments') && user_id) {
+      setAssignLoader(true);
+      getData(`/users/profile?id=${user_id}`).then((res) => {
+        let { message: { Item } } = res.data;
+        if (Item) setUserData(Item);
+        setAssignLoader(false);
+      })
+    }
+  }, [user_id]);
+
 
   return <Modal show={viewModal} size="lg" className='view--modal' onHide={handleClose} backdrop="static"
     keyboard={false} centered>
     <Modal.Header>
       <Modal.Title>
-        <section className='delete--section'>
-          {(user_role === 'admin' && !hospitalId) ? <>
-            <button onClick={() => deleteItem(emailid, reloadData)} className='btn btn-danger btn--delete'>
-              {deleteLoader ? <ProcessSpinner padding={'2px 15px'} size={18} border={'3px'} /> : 'Delete'}
-            </button> &nbsp; </>
-            : null}
-        </section>
+        {!pathname.includes('appointments') ?
+          <section className='delete--section'>
+            {(user_role === 'admin' && !hospitalId) ? <>
+              <button onClick={() => deleteItem(emailid, reloadData)} className='btn btn-danger btn--delete'>
+                {deleteLoader ? <ProcessSpinner padding={'2px 15px'} size={18} border={'3px'} /> : 'Delete'}
+              </button> &nbsp; </>
+              : null}
+          </section> : null
+        }
         {viewData.fullname}
         {concern}
         <br />
@@ -80,6 +96,19 @@ const ViewData = ({ reloadData }) => {
               <p>Address: <span> {hospitaldata[0].address}</span></p>
               <p>Contact: <span> {hospitaldata[0].contact}</span></p>
             </article> : 'Not Yet Assigned!' : null
+      }
+      {pathname.includes('appointments') ? <p className='appoint--veiwuser'>User Details: </p> : null}
+      {
+        pathname.includes('appointments')
+          ? assignLoader
+            ? <ProcessSpinner color={'#00bfa6'} size={30} />
+            :
+            <article>
+              <p>Name: <span> {userdata.fullname}</span></p>
+              <p>Email: <span> {userdata.emailid}</span></p>
+              <p>DOB: <span> {userdata.dob}</span></p>
+              <p>Age: <span>{moment().year() - moment(userdata.dob).year()}+</span></p>
+            </article> : null
       }
       <br />
     </Modal.Body>

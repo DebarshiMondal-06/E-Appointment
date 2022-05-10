@@ -178,6 +178,26 @@
   text-decoration: underline;
   letter-spacing: 1.2px;
 }
+.doctors .table--body .approve--appoint{
+  font-size: 12px;
+  border: 1.8px solid #00bfa6;
+  width: fit-content;
+  padding: 1px 8px;
+}
+.doctors .table--body .approve--appoint:hover{
+  background-color: #00bfa6;
+  color: #fff;
+}
+.doctors .table--body .reject--appoint{
+  font-size: 12px;
+  border: 1.8px solid #e05656;
+  width: fit-content;
+  padding: 1px 8px;
+}
+.doctors .table--body .reject--appoint:hover{
+  background-color: #e05656;
+  color: #fff;
+}
 
 .doctors .no--data{
   display: flex;

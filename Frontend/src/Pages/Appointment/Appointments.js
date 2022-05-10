@@ -18,13 +18,14 @@ const Appointments = () => {
   const [cookie] = useCookies();
   const [loader, setLoader] = useState(false);
   const { setViewModal, setViewData } = useContext(createGlobalContext);
-  const { email } = cookie.user_data || {};
+  const { email, user_role } = cookie.user_data || {};
 
-  
+
   const getHospital = async () => {
     setLoader(true);
+    let url = user_role.includes('admin') ? '/appointment' : `/appointment/user?user_id=${email}`;
     try {
-      let result = await getData(`/appointment/user?user_id=${email}`, 'GET');
+      let result = await getData(url, 'GET');
       let { message } = result.data;
       if (message) {
         setData(message);
@@ -45,7 +46,9 @@ const Appointments = () => {
     <ViewData />
     <article>
       <h4>Appointments</h4>
-      <Link to="/dashboard/book"><button className='btn--add btn'>Book <BiPlusMedical /> </button></Link>
+      {user_role && user_role.includes('patient')
+        ? <Link to="/dashboard/book"><button className='btn--add btn'>Book <BiPlusMedical /> </button></Link>
+        : null}
     </article>
     {
       !data.length > 0
@@ -81,11 +84,22 @@ const Appointments = () => {
                       Pending
                     </span></td>
                     <td>
-                      <Link to="/dashboard/book_edit" onClick={() => setViewData(items)}>
-                        <button className='btn btn-info' type='button'>
-                          <span><RiEdit2Fill size={18} color="#fff" /></span>
-                        </button>
-                      </Link>
+                      {
+                        user_role && user_role.includes('admin')
+                          ? <>
+                            <button className='approve--appoint btn' type='button'>
+                              <span>Approve</span>
+                            </button> &nbsp;
+                            <button className='reject--appoint btn' type='button'>
+                              <span>Reject</span>
+                            </button>
+                          </>
+                          : <Link to="/dashboard/book_edit" onClick={() => setViewData(items)}>
+                            <button className='btn btn-info' type='button'>
+                              <span><RiEdit2Fill size={18} color="#fff" /></span>
+                            </button>
+                          </Link>
+                      }
                     </td>
                   </tr>
                 })

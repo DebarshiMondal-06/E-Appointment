@@ -1,13 +1,13 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { HiOutlineArrowNarrowLeft } from 'react-icons/hi';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Inputs, TextBox } from '../../Components/Inputs/Input';
 import SelectBox from '../../Components/Inputs/SelectBox';
 import ProcessSpinner from '../../Components/Spinners/ProcessSpinner';
-import { district_data, health_category, state_data } from '../../Utils/data';
+import { health_category } from '../../Utils/data';
 import { useCookies } from 'react-cookie';
-import { sendData } from '../../Utils/API';
+import { getData, sendData } from '../../Utils/API';
 import { toast } from 'react-toastify';
 import { exception_handler } from '../../Utils/Exception';
 import random from 'randomstring';
@@ -23,17 +23,18 @@ const Book = () => {
   const { appoint_id, concern, description, contact, user_id } = viewData || {};
   const [loader, setLoader] = useState(false);
   const { email } = cookie.user_data || {};
+  const [banner, setBanner] = useState(false);
+
 
   let getState = watch('given_state');
   if (!getState) setValue('district', null);
 
   const submit_data = (data) => {
+    if (banner) return toast.info('Profile not updated!');
     setLoader(true);
-    const { district, contact, description } = data;
+    const { contact, description } = data;
     if (!pathname.includes('edit')) {
       data.appoint_id = `eapp-${random.generate({ length: 8, capitalization: "lowercase" })}`;
-      let { pincode } = district_data.find((items) => items.district === district);
-      data.pincode = pincode;
       data.user_id = email;
       data.status = 'pending';
     };
@@ -52,6 +53,16 @@ const Book = () => {
     })
   };
 
+  useEffect(() => {
+    if (email) {
+      getData(`/users/profile?id=${email}`).then((res) => {
+        let { message: { Item } } = res.data;
+        if (Item.hasOwnProperty("pincode")) setBanner(false);
+        else setBanner(true);
+      })
+    }
+  }, [email]);
+
 
   return <div>
     <h4><Link to="/dashboard/appointments"><HiOutlineArrowNarrowLeft className="back--icon" /></Link>  &nbsp;
@@ -60,6 +71,11 @@ const Book = () => {
     <main className='add--doctor--section'>
       <form className="doctors--add--form card shadow-sm" onSubmit={handleSubmit(submit_data)}>
         {
+          banner ? <div className="alert alert-warning" role="alert">
+            Seems <b>profile not updated,</b> please update your address in order to book appointment.
+          </div> : null
+        }
+        {
           pathname !== '/dashboard/book_edit' ? <section className='row'>
             {<Inputs isreadable={false} errors={errors} register={register} name1={'Concern'} register1={'concern'} />}
             {<SelectBox errors={errors} register={register} name1={'Category'} register1={'category'}
@@ -67,14 +83,6 @@ const Book = () => {
           </section> : <section className='appoint--edit--details mb-3 mt-3'>
             <p><b>Concern</b> - {concern} - <span className='badge bg-info'>#{appoint_id}</span></p>
           </section>
-        }
-        {
-          pathname !== '/dashboard/book_edit' ? <section className="row">
-            {<SelectBox errors={errors} register={register} name1={'State'} register1={'given_state'}
-              data={[state_data, 'state']} />}
-            {<SelectBox errors={errors} register={register} name1={'District'} register1={'district'}
-              data={[district_data, 'district']} message={!getState ? 'Choose State First' : null} />}
-          </section> : null
         }
 
         <section className='row'>

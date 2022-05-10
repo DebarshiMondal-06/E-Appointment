@@ -16,7 +16,7 @@ export const adminOption = [
     sub_list: [
       { name: "Hospitals", route: "/dashboard/hospital" },
       { name: "Payments", route: "/payment" },
-      { name: "Appointments", route: "/appointment" }
+      { name: "Appointments", route: "/dashboard/appointments" }
     ]
   },
   {

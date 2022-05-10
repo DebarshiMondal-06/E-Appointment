@@ -192,9 +192,11 @@
   text-transform: capitalize;
 }
 
-
-
-
+.appoint--veiwuser{
+  font-size: large;
+  font-weight: bold;
+  color: #00bfa6;
+}
 
 .delete--section{
   position: absolute;
