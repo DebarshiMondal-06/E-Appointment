@@ -58,7 +58,11 @@ export const doctorOption = [
     header: "CMS", icon: <MdPolicy />
   },
   {
-    header: "Settings", icon: <MdAdminPanelSettings />
+    header: "Settings", icon: <MdAdminPanelSettings />,
+    sub_list: [
+      { name: "Feedback", route: "/dashboard/feedback" },
+      { name: "Advance Setting", route: "/dashboard/advance" },
+    ]
   },
   {
     header: "Logout", icon: <RiLogoutBoxFill />
@@ -83,7 +87,11 @@ export const patientOption = [
     header: "CMS", icon: <MdPolicy />
   },
   {
-    header: "Settings", icon: <MdAdminPanelSettings />
+    header: "Settings", icon: <MdAdminPanelSettings />,
+    sub_list: [
+      { name: "Feedback", route: "/dashboard/feedback" },
+      { name: "Advance Setting", route: "/dashboard/advance" },
+    ]
   },
   {
     header: "Logout", icon: <RiLogoutBoxFill />

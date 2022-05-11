@@ -11,6 +11,8 @@ import Hospital from './Hospitals/Hospital';
 import AddHospital from './Hospitals/AddHospital';
 import Book from './Appointment/Book';
 import Appointments from './Appointment/Appointments';
+import Advance from './Settings/Advance';
+import Feedback from './Settings/Feedback';
 
 
 
@@ -28,6 +30,8 @@ const Paths = () => {
   if (pathname === '/dashboard/appointments') return <Appointments />
   if (pathname === '/dashboard/book') return <Book />
   if (pathname === '/dashboard/book_edit') return <Book />
+  if (pathname === '/dashboard/feedback') return <Feedback />
+  if (pathname === '/dashboard/advance') return <Advance />
 
 
   return <DashboardCard />
