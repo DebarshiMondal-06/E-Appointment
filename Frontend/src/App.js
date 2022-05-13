@@ -7,7 +7,7 @@ import Error from "./Pages/Error";
 import "./index.css";
 import { useContext } from "react";
 import { createGlobalContext } from "./Utils/GlobalContext";
-import Footer from './Components/Footer';
+import Footer from './Components/Footer/Footer';
 import Services from "./Pages/Public/Services";
 import Contact from "./Pages/Public/Contact";
 import About from "./Pages/Public/About";
@@ -16,6 +16,7 @@ import Home from "./Pages/Public/Home";
 
 const App = () => {
   const { loader } = useContext(createGlobalContext);
+
   return <>
     <Routes>
       {/* Auth routes... */}
@@ -28,7 +29,7 @@ const App = () => {
       <Route element={<ProtectAuth><Dashboard /></ProtectAuth>} path="/dashboard/appointments" />
       <Route element={<ProtectAuth><Dashboard /></ProtectAuth>} path="/dashboard/feedback" />
       <Route element={<ProtectAuth><Dashboard /></ProtectAuth>} path="/dashboard/advance" />
-      
+
 
       {/* Admin routes... */}
       <Route element={<ProtectAdmin><Dashboard /></ProtectAdmin>} path="/dashboard/doctors" />

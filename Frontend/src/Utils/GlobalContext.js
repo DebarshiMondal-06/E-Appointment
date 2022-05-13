@@ -1,4 +1,5 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { getData } from './API';
 import { exception_handler } from './Exception';
@@ -7,6 +8,7 @@ import { exception_handler } from './Exception';
 const createGlobalContext = createContext();
 
 const GlobalContext = ({ children }) => {
+  const { pathname } = useLocation();
   const [openSidebar, setOpenSidebar] = useState(false);
   const [closeSidebar, setCloseSidebar] = useState(false);
   const [loader, setLoader] = useState(false);
@@ -51,6 +53,11 @@ const GlobalContext = ({ children }) => {
       toast.error(exception_handler(err));
     }
   };
+
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
 
 

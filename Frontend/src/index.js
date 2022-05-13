@@ -10,13 +10,13 @@ import { AuthContext } from "./Auth/AuthContext";
 
 
 ReactDOM.render(
-  <GlobalContext>
-    <AuthContext>
-      <Router>
+  <Router>
+    <GlobalContext>
+      <AuthContext>
         <ToastContainer autoClose="2500" position="bottom-right" />
         <App />
-      </Router>
-    </AuthContext>
-  </GlobalContext>,
+      </AuthContext>
+    </GlobalContext>
+  </Router>,
   document.getElementById("root")
 );
