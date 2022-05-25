@@ -182,7 +182,7 @@
   font-size: 12px;
   border: 1.8px solid #00bfa6;
   width: fit-content;
-  padding: 1px 8px;
+  padding: 0px 8px;
 }
 .doctors .table--body .approve--appoint:hover{
   background-color: #00bfa6;
@@ -192,7 +192,7 @@
   font-size: 12px;
   border: 1.8px solid #e05656;
   width: fit-content;
-  padding: 1px 8px;
+  padding: 0px 10px;
 }
 .doctors .table--body .reject--appoint:hover{
   background-color: #e05656;
@@ -557,6 +557,9 @@
   margin-bottom: 0%;
   background: #00bfa6!important;
   border: none;
+}
+.assign--btn:focus{
+  box-shadow: none;
 }
 
 

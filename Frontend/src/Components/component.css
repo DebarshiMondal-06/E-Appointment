@@ -51,13 +51,18 @@
   background: tomato;
   color: white;
 }
+.nav--text{
+  transition: 0.3s all ease-in-out;
+}
+.nav--text:hover{
+  color: #03af98!important;
+  transform: translateY(-3px);
+  letter-spacing: 1px;
+}
 .dashboard--icon{
-  color: #000;
   margin-top: -2px;
 }
-.dashboard--icon:hover{
-  color: #00bfa6;
-}
+
 
 @media only screen and (max-width: 990px) {
   .nav--items {
@@ -104,6 +109,7 @@
   z-index: 4;
   border-top-right-radius: 8px;
   bottom: 0%;
+  overflow-y: auto;
 } 
 @media only screen and (max-width: 1190px) {
   .sidebar{
@@ -218,7 +224,7 @@
 
 .footer--section{
   margin-bottom: 0px;
-  background-color: #00bfa6;
+  background-color: #07a38e;
   border-radius: 0%;
   display: flex;
 }
@@ -272,6 +278,8 @@
 }
 .footer--section .contact--section{
   margin-top: 5%;
+  display: flex;
+  justify-content: flex-end;
 }
 .contact--btn{
   margin-top: -10px;

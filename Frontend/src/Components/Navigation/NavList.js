@@ -55,7 +55,6 @@ const NavList = () => {
         : <>
           <li className="nav-item">
             <NavLink onClick={Home} className="nav--text nav-link" to="/"> Home </NavLink>
-            {/* <NavLink onClick={Home} className='menu_active' className="nav--text nav-link" to="/"> Home </NavLink> */}
           </li>
           <li className="nav-item">
             <NavLink onClick={AboutMe} className="nav--text nav-link" to="/about"> About </NavLink>

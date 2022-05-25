@@ -49,7 +49,7 @@ export const doctorOption = [
   {
     header: "Management", icon: <FaUsers />,
     sub_list: [
-      { name: "Appointments", route: "/appointment" },
+      { name: "Appointments", route: "/dashboard/appointments" },
       { name: "Patients", route: "/dashboard/patients" },
       { name: "Payments", route: "/payment" }
     ]
