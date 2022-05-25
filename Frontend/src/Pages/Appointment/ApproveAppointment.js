@@ -103,7 +103,7 @@ const ApproveAppoint = ({ modalAssign, setModalAssign, reloadData }) => {
           </article>
 
           {(!loader && !hospital.length > 0) ? <h5 className='mb-3 p-2 badge bg-info'>No Hospital Data Found!</h5> : null}
-          {(hospital.length > 0 && !doctor.length > 0) ? <h5 className='mb-3 p-2 badge bg-info'>No Doctors Found!</h5> : null}
+          {(get_hospital_id && !doctor.length > 0) ? <h5 className='mb-3 p-2 badge bg-info'>No Doctors Found!</h5> : null}
 
           <section className='row'>
             {<SelectBox errors={errors} register={register} name1={'Hospital'} register1={'hospital_assign'}

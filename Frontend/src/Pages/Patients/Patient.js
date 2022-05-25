@@ -34,7 +34,7 @@ const Patient = () => {
 
   if (loader) return <MainLoader />
   return <div className='doctors text-center'>
-    <ViewData />
+    <ViewData reloadData={get_patients} />
     <article>
       <h4>Patient</h4>
     </article>

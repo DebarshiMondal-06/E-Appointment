@@ -13,6 +13,7 @@ import { useCookies } from 'react-cookie';
 import ApproveReject from './Approve_Reject';
 import ApproveAppoint from './ApproveAppointment';
 import UserOperation from './UserOperation';
+import { FaUserCheck } from 'react-icons/fa';
 
 
 const Appointments = () => {
@@ -26,7 +27,9 @@ const Appointments = () => {
 
   const getAppointment = async () => {
     setLoader(true);
-    let url = user_role.includes('admin') ? '/appointment' : `/appointment/user?user_id=${email}`;
+    let url = user_role.includes('admin') ? '/appointment' : user_role.includes('doctor')
+      ? `/appointment/doctor?doctor_id=${email}`
+      : `/appointment/user?user_id=${email}`;
     try {
       let result = await getData(url, 'GET');
       let { message } = result.data;
@@ -100,12 +103,16 @@ const Appointments = () => {
                                 items={items}
                                 reloadData={getAppointment}
                               />
-                          : <UserOperation
-                            items={items}
-                            loader={loader}
-                            setLoader={setLoader}
-                            reloadData={getAppointment}
-                          />
+                          : user_role && user_role.includes('doctor')
+                            ? <button className='btn btn-success' type='button'>
+                              <span><FaUserCheck size={18} color="#fff" /></span>
+                            </button>
+                            : <UserOperation
+                              items={items}
+                              loader={loader}
+                              setLoader={setLoader}
+                              reloadData={getAppointment}
+                            />
                       }
                     </td>
                   </tr>

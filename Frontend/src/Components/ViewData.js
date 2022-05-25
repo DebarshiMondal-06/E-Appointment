@@ -13,11 +13,13 @@ const ViewData = ({ reloadData }) => {
   const { user_role } = cookie.user_data || {}
   const { viewModal, setViewModal, viewData, get_hospital_assign, deleteLoader, deleteItem, setViewData } = useContext(createGlobalContext);
   const { speciality, contact, district, address, pincode, emailid, hospitalId, dob, phone, given_state, hospitalassign,
-    appoint_id, concern, description, status, category, user_id } = viewData;
+    doctor_assign, appoint_id, concern, description, status, category, user_id } = viewData;
   const [hospitaldata, setHospitalData] = useState([]);
   const [userdata, setUserData] = useState([]);
+  const [doctorData, setDoctorData] = useState([]);
   const { pathname } = useLocation();
   const [assignLoader, setAssignLoader] = useState(false);
+  const [assignDoctorLoader, setAssignDoctorLoader] = useState(false);
 
 
   let handleClose = () => {
@@ -48,6 +50,17 @@ const ViewData = ({ reloadData }) => {
       })
     }
   }, [user_id]);
+
+  useEffect(() => {
+    if (pathname.includes('appointments') && doctor_assign) {
+      setAssignDoctorLoader(true);
+      getData(`/users/profile?id=${doctor_assign}`).then((res) => {
+        let { message: { Item } } = res.data;
+        if (Item) setDoctorData(Item);
+        setAssignDoctorLoader(false);
+      })
+    }
+  }, [doctor_assign]);
 
 
   return <Modal show={viewModal} size="lg" className='view--modal' onHide={handleClose} backdrop="static"
@@ -110,7 +123,18 @@ const ViewData = ({ reloadData }) => {
               <p>Age: <span>{moment().year() - moment(userdata.dob).year()}+</span></p>
             </article> : null
       }
-      <br />
+      {(pathname.includes('appointments') && doctor_assign) ? <p className='appoint--veiwuser'>Doctor Details: </p> : null}
+      {
+        (pathname.includes('appointments') && doctor_assign)
+          ? assignDoctorLoader
+            ? <ProcessSpinner color={'#00bfa6'} size={30} />
+            :
+            <article>
+              <p>Name: <span> {doctorData.fullname}</span></p>
+              <p>Email: <span> {doctorData.emailid}</span></p>
+            </article> : null
+      }
+      < br />
     </Modal.Body>
     <Modal.Footer>
       <Button className='close--btn' variant="dark" onClick={handleClose}>
