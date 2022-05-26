@@ -94,7 +94,7 @@ const Appointments = () => {
                       {
                         user_role && user_role.includes('admin')
                           ? appoint_status === 'active'
-                            ? <span className='text-dark badge border border-info'>Approved</span>
+                            ? <span className='text-dark badge border border-primary'>Approved</span>
                             : appoint_status === 'reject'
                               ? <span className='text-dark badge border border-danger'>Rejected</span>
                               : <ApproveReject

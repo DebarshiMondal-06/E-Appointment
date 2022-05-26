@@ -10,10 +10,10 @@ const Approve_Reject = ({ setModalAssign, setViewData, items, reloadData }) => {
 
   const reject_appoint = (appoint_id, user_id) => {
     let data = {}
-    data.doctor_assign = null;
+    data.doctor_assign = "null";
     data.user_id = user_id;
     data.appoint_id = appoint_id;
-    data.hospital_assign = null;
+    data.hospital_assign = "null";
     data.appoint_status = 'reject';
     sendData('/appointment/approve', 'PUT', data).then(() => {
       reloadData();

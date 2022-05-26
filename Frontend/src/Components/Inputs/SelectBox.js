@@ -7,12 +7,12 @@ const SelectBox = ({ col, errors, register, name1, register1, pattern1, message1
   return <div className={`select--box--div col-md-${col ? col : '6'} mb-4`}>
     <label className="form-label">{name1}</label>
     <i className="fas fa-sort-down"></i>
-    <select defaultValue={value} className={`select--boxes form-control`} {...register(register1, { required: true, pattern: pattern1 ? pattern1 : null })}>
-      <option value="">{message ? message : 'Choose'}</option>
+    <select defaultValue={value} className={`select--boxes form-control ${className}`} {...register(register1, { required: true, pattern: pattern1 ? pattern1 : null })}>
+      <option style={{ textTransform: "uppercase!important" }} value="">{message ? message : 'Choose'}</option>
       {
         message ? null : data && data[0].map((items, i) => {
           let val = items[data[1]];
-          return <option className={`${className}`} key={i} value={val}>{val}</option>
+          return <option key={i} value={val}>{val}</option>
         })
       }
     </select>
