@@ -198,7 +198,18 @@
   background-color: #e05656;
   color: #fff;
 }
-
+.doctor--patient{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  background-color: whitesmoke;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 0%;
+}
+.doctor--patient b{
+  font-size: large;
+}
 .doctors .no--data{
   display: flex;
   margin-top: 5%;

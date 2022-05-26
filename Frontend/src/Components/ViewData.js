@@ -118,7 +118,7 @@ const ViewData = ({ reloadData }) => {
             :
             <article>
               <p>Name: <span> {userdata.fullname}</span></p>
-              <p>Email: <span> {userdata.emailid}</span></p>
+              <p>Email: <span className='emailid'> {userdata.emailid}</span></p>
               <p>DOB: <span> {userdata.dob}</span></p>
               <p>Age: <span>{moment().year() - moment(userdata.dob).year()}+</span></p>
             </article> : null
@@ -131,7 +131,7 @@ const ViewData = ({ reloadData }) => {
             :
             <article>
               <p>Name: <span> {doctorData.fullname}</span></p>
-              <p>Email: <span> {doctorData.emailid}</span></p>
+              <p>Email: <span className='emailid'> {doctorData.emailid}</span></p>
             </article> : null
       }
       < br />

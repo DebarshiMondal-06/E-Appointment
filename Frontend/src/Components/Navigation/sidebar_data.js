@@ -50,7 +50,7 @@ export const doctorOption = [
     header: "Management", icon: <FaUsers />,
     sub_list: [
       { name: "Appointments", route: "/dashboard/appointments" },
-      { name: "Patients", route: "/dashboard/patients" },
+      { name: "Patients", route: "/dashboard/patients_appointed" },
       { name: "Payments", route: "/payment" }
     ]
   },

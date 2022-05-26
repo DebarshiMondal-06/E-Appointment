@@ -13,6 +13,7 @@ import Book from './Appointment/Book';
 import Appointments from './Appointment/Appointments';
 import Advance from './Settings/Advance';
 import Feedback from './Settings/Feedback';
+import DoctorPatient from './Patients/DoctorPatient';
 
 
 
@@ -22,6 +23,8 @@ const Paths = () => {
   if (pathname === '/dashboard/doctors') return <Doctor />
   if (pathname === '/dashboard/doctors_add') return <AddDoctor />
   if (pathname === '/dashboard/patients') return <Patient />
+  if (pathname === '/dashboard/patients_appointed') return <DoctorPatient />
+
   if (pathname === '/dashboard/pending') return <PendingUser />
   if (pathname === '/dashboard/profile') return <Profile />
   if (pathname === '/dashboard/hospital') return <Hospital />

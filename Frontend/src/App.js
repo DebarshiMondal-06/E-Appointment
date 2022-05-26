@@ -2,7 +2,7 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Auth from "./Auth/Auth";
 import Dashboard from "./Pages/Dashboard";
-import { SignInAuth, ProtectAuth, ProtectAdminDoctor, ProtectAdmin } from "./Utils/ProtectedRoutes";
+import { SignInAuth, ProtectAuth, ProtectAdminDoctor, ProtectAdmin, ProtectDoctor } from "./Utils/ProtectedRoutes";
 import Error from "./Pages/Error";
 import "./index.css";
 import { useContext } from "react";
@@ -35,14 +35,18 @@ const App = () => {
       <Route element={<ProtectAdmin><Dashboard /></ProtectAdmin>} path="/dashboard/doctors" />
       <Route element={<ProtectAdmin><Dashboard /></ProtectAdmin>} path="/dashboard/doctors_add" />
       <Route element={<ProtectAdmin><Dashboard /></ProtectAdmin>} path="/dashboard/doctors_edit" />
+      <Route element={<ProtectAdmin><Dashboard /></ProtectAdmin>} path="/dashboard/patients" />
+      <Route element={<ProtectAdmin><Dashboard /></ProtectAdmin>} path="/dashboard/patients_add" />
+
 
       {/* AdminDoctor routes... */}
       <Route element={<ProtectAdminDoctor><Dashboard /></ProtectAdminDoctor>} path="/dashboard/hospital" />
       <Route element={<ProtectAdminDoctor><Dashboard /></ProtectAdminDoctor>} path="/dashboard/hospital_add" />
       <Route element={<ProtectAdminDoctor><Dashboard /></ProtectAdminDoctor>} path="/dashboard/hospital_edit" />
-      <Route element={<ProtectAdminDoctor><Dashboard /></ProtectAdminDoctor>} path="/dashboard/patients" />
-      <Route element={<ProtectAdminDoctor><Dashboard /></ProtectAdminDoctor>} path="/dashboard/patients_add" />
       <Route element={<ProtectAdminDoctor><Dashboard /></ProtectAdminDoctor>} path="/dashboard/pending" />
+
+      {/* Doctor routes... */}
+      <Route element={<ProtectDoctor><Dashboard /></ProtectDoctor>} path="/dashboard/patients_appointed" />
 
 
       {/* Public routes... */}

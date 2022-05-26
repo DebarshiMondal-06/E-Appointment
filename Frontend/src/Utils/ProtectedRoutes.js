@@ -28,10 +28,18 @@ export function ProtectAdminDoctor({ children }) {
     : <Navigate to="/dashboard" />;
 };
 
-export function ProtectPatient({ children }) {
+export function ProtectDoctor({ children }) {
   const [cookie] = useCookies();
   const { user_role } = cookie.user_data || {};
-  return user_role && user_role === 'patient'
+  return user_role && user_role === 'doctor'
     ? children
     : <Navigate to="/dashboard" />;
 };
+
+// export function ProtectPatient({ children }) {
+//   const [cookie] = useCookies();
+//   const { user_role } = cookie.user_data || {};
+//   return user_role && user_role === 'patient'
+//     ? children
+//     : <Navigate to="/dashboard" />;
+// };
