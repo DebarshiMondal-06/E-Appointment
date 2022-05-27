@@ -23,6 +23,7 @@ const Appointments = () => {
   const { setViewModal, setViewData } = useContext(createGlobalContext);
   const [modalAssign, setModalAssign] = useState(false);
   const { email, user_role } = cookie.user_data || {};
+  const { jwtToken } = cookie.token || {};
 
 
   const getAppointment = async () => {
@@ -31,14 +32,14 @@ const Appointments = () => {
       ? `/appointment/doctor?doctor_id=${email}`
       : `/appointment/user?user_id=${email}`;
     try {
-      let result = await getData(url, 'GET');
+      let result = await getData(url, 'GET', jwtToken);
       let { message } = result.data;
       if (message) {
         setData(message);
         setLoader(false);
       }
-    } catch (err) {
-      toast.error(exception_handler(err));
+    } catch (error) {
+      toast.error(exception_handler(error));
     }
   };
 

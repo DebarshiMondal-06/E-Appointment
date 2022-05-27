@@ -20,13 +20,14 @@ const DoctorPatient = () => {
   const { pageLoader, btnLoader } = loader;
   const [cookie] = useCookies();
   const { email } = cookie.user_data || {};
+  const { jwtToken } = cookie.token || {};
   const [appointment, setAppointment] = useState([]);
 
 
   const getAppointment = async () => {
     setLoader({ ...loader, pageLoader: true });
     try {
-      let result = await getData(`/appointment/doctor?doctor_id=${email}`, 'GET');
+      let result = await getData(`/appointment/doctor?doctor_id=${email}`, 'GET', jwtToken);
       let { message } = result.data;
       if (message) {
         setAppointment(message);
@@ -44,11 +45,11 @@ const DoctorPatient = () => {
 
   const get_user = (user_id) => {
     setLoader({ ...loader, btnLoader: true });
-    getData(`/users/profile?id=${user_id}`).then((res) => {
+    getData(`/users/profile?id=${user_id}`, 'GET', jwtToken).then((res) => {
       let { message: { Item } } = res.data;
       if (Item) setUserDetails(Item);
       setLoader({ ...loader, btnLoader: false });
-    })
+    }).catch((err) => toast.error(exception_handler(err)))
   };
 
 
@@ -67,6 +68,7 @@ const DoctorPatient = () => {
         <section className="row">
           {<SelectBox className={'text-lowercase'} errors={errors} register={register} name1={'User (Patient)'} register1={'user'}
             data={[appointment, 'user_id']} />}
+
           <div className="col-md-12" style={{ marginTop: -20 }}>
             <button className='btn btn-info text-white'>{btnLoader
               ? <ProcessSpinner padding={'2px 20px'} size={'20px'} />

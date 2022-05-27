@@ -81,12 +81,13 @@ const AuthContext = ({ children }) => {
                 Username: email,
             });
             user.authenticateUser(authDetails, {
-                onSuccess: async () => {
-                    // let { email, name, phone_number, } = res.idToken.payload;
+                onSuccess: async (res) => {
+                    console.log(res);
+                    let { jwtToken } = res.idToken;
                     try {
                         let { data: { isAdminApprove, user_role, fullname } } = await getData(`/get_admin_approve?id=${email}`, 'GET');
                         if (!isAdminApprove && user_role !== 'admin') return reject({ code: "isAdminApprove" });
-                        resolve({ email, fullname, user_role });
+                        resolve({ email, fullname, user_role, jwtToken });
                     }
                     catch (err) { reject(err) };
                 },

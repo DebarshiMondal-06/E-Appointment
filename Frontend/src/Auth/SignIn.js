@@ -27,9 +27,10 @@ const SignIn = () => {
   const authenicate = (data) => {
     setLoader(true);
     sign_in(data.email, data.password).then((result) => {
-      let { fullname, user_role, email } = result;
+      let { fullname, user_role, email, jwtToken } = result;
       setLoader(false);
       setCookie('user_data', JSON.stringify({ email, fullname, user_role }), { path: '/' });
+      setCookie('token', JSON.stringify({ jwtToken }), { path: '/' });
       navigate('/dashboard');
     }).catch((err) => {
       if (err.code === 'UserNotConfirmedException') setNeedVerify(true);

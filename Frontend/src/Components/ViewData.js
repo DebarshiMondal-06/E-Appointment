@@ -4,6 +4,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import { useCookies } from 'react-cookie';
 import { useLocation } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { getData } from '../Utils/API';
 import { createGlobalContext } from '../Utils/GlobalContext';
 import ProcessSpinner from './Spinners/ProcessSpinner';
@@ -11,6 +12,7 @@ import ProcessSpinner from './Spinners/ProcessSpinner';
 const ViewData = ({ reloadData }) => {
   const [cookie] = useCookies();
   const { user_role } = cookie.user_data || {}
+  const { jwtToken } = cookie.token || {}
   const { viewModal, setViewModal, viewData, get_hospital_assign, deleteLoader, deleteItem, setViewData } = useContext(createGlobalContext);
   const { speciality, contact, district, address, pincode, emailid, hospitalId, dob, phone, given_state, hospitalassign,
     doctor_assign, appoint_id, concern, description, status, category, user_id } = viewData;
@@ -43,18 +45,18 @@ const ViewData = ({ reloadData }) => {
   useEffect(() => {
     if (pathname.includes('appointments') && user_id) {
       setAssignLoader(true);
-      getData(`/users/profile?id=${user_id}`).then((res) => {
+      getData(`/users/profile?id=${user_id}`, 'GET', jwtToken).then((res) => {
         let { message: { Item } } = res.data;
         if (Item) setUserData(Item);
         setAssignLoader(false);
-      })
+      }).catch(() => toast.error('Something went wrong!'))
     }
   }, [user_id]);
 
   useEffect(() => {
     if (pathname.includes('appointments') && doctor_assign) {
       setAssignDoctorLoader(true);
-      getData(`/users/profile?id=${doctor_assign}`).then((res) => {
+      getData(`/users/profile?id=${doctor_assign}`, 'GET', jwtToken).then((res) => {
         let { message: { Item } } = res.data;
         if (Item) setDoctorData(Item);
         setAssignDoctorLoader(false);
