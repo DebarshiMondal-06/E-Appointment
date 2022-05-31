@@ -7,11 +7,14 @@ import { getData } from '../../Utils/API';
 import MainLoader from '../../Components/Spinners/MainLoader';
 import { createGlobalContext } from '../../Utils/GlobalContext';
 import EditProfile from './EditProfile';
+import { toast } from 'react-toastify';
+import { exception_handler } from '../../Utils/Exception';
 
 const Profile = () => {
   const { setViewModal, setViewData, loader, setLoader, get_hospital_assign } = useContext(createGlobalContext)
   const [cookie] = useCookies();
   let { user_role, email } = cookie.user_data || {};
+  const { jwtToken } = cookie.token || {};
   const [data, setData] = useState({});
   const [hospitaldata, setHospitalData] = useState({})
 
@@ -20,11 +23,11 @@ const Profile = () => {
   let fetchData = async () => {
     setLoader(true);
     if (cookie.user_data) {
-      await getData(`/users/profile?id=${cookie.user_data.email}`, 'GET').then((res) => {
+      await getData(`/users/profile?id=${email}`, 'GET', jwtToken).then((res) => {
         setLoader(false)
         let { message: { Item } } = res.data;
         if (Item) setData(Item);
-      });
+      }).catch((err) => toast.error(exception_handler(err)));
     };
   };
   useEffect(() => {
