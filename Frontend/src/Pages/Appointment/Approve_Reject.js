@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useCookies } from 'react-cookie';
 import { toast } from 'react-toastify';
 import Swal from 'sweetalert2';
 import ProcessSpinner from '../../Components/Spinners/ProcessSpinner';
@@ -7,7 +8,10 @@ import { sendData } from '../../Utils/API';
 
 const Approve_Reject = ({ setModalAssign, setViewData, items, reloadData }) => {
   const [loader, setLoader] = useState(false);
+  const [cookie] = useCookies();
+  const { jwtToken } = cookie.token;
 
+  
   const reject_appoint = (appoint_id, user_id) => {
     let data = {}
     data.doctor_assign = "null";
@@ -15,7 +19,7 @@ const Approve_Reject = ({ setModalAssign, setViewData, items, reloadData }) => {
     data.appoint_id = appoint_id;
     data.hospital_assign = "null";
     data.appoint_status = 'reject';
-    sendData('/appointment/approve', 'PUT', data).then(() => {
+    sendData('/appointment/approve', 'PUT', data, jwtToken).then(() => {
       reloadData();
       toast.success('Successfully Updated!');
     }).catch(() => {

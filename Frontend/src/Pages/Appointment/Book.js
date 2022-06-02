@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { HiOutlineArrowNarrowLeft } from 'react-icons/hi';
@@ -23,6 +24,7 @@ const Book = () => {
   const { appoint_id, concern, description, contact, user_id } = viewData || {};
   const [loader, setLoader] = useState(false);
   const { email } = cookie.user_data || {};
+  const { jwtToken } = cookie.token || {};
   const [banner, setBanner] = useState(false);
 
 
@@ -39,8 +41,8 @@ const Book = () => {
       data.status = 'pending';
     };
     let operation = pathname.includes('edit')
-      ? sendData('/appointment/edit', 'PUT', { description, contact, appoint_id, user_id })
-      : sendData('/appointment/add', 'POST', data)
+      ? sendData('/appointment/edit', 'PUT', { description, contact, appoint_id, user_id }, jwtToken)
+      : sendData('/appointment/add', 'POST', data, jwtToken)
     operation.then(() => {
       toast.success('Data Uploaded Successfully!');
       setLoader(false);
@@ -55,7 +57,7 @@ const Book = () => {
 
   useEffect(() => {
     if (email) {
-      getData(`/users/profile?id=${email}`).then((res) => {
+      getData(`/users/profile?id=${email}`, 'GET', jwtToken).then((res) => {
         let { message: { Item } } = res.data;
         if (Item.hasOwnProperty("pincode")) setBanner(false);
         else setBanner(true);

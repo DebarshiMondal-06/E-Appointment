@@ -7,6 +7,7 @@ import SelectBox from '../../Components/Inputs/SelectBox';
 import { getData, sendData } from '../../Utils/API';
 import { createGlobalContext } from '../../Utils/GlobalContext';
 import ProcessSpinner from '../../Components/Spinners/ProcessSpinner';
+import { useCookies } from 'react-cookie';
 
 const ApproveAppoint = ({ modalAssign, setModalAssign, reloadData }) => {
   const { viewData, setViewData } = useContext(createGlobalContext);
@@ -15,6 +16,7 @@ const ApproveAppoint = ({ modalAssign, setModalAssign, reloadData }) => {
   const [doctor, setDoctors] = useState([]);
   const [pincode, setPincode] = useState('');
   const [loader, setLoader] = useState(false);
+  const [cookie] = useCookies();
   let handleClose = () => {
     setViewData({});
     setModalAssign(false);
@@ -22,13 +24,14 @@ const ApproveAppoint = ({ modalAssign, setModalAssign, reloadData }) => {
     setValue('hospital_assign', null);
   };
   const get_hospital_id = watch('hospital_assign');
+  const { jwtToken } = cookie.token;
 
 
   const get_possible_hospital = async (pincode) => {
     try {
       setValue('doctor_assign', null);
       setLoader(true);
-      const result = await getData(`/hospital/pincode?pincode=${pincode}`);
+      const result = await getData(`/hospital/pincode?pincode=${pincode}`, 'GET', jwtToken);
       let { message: { Items } } = result.data || {};
       if (Items) {
         setLoader(false);
@@ -42,7 +45,7 @@ const ApproveAppoint = ({ modalAssign, setModalAssign, reloadData }) => {
 
   const get_doctors_to_hospital = (id) => {
     setLoader(true);
-    getData(`/hospital/doctors?hospitalId=${id}`, 'GET').then((res) => {
+    getData(`/hospital/doctors?hospitalId=${id}`, 'GET', jwtToken).then((res) => {
       setLoader(false);
       let { message } = res.data;
       if (message && message.length > 0) setDoctors(message);
@@ -55,7 +58,7 @@ const ApproveAppoint = ({ modalAssign, setModalAssign, reloadData }) => {
   useEffect(() => {
     if (viewData.user_id) {
       setLoader(true);
-      getData(`/users/profile?id=${viewData.user_id}`).then((res) => {
+      getData(`/users/profile?id=${viewData.user_id}`, 'GET', jwtToken).then((res) => {
         let { message: { Item } } = res.data;
         if (Item) setPincode(Item.pincode);
         setLoader(false);
@@ -75,7 +78,7 @@ const ApproveAppoint = ({ modalAssign, setModalAssign, reloadData }) => {
     data.user_id = viewData.user_id;
     data.appoint_id = viewData.appoint_id;
     data.appoint_status = 'active';
-    sendData('/appointment/approve', 'PUT', data).then(() => {
+    sendData('/appointment/approve', 'PUT', data, jwtToken).then(() => {
       reloadData();
       toast.success('Successfully Updated!');
       handleClose();

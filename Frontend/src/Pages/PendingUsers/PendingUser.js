@@ -8,15 +8,18 @@ import { toast } from 'react-toastify';
 import { exception_handler } from '../../Utils/Exception';
 import ApproveReject from './ApproveReject';
 import { createGlobalContext } from '../../Utils/GlobalContext';
+import { useCookies } from 'react-cookie';
 
 const PendingUser = () => {
   const [data, setData] = useState(false);
+  const [cookie] = useCookies();
+  const { jwtToken } = cookie.token || {};
   const { loader, setLoader } = useContext(createGlobalContext);
 
 
   let load_pending_data = async () => {
     setLoader(true);
-    await getData('/users', 'GET').then((res) => {
+    await getData('/users', 'GET', jwtToken).then((res) => {
       setLoader(false);
       let { message: { Items } } = res.data;
       if (Items) setData(Items);
