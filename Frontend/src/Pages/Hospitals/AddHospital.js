@@ -2,15 +2,16 @@ import React, { useContext, useState } from 'react';
 import { HiOutlineArrowNarrowLeft } from 'react-icons/hi'
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import {Inputs} from '../../Components/Inputs/Input';
+import { Inputs } from '../../Components/Inputs/Input';
 import SelectBox from '../../Components/Inputs/SelectBox';
 import { district_data, state_data, doctor_speacility } from '../../Utils/data';
 import ProcessSpinner from '../../Components/Spinners/ProcessSpinner';
 import { toast } from 'react-toastify';
 import { exception_handler } from '../../Utils/Exception';
-import { sendData } from '../../Utils/API';
+import { getData, sendData } from '../../Utils/API';
 import random from 'randomstring';
 import { createGlobalContext } from '../../Utils/GlobalContext';
+import { useCookies } from 'react-cookie';
 
 
 const AddHospital = () => {
@@ -18,17 +19,31 @@ const AddHospital = () => {
   const { viewData } = useContext(createGlobalContext);
   const { fullname, address, contact, hospitalId, speciality, district } = viewData || {};
   const [loader, setLoader] = useState(false);
+  const [checkHospital, setCheckHospital] = useState(false);
   const navigate = useNavigate();
   const { pathname } = useLocation();
+  const [cookie] = useCookies();
+  const { jwtToken } = cookie.token;
+
 
   let getState = watch('state');
   if (!getState) setValue('district', null);
 
 
-  const submit_data = (data) => {
+
+  const submit_data = async (data) => {
     setLoader(true);
     data.hospitalId = `E-${random.generate({ length: 7, capitalization: "uppercase" })}`;
     let { pincode } = district_data.find((items) => items.district === data.district || district);
+    if (pincode) {
+      const result = await getData(`/hospital/pincode?pincode=${pincode}`, 'GET', jwtToken);
+      let { message: { Items } } = result.data || {};
+      if (Items.length > 0) {
+        setCheckHospital(true);
+        setLoader(false);
+        return toast.info('Hospital data not added!');
+      }
+    }
     let { fullname, address, contact } = data;
     let operation = pathname.includes('edit')
       ? sendData('/hospital/edit', 'PUT', { fullname, address, contact, hospitalId, speciality })
@@ -76,6 +91,11 @@ const AddHospital = () => {
           <Link to="/dashboard/hospital"><button className='btn btn--cancel'>Cancel</button></Link>
           <button className='btn btn--add'> {loader ? <ProcessSpinner padding={'4px 20px'} /> : pathname.includes('edit') ? 'Update' : 'Add'}</button>
         </div>
+        {
+          (checkHospital) ? <div className="mt-4 alert alert-warning" role="alert">
+            <b className='text-secondary'> Seems a Hospital was already exists with same district. </b>
+          </div> : null
+        }
       </form>
     </main>
   </div>;

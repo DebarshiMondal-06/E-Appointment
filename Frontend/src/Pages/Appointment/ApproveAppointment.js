@@ -22,6 +22,8 @@ const ApproveAppoint = ({ modalAssign, setModalAssign, reloadData }) => {
     setModalAssign(false);
     setPincode('');
     setValue('hospital_assign', null);
+    setValue('doctor_assign', null);
+    setDoctors([]);
   };
   const get_hospital_id = watch('hospital_assign');
   const { jwtToken } = cookie.token;

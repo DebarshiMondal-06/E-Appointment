@@ -14,6 +14,7 @@ import ApproveReject from './Approve_Reject';
 import ApproveAppoint from './ApproveAppointment';
 import UserOperation from './UserOperation';
 import { FaUserCheck } from 'react-icons/fa';
+import DoctorOperation from './DoctorOperation';
 
 
 const Appointments = () => {
@@ -22,6 +23,7 @@ const Appointments = () => {
   const [loader, setLoader] = useState(false);
   const { setViewModal, setViewData } = useContext(createGlobalContext);
   const [modalAssign, setModalAssign] = useState(false);
+  const [doctorOperation, setDoctorOperation] = useState(false);
   const { email, user_role } = cookie.user_data || {};
   const { jwtToken } = cookie.token || {};
 
@@ -50,6 +52,10 @@ const Appointments = () => {
 
   if (loader) return <MainLoader />
   return <div className='doctors text-center'>
+    <DoctorOperation
+      doctorOperation={doctorOperation}
+      setDoctorOperation={setDoctorOperation}
+    />
     <ViewData />
     <ApproveAppoint modalAssign={modalAssign} setModalAssign={setModalAssign} reloadData={getAppointment} />
     <article>
@@ -105,7 +111,10 @@ const Appointments = () => {
                                 reloadData={getAppointment}
                               />
                           : user_role && user_role.includes('doctor')
-                            ? <button className='btn btn-success' type='button'>
+                            ? <button className='btn btn-success' type='button' onClick={() => {
+                              setDoctorOperation(true);
+                              setViewData(items);
+                            }}>
                               <span><FaUserCheck size={18} color="#fff" /></span>
                             </button>
                             : <UserOperation
