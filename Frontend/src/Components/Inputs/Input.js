@@ -14,10 +14,10 @@ const Inputs = ({ col, errors, register, name1, register1, pattern1, message1, t
   </div>
 }
 
-const TextBox = ({ register, name1, register1, message1, value }) => {
+const TextBox = ({ register, name1, register1, message1, value, placeholder }) => {
   return <div className={`password col-md-12  mb-4`}>
     <label className="form-label">{name1}</label>
-    <textarea defaultValue={value} type="text" className="form-control"
+    <textarea placeholder={placeholder} defaultValue={value} type="text" className="form-control"
       {...register(register1, { required: true })} rows="4" cols="30" />
     <p className='error--lines'><span className="text-danger">{message1}</span></p>
   </div>

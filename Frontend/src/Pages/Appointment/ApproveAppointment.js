@@ -115,7 +115,8 @@ const ApproveAppoint = ({ modalAssign, setModalAssign, reloadData }) => {
               data={[hospital, 'hospitalId']} />}
             {<SelectBox errors={errors} register={register} name1={'Doctor'} register1={'doctor_assign'}
               data={[doctor, 'fullname']} />}
-          </section></>
+          </section>
+        </>
       }
 
 

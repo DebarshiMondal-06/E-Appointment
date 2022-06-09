@@ -15,7 +15,7 @@ const ViewData = ({ reloadData }) => {
   const { jwtToken } = cookie.token || {}
   const { viewModal, setViewModal, viewData, get_hospital_assign, deleteLoader, deleteItem, setViewData } = useContext(createGlobalContext);
   const { speciality, contact, district, address, pincode, emailid, hospitalId, dob, phone, given_state, hospitalassign,
-    doctor_assign, appoint_id, concern, description, status, category, user_id } = viewData;
+    doctor_assign, appoint_id, concern, description, status, category, user_id, appoint_status, prescription } = viewData;
   const [hospitaldata, setHospitalData] = useState([]);
   const [userdata, setUserData] = useState([]);
   const [doctorData, setDoctorData] = useState([]);
@@ -136,6 +136,12 @@ const ViewData = ({ reloadData }) => {
               <p>Email: <span className='emailid'> {doctorData.emailid}</span></p>
             </article> : null
       }
+
+      {(appoint_status === 'complete' && prescription) ? <p className='appoint--veiwuser'>Prescription </p> : null}
+      <article>
+        <p>{prescription}</p>
+      </article>
+
       < br />
     </Modal.Body>
     <Modal.Footer>

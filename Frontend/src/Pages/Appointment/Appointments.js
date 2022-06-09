@@ -55,6 +55,7 @@ const Appointments = () => {
     <DoctorOperation
       doctorOperation={doctorOperation}
       setDoctorOperation={setDoctorOperation}
+      getAppointment={getAppointment}
     />
     <ViewData />
     <ApproveAppoint modalAssign={modalAssign} setModalAssign={setModalAssign} reloadData={getAppointment} />
@@ -94,35 +95,41 @@ const Appointments = () => {
                     </td>
                     <td>{contact}</td>
                     <td><span className={`badge bg-${appoint_status === 'pending' ? 'warning' :
-                      appoint_status === 'active' ? 'info' : 'danger'}`}>
+                      appoint_status === 'active' ? 'info' :
+                        appoint_status === 'complete'
+                          ? 'success' : 'danger'}`}>
                       {appoint_status}
                     </span></td>
                     <td>
                       {
-                        user_role && user_role.includes('admin')
-                          ? appoint_status === 'active'
-                            ? <span className='text-dark badge border border-primary'>Approved</span>
-                            : appoint_status === 'reject'
-                              ? <span className='text-dark badge border border-danger'>Rejected</span>
-                              : <ApproveReject
-                                setModalAssign={setModalAssign}
-                                setViewData={setViewData}
+                        appoint_status === 'complete' ?
+                          <button className='approve--appoint btn' type='button'>
+                            <span>Completed</span>
+                          </button>
+                          :
+                          user_role && user_role.includes('admin')
+                            ? appoint_status === 'active'
+                              ? <span className='text-dark badge border border-primary'>Approved</span>
+                              : appoint_status === 'reject'
+                                ? <span className='text-dark badge border border-danger'>Rejected</span>
+                                : <ApproveReject
+                                  setModalAssign={setModalAssign}
+                                  setViewData={setViewData}
+                                  items={items}
+                                  reloadData={getAppointment}
+                                />
+                            : user_role && user_role.includes('doctor')
+                              ? <button className='btn btn-success' type='button' onClick={() => {
+                                setDoctorOperation(true);
+                                setViewData(items);
+                              }}> <span><FaUserCheck size={18} color="#fff" /></span>
+                              </button>
+                              : <UserOperation
                                 items={items}
+                                loader={loader}
+                                setLoader={setLoader}
                                 reloadData={getAppointment}
                               />
-                          : user_role && user_role.includes('doctor')
-                            ? <button className='btn btn-success' type='button' onClick={() => {
-                              setDoctorOperation(true);
-                              setViewData(items);
-                            }}>
-                              <span><FaUserCheck size={18} color="#fff" /></span>
-                            </button>
-                            : <UserOperation
-                              items={items}
-                              loader={loader}
-                              setLoader={setLoader}
-                              reloadData={getAppointment}
-                            />
                       }
                     </td>
                   </tr>
