@@ -8,7 +8,7 @@ import { exception_handler } from "../Utils/Exception";
 import { useForm } from 'react-hook-form';
 import Swal from "sweetalert2";
 import { useCookies } from "react-cookie";
-
+import { FiVideo } from 'react-icons/fi'
 
 
 const SignIn = () => {
@@ -58,6 +58,21 @@ const SignIn = () => {
       });
       else Swal.close();
     });
+  };
+
+  const open_swal_youtube = () => {
+    return Swal.fire({
+      icon: "info",
+      title: 'Launch Video!',
+      text: "If procced, it will redirect you to youtube.",
+      confirmButtonColor: '#00bfa6',
+      confirmButtonText: 'Proceed',
+      allowOutsideClick: false,
+      showCancelButton: true,
+    }).then(async (val) => {
+      if (val.isConfirmed) return window.open('https://youtu.be/gtN3pAQsBCQ', '_blank');
+      else Swal.close();
+    });
   }
 
 
@@ -90,6 +105,9 @@ const SignIn = () => {
       <br></br><br></br>
       <p>{Object.values(errors).some(val => val) ? <span className="text-danger">All feilds must be valid!</span> : null}</p>
       <p>{errors.email?.type === 'pattern' ? <span className="text-danger"> <b>Email:</b> Must be a Valid Email</span> : null}</p>
+      <article className="watch--in" onClick={() => open_swal_youtube()}>
+        <FiVideo />
+      </article>
     </div>
   );
 };
