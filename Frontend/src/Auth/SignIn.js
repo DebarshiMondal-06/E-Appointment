@@ -105,7 +105,7 @@ const SignIn = () => {
       <br></br><br></br>
       <p>{Object.values(errors).some(val => val) ? <span className="text-danger">All feilds must be valid!</span> : null}</p>
       <p>{errors.email?.type === 'pattern' ? <span className="text-danger"> <b>Email:</b> Must be a Valid Email</span> : null}</p>
-      <article className="watch--in" onClick={() => open_swal_youtube()}>
+      <article className="watch--in shadow-lg" onClick={() => open_swal_youtube()}>
         <FiVideo />
       </article>
     </div>
